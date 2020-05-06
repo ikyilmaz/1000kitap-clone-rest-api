@@ -1,4 +1,3 @@
-import { NextFunction, Request } from 'express';
 import { catchAsync } from '../utils/catchAsync';
 import { User } from '../models/user/user.model';
 import * as mongoose from 'mongoose';

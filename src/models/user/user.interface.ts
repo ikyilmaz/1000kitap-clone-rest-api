@@ -12,4 +12,7 @@ export interface IUser extends IBaseModel {
     passwordChangedAt: Date,
     passwordResetToken: string,
     passwordResetExpires: Date
+
+    hashPassword(password: string): Promise<string>
+    comparePasswords(candidatePassword: string, hashedPassword: string): Promise<boolean>
 }

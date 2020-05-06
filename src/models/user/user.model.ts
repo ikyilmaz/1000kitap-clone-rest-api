@@ -4,8 +4,7 @@ import validator from 'validator';
 import bcrypt from 'bcryptjs';
 import { IUser } from './user.interface';
 import { Models } from '../models.enum';
-
-
+import { raw } from 'express';
 
 
 const userSchema = new Schema<IUser>({
@@ -14,7 +13,7 @@ const userSchema = new Schema<IUser>({
         minlength: [2, 'field \'firstName\' must contains at least 2 characters'],
         maxlength: [32, 'field \'firstName\' must contain no more than 32 characters'],
         lowercase: true,
-        trim: true,
+        trim: true
     },
     lastName: {
         type: SchemaTypes.String,
@@ -84,4 +83,13 @@ userSchema.pre<IUser>('save', async function(next: HookNextFunction) {
     next();
 });
 
-export const User = mongoose.model(Models.USER, userSchema);
+userSchema.methods.hashPassword = (password: string): Promise<string> => {
+    return bcrypt.hash(password, 12);
+};
+
+userSchema.methods.comparePasswords = (candidatePassword, hashedPassword) => {
+    return bcrypt.compare(candidatePassword, hashedPassword);
+};
+
+export const User = mongoose.model<IUser>(Models.USER, userSchema);
+
