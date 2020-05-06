@@ -23,7 +23,7 @@ export class UserController extends BaseController {
     });
 
     create = catchAsync(async (req, res, next) => {
-        const data = await this.userService.getMany(req.query);
+        const data = await this.userService.create(req.body);
         res.status(201).json({ status: 'success', data });
     });
 
