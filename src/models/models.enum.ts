@@ -1,4 +1,4 @@
-enum Models {
+export enum Models {
     USER = 'User',
     BOOK = 'Book',
     AUTHOR = 'Author',

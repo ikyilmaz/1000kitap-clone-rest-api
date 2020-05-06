@@ -1,5 +1,6 @@
 import { SchemaTypes, Schema, model } from 'mongoose';
 import { IBook } from './book.interface';
+import { Models } from '../models.enum';
 
 const bookSchema = new Schema<IBook>({
     title: {
@@ -12,7 +13,7 @@ const bookSchema = new Schema<IBook>({
         required: [true, 'field \'numberOfPages\' is required']
     },
     format: SchemaTypes.String, // TODO
-    ISBN: SchemaTypes.Number,
+    ISBN: SchemaTypes.String,
     language: SchemaTypes.String,
     country: SchemaTypes.String,
     publisher: SchemaTypes.String,

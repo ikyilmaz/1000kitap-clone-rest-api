@@ -1,5 +1,6 @@
 import { model, Schema, SchemaTypes } from 'mongoose';
 import { IBookExcerpt } from './book-excerpt.interface';
+import { Models } from '../models.enum';
 
 const bookExcerptSchema = new Schema<IBookExcerpt>({
     book: {

@@ -1,5 +1,6 @@
 import { model, Schema, SchemaTypes } from 'mongoose';
 import { ICategory } from './category.interface';
+import { Models } from '../models.enum';
 
 const categorySchema = new Schema({
     name: {

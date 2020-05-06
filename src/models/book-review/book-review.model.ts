@@ -1,5 +1,6 @@
 import { model, Schema, SchemaTypes } from 'mongoose';
 import { IBookReview } from './book-review.interface';
+import { Models } from '../models.enum';
 
 const bookReviewSchema = new Schema<IBookReview>({
     book: {

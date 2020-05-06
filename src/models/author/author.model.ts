@@ -1,5 +1,6 @@
 import { Schema, SchemaTypes, model } from 'mongoose';
 import { IAuthor } from './author.interface';
+import { Models } from '../models.enum';
 
 const authorSchema = new Schema<IAuthor>({
     firstName: {
@@ -15,6 +16,10 @@ const authorSchema = new Schema<IAuthor>({
         maxlength: [32, 'field \'lastName\' must contain no more than 32 characters'],
         lowercase: true,
         trim: true
+    },
+    image: {
+        type: SchemaTypes.String,
+        default: 'default.jpg'
     },
     placeOfBirth: SchemaTypes.String,
     birthday: SchemaTypes.Date,

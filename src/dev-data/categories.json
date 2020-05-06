@@ -1,0 +1,44 @@
+{
+  "categories": [
+    {
+      "description": "-",
+      "_id": "5eb2d54ef0b6732b443a840d",
+      "name": "horror",
+      "createdAt": "2020-05-06T15:18:38.453Z",
+      "updatedAt": "2020-05-06T15:18:38.453Z",
+      "__v": 0
+    },
+    {
+      "description": "-",
+      "_id": "5eb2d54ef0b6732b443a840e",
+      "name": "classic",
+      "createdAt": "2020-05-06T15:18:38.454Z",
+      "updatedAt": "2020-05-06T15:18:38.454Z",
+      "__v": 0
+    },
+    {
+      "description": "-",
+      "_id": "5eb2d54ef0b6732b443a840f",
+      "name": "psychological",
+      "createdAt": "2020-05-06T15:18:38.454Z",
+      "updatedAt": "2020-05-06T15:18:38.454Z",
+      "__v": 0
+    },
+    {
+      "description": "-",
+      "_id": "5eb2d54ef0b6732b443a8410",
+      "name": "adventure",
+      "createdAt": "2020-05-06T15:18:38.454Z",
+      "updatedAt": "2020-05-06T15:18:38.454Z",
+      "__v": 0
+    },
+    {
+      "description": "-",
+      "_id": "5eb2d54ef0b6732b443a8411",
+      "name": "dram",
+      "createdAt": "2020-05-06T15:18:38.454Z",
+      "updatedAt": "2020-05-06T15:18:38.454Z",
+      "__v": 0
+    }
+  ]
+}

@@ -9,25 +9,13 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "nodemonConfig": {
-    "watch": [
-      "src"
-    ],
-    "ext": "ts",
-    "ignore": [
-      "src/**/*.spec.ts"
-    ],
-    "exec": "ts-node ./src/server.ts"
-  },
   "dependencies": {
     "@types/bcryptjs": "^2.4.2",
     "bcryptjs": "^2.4.3",
-    "chalk": "^4.0.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-validator": "^6.4.1",
     "mongoose": "^5.9.12",
-    "morgan": "^1.10.0",
     "validator": "^13.0.0"
   },
   "devDependencies": {
@@ -37,6 +25,19 @@
     "@types/express-validator": "^3.0.0",
     "@types/mongoose": "^5.7.15",
     "@types/morgan": "^1.9.0",
-    "@types/validator": "^13.0.0"
+    "@types/validator": "^13.0.0",
+    "chalk": "^4.0.0",
+    "morgan": "^1.10.0"
+  },
+  "nodemonConfig": {
+    "watch": [
+      "src"
+    ],
+    "ext": "ts",
+    "ignore": [
+      "src/**/*.spec.ts",
+      "src/dev-data/*"
+    ],
+    "exec": "ts-node ./src/server.ts"
   }
 }
