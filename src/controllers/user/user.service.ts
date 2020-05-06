@@ -6,16 +6,10 @@ import { filterObject } from '../../utils/filterObject';
 export class UserService {
     public model = User;
 
-    getOne = (id: string) => {
-        return this.model.findById(id);
-    };
+    getOne = (id: string) => this.model.findById(id).where('isActive', true);
 
     getMany = (query: any) => {
-        const documentQuery = this.model.find();
+        const documentQuery = this.model.find().where('isActive', true);
         return new APIFeatures(documentQuery, query).filter().sort().limitFields().paginate().query;
-    };
-
-    create = (user: { [key: string]: string }) => {
-        return this.model.create(user);
     };
 }
