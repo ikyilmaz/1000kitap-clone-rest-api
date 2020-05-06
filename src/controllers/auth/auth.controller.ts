@@ -1,11 +1,11 @@
 import { BaseController } from '../base.controller';
-import { Document, Model } from 'mongoose';
 import { AuthService } from './auth.service';
 import { catchAsync } from '../../utils/catchAsync';
 import { filterObject } from '../../utils/filterObject';
 import { BadRequest, Unauthorized } from '../../utils/appError';
-import { User } from '../../models/user/user.model';
 import moment from 'moment';
+import { validationResult } from 'express-validator';
+import { checkValidationResult } from '../../utils/check-validation-result';
 
 export class AuthController extends BaseController {
     constructor(public authService: AuthService) {
@@ -13,45 +13,45 @@ export class AuthController extends BaseController {
     }
 
     signUp = catchAsync(async (req, res, next) => {
-
+        if (checkValidationResult(req, next)) return;
+        throw Error("implement me")
     });
 
     signIn = catchAsync(async (req, res, next) => {
-
+        if (checkValidationResult(req, next)) return;
+        throw Error("implement me")
     });
 
     signOut = catchAsync(async (req, res, next) => {
-
+        throw Error("implement me")
     });
 
     me = catchAsync(async (req, res, next) => {
-
-
+        throw Error("implement me")
     });
 
     isLoggedIn = catchAsync(async (req, res, next) => {
-
-
+        throw Error("implement me")
     });
 
     updateMe = catchAsync(async (req, res, next) => {
+        if (checkValidationResult(req, next)) return;
+
         req.body = filterObject(req.body, 'firstName', 'lastName', 'username');
         super.update(req, res, next);
     });
 
     updateEmail = catchAsync(async (req, res, next) => {
+        if (checkValidationResult(req, next)) return;
+
         // Send Verification Email
+        //...
         req.body = filterObject(req.body, 'email');
         super.update(req, res, next);
     });
 
     updatePassword = catchAsync(async (req, res, next) => {
-        // const errors = validationResult(req)
-        //
-        // if (!errors.isEmpty()) return res.status(400).json({
-        //     status: "fail",
-        //     message: errors.mapped()
-        // })
+        if (checkValidationResult(req, next)) return;
 
         const { password, newPassword, newPasswordConfirm } = req.body;
 

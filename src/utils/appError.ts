@@ -9,5 +9,5 @@ export class AppError extends Error {
 }
 
 export const NotFound = () => new AppError('not found', 404);
-export const BadRequest = (msg?: string) => new AppError(msg ? msg : 'bad request', 400);
-export const Unauthorized = (msg?: string) => new AppError(msg ? msg : 'unauthorized', 401);
+export const BadRequest = (err?: any) => new AppError(err ? err : 'bad request', 400);
+export const Unauthorized = (err?: any) => new AppError(err ? err : 'unauthorized', 401);
