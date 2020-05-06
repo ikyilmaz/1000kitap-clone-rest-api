@@ -1,11 +1,8 @@
 import { User } from '../models/user/user.model';
-import fs from 'fs';
-// @ts-ignore
-import { books as jsonBooks } from './books.json';
-import { users as jsonUsers } from './users.json';
-// @ts-ignore
-import { authors as jsonAuthors } from './authors.json';
-import { categories as jsonCategories } from './categories.json';
+import { books  } from './books.json';
+import { users  } from './users.json';
+import { authors  } from './authors.json';
+import { categories  } from './categories.json';
 import { Category } from '../models/category/category.model';
 import mongoose from 'mongoose';
 import { DB_CONNECTION_STRING, DB_NAME } from '../config/config';
@@ -37,10 +34,10 @@ const dummy = async () => {
 
         console.log(chalk.redBright('all deleted!'));
     }
-    const c = Category.create(jsonCategories).catch(err => console.log('Category.create()', err));
-    const u = User.create(jsonUsers).catch(err => console.log('User.create()', err));
-    const a = Author.create(jsonAuthors).catch(err => console.log('Author.create()', err));
-    const b = Book.create(jsonBooks).catch(err => console.log('Book.create()', err));
+    const c = Category.create(categories).catch(err => console.log('Category.create()', err));
+    const u = User.create(users).catch(err => console.log('User.create()', err));
+    const a = Author.create(authors).catch(err => console.log('Author.create()', err));
+    const b = Book.create(books).catch(err => console.log('Book.create()', err));
 
     await Promise.all([c, u, a, b]);
 };

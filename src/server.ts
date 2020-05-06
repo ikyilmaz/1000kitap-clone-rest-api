@@ -9,7 +9,7 @@ mongoose.connect(DB_CONNECTION_STRING, {
     useFindAndModify: false,
     useUnifiedTopology: true
 })
-    .then(async () => console.log(chalk.blueBright('--> Successfully connected to %s database'), DB_NAME))
+    .then(() => console.log(chalk.blueBright('--> Successfully connected to %s database'), DB_NAME))
     .catch(err => console.error(err));
 
 app.listen(PORT, HOST, () => console.log(chalk.yellow(`--> Listening on http://${HOST}:${PORT}`)));
