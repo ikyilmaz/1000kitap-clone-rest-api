@@ -3,6 +3,7 @@ import { isNotEmpty } from '../lib/is-not-empty';
 
 export const checkCreateOrUpdateCategoryBody = (isCreate: boolean) => checkSchema({
     name: {
+        isString: true,
         notEmpty: isCreate ? isNotEmpty('name') : undefined,
         isLength: {
             errorMessage: 'field \'name\' must be between 2 and 64 characters',
@@ -10,6 +11,7 @@ export const checkCreateOrUpdateCategoryBody = (isCreate: boolean) => checkSchem
         }
     },
     description: {
+        isString: true,
         optional: true,
         isLength: {
             errorMessage: 'field \'description\' must be between 2 and 128 characters',

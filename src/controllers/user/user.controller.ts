@@ -1,7 +1,7 @@
-import { catchAsync } from '../../utils/catchAsync';
+import { catchAsync } from '../../utils/catch-async';
 import { BaseController } from '../base.controller';
 import { UserService } from './user.service';
-import { NotFound } from '../../utils/appError';
+import { NotFound } from '../../utils/app-error';
 
 export class UserController extends BaseController {
     constructor(private readonly userService: UserService) {

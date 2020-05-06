@@ -1,10 +1,9 @@
 import { BaseController } from '../base.controller';
 import { AuthService } from './auth.service';
-import { catchAsync } from '../../utils/catchAsync';
-import { filterObject } from '../../utils/filterObject';
-import { BadRequest, Unauthorized } from '../../utils/appError';
+import { catchAsync } from '../../utils/catch-async';
+import { filterObject } from '../../utils/filter-object';
+import { BadRequest, Unauthorized } from '../../utils/app-error';
 import moment from 'moment';
-import { validationResult } from 'express-validator';
 import { checkValidationResult } from '../../utils/check-validation-result';
 
 export class AuthController extends BaseController {
@@ -46,6 +45,7 @@ export class AuthController extends BaseController {
 
         // Send Verification Email
         //...
+
         req.body = filterObject(req.body, 'email');
         super.update(req, res, next);
     });

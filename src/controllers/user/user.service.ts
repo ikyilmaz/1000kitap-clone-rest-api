@@ -1,7 +1,5 @@
 import { User } from '../../models/user/user.model';
-import { APIFeatures } from '../../utils/apiFeatures';
-import { IUser } from '../../models/user/user.interface';
-import { filterObject } from '../../utils/filterObject';
+import { APIFeatures } from '../../utils/api-features';
 
 export class UserService {
     public model = User;

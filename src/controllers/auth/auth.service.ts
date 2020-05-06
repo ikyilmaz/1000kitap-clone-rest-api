@@ -1,5 +1,3 @@
-import { Document, Model } from 'mongoose';
-import { IUser } from '../../models/user/user.interface';
 import { User } from '../../models/user/user.model';
 
 export class AuthService {

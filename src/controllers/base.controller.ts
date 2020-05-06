@@ -1,10 +1,8 @@
-import { catchAsync } from '../utils/catchAsync';
-import { User } from '../models/user/user.model';
+import { catchAsync } from '../utils/catch-async';
 import * as mongoose from 'mongoose';
 import { Document } from 'mongoose';
-import { BadRequest, NotFound } from '../utils/appError';
-import { APIFeatures } from '../utils/apiFeatures';
-import { validationResult } from 'express-validator';
+import {  NotFound } from '../utils/app-error';
+import { APIFeatures } from '../utils/api-features';
 import { checkValidationResult } from '../utils/check-validation-result';
 
 export abstract class BaseController {

@@ -1,6 +1,6 @@
 import express, { NextFunction, Request, Response } from 'express';
 import morgan from 'morgan';
-import { AppError } from './utils/appError';
+import { AppError } from './utils/app-error';
 import { userRouter } from './routes/user.route';
 import { categoryRouter } from './routes/category.route';
 
