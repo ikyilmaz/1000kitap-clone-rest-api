@@ -2,7 +2,8 @@ import { catchAsync } from '../../utils/catchAsync';
 import { BaseController } from '../base.controller';
 import { UserService } from './user.service';
 import { Request } from 'express';
-import { AppError } from '../../utils/appError';
+import { AppError, NotFound } from '../../utils/appError';
+import { APIFeatures } from '../../utils/apiFeatures';
 
 export class UserController extends BaseController {
     constructor(private readonly userService: UserService) {
@@ -11,18 +12,19 @@ export class UserController extends BaseController {
 
     get = catchAsync(async (req, res, next) => {
         const data = await this.userService.getOne(req.params.id);
-        if (!data) return next(new AppError('not found', 404));
+        if (!data) return next(NotFound());
         res.status(200).json({ status: 'success', data });
     });
 
     getMany = catchAsync(async (req, res, next) => {
         const data = await this.userService.getMany(req.query);
-        if (!data) return next(new AppError('not found', 404));
+        if (!data) return next(NotFound());
         res.status(200).json({ status: 'success', data });
     });
 
     create = catchAsync(async (req, res, next) => {
-
+        const data = await this.userService.getMany(req.query);
+        res.status(201).json({ status: 'success', data });
     });
 
     update = catchAsync(async (req, res, next) => {

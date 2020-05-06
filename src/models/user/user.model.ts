@@ -57,7 +57,8 @@ const userSchema = new Schema<IUser>({
     },
     password: {
         type: SchemaTypes.String,
-        required: [true, 'field \'password\' is required']
+        required: [true, 'field \'password\' is required'],
+        select: false
         // validate: {
         //     message: 'field \'password\' must be hashed',
         //     validator: (value: string) => validator.isHash(value, 'sha256')

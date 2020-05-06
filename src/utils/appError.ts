@@ -7,3 +7,6 @@ export class AppError extends Error {
         this.status = `${statusCode}`.startsWith('4') ? 'fail' : 'error';
     }
 }
+
+export const NotFound = () => new AppError('not found', 404);
+export const BadRequest = (msg?: string) => new AppError(msg ? msg : 'bad request', 400);

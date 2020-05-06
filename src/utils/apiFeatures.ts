@@ -1,8 +1,7 @@
 import { Document, DocumentQuery } from 'mongoose';
 
 export class APIFeatures {
-    constructor(public query: DocumentQuery<Document | Document[] | null, Document>, private queryString: { [key: string]: string }) {
-
+    constructor(public query: DocumentQuery<Document | Document[] | null, Document>, public queryString: { [key: string]: string }) {
     }
 
     filter() {
@@ -51,5 +50,3 @@ export class APIFeatures {
         return this;
     }
 }
-
-module.exports = APIFeatures;
