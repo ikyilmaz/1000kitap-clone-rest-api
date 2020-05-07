@@ -4,6 +4,10 @@ import { IUser } from '../../models/user/user.interface';
 export class AuthService {
     public model = User;
 
+    get = (conditions: { [key: string]: any }) => {
+        return this.model.findOne(conditions).select('+password')
+    };
+
     create = (user: any) => {
         return this.model.create({
             firstName: user.firstName,
@@ -15,6 +19,6 @@ export class AuthService {
     };
 
     update = (id: string, body: { [key: string]: any }) => {
-        return this.model.findByIdAndUpdate(id, body, { new: true });
+        return this.model.findByIdAndUpdate(id, body, { new: true })
     };
 }

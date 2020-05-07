@@ -22,12 +22,25 @@ export class AuthController extends BaseController {
     });
 
     signIn = catchAsync(async (req, res, next) => {
-        if (!req.body.username || !req.body.email) return next(BadRequest('fields \'username\' or \'email\' must be specified'));
-        throw new Error('implement me');
+        const { username, email, password } = req.body;
+        if (!username || !email) return next(BadRequest('fields \'username\' or \'email\' must be specified'));
+
+        const conditions: Partial<{ username?: string; email?: string; }> = {};
+
+        if (email) conditions.email = email;
+        else conditions.username = username;
+
+        const user = await this.authService.get(conditions);
+
+        if (!user || !(await user.comparePasswords(password, user.password)))
+            return next(Unauthorized('incorrect credentials'));
+
+        this.createAndSendToken(user, 200, req, res);
     });
 
     signOut = catchAsync(async (req, res, next) => {
-        throw new Error('implement me');
+        res.cookie('jwt', 'signed-out', { expires: moment().add(10, 'seconds').toDate(), httpOnly: true });
+        res.status(200).json({ status: 'success' });
     });
 
     user = catchAsync(async (req, res, next) => {
