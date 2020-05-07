@@ -22,15 +22,11 @@ export abstract class BaseController {
     });
 
     create = catchAsync(async (req, res, next) => {
-
-
         const doc = await this.model.create(req.body);
         res.status(201).json({ status: 'success', data: doc });
     });
 
     update = catchAsync(async (req, res, next) => {
-
-
         const doc = await this.model.findByIdAndUpdate(req.params.id, req.body, { new: true });
         res.status(200).json({ status: 'success', data: doc });
     });

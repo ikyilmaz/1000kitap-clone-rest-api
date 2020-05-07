@@ -28,6 +28,7 @@ router
         '/:id'
     )
     .get(
+        checkIdParam, checkValidationResult, // VALIDATORS
         bookController.get
     )
     .patch(
