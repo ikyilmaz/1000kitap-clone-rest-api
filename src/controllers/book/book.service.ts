@@ -28,7 +28,9 @@ export class BookService {
             .populate({
                 path: 'author',
                 select: limitFields(query['authorFields'], ['firstName', 'lastName'])
-            });
+            })
+            .populate('excerptsCount')
+            .populate('reviewsCount');
 
         return new APIFeatures(documentQuery, query).limitFields().query;
     };
