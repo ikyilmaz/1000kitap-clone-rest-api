@@ -1,7 +1,7 @@
 import { checkSchema } from 'express-validator';
-import { isNotEmpty } from '../lib/is-not-empty';
+import { isNotEmpty } from './lib/is-not-empty';
 
-export const checkCreateOrUpdateUserBody = (isCreate: boolean) => checkSchema({
+export const createOrUpdate = (isCreate: boolean) => checkSchema({
     firstName: {
         isString: true,
         optional: true,
@@ -25,8 +25,8 @@ export const checkCreateOrUpdateUserBody = (isCreate: boolean) => checkSchema({
             errorMessage: 'field \'username\' must be between 2 and 64 characters',
             options: { min: 2, max: 64 }
         },
-        isAlpha: {
-            errorMessage: 'field \'username\' must be between 2 and 64 characters',
+        isAlphanumeric: {
+            errorMessage: 'field \'username\' must be alphanumeric',
             options: 'en-US'
         }
     },
@@ -43,5 +43,17 @@ export const checkCreateOrUpdateUserBody = (isCreate: boolean) => checkSchema({
             errorMessage: 'field \'password\' must be between 6 and 32 characters',
             options: { min: 2, max: 32 }
         }
+    },
+    role: {
+        isString: true,
+        optional: true,
+        isIn: {
+            errorMessage: 'field \'role\' must be either admin or user',
+            options: ['admin', 'user']
+        }
     }
 }, ['body']);
+
+export const userValidator = {
+    createOrUpdate
+}

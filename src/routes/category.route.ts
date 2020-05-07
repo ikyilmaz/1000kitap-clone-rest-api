@@ -1,12 +1,12 @@
 import { Router } from 'express';
 import { CategoryController } from '../controllers/category/category.controller';
 import { CategoryService } from '../controllers/category/category.service';
-import { Category } from '../models/category/category.model';
 import { checkIdParam } from '../validators/param/id.validator';
-import { checkCreateOrUpdateCategoryBody } from '../validators/body/category/create-update-category.validator';
+import { categoryValidator } from '../validators/body/category.validator';
+import { checkValidationResult } from '../filters/check-validation-result.filter';
 
 const router = Router();
-const categoryController = new CategoryController(new CategoryService(Category));
+const categoryController = new CategoryController(new CategoryService());
 
 router
     .route(
@@ -16,7 +16,8 @@ router
         categoryController.getMany
     )
     .post(
-        checkCreateOrUpdateCategoryBody(true),
+        categoryValidator.createOrUpdate(true),
+        checkValidationResult,
         categoryController.create
     );
 
@@ -30,7 +31,8 @@ router
     )
     .patch(
         checkIdParam,
-        checkCreateOrUpdateCategoryBody(false),
+        categoryValidator.createOrUpdate(false),
+        checkValidationResult,
         categoryController.update
     )
     .delete(

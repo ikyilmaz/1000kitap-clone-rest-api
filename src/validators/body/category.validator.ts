@@ -1,7 +1,7 @@
 import { checkSchema } from 'express-validator';
-import { isNotEmpty } from '../lib/is-not-empty';
+import { isNotEmpty } from './lib/is-not-empty';
 
-export const checkCreateOrUpdateCategoryBody = (isCreate: boolean) => checkSchema({
+const createOrUpdate = (isCreate: boolean) => checkSchema({
     name: {
         isString: true,
         notEmpty: isCreate ? isNotEmpty('name') : undefined,
@@ -19,3 +19,7 @@ export const checkCreateOrUpdateCategoryBody = (isCreate: boolean) => checkSchem
         }
     }
 }, ['body']);
+
+export const categoryValidator = {
+    createOrUpdate
+}

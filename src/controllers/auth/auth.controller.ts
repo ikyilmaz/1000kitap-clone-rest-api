@@ -4,7 +4,6 @@ import { catchAsync } from '../../utils/catch-async';
 import { filterObject } from '../../utils/filter-object';
 import { BadRequest, Unauthorized } from '../../utils/app-error';
 import moment from 'moment';
-import { checkValidationResult } from '../../utils/check-validation-result';
 
 export class AuthController extends BaseController {
     constructor(public authService: AuthService) {
@@ -12,36 +11,32 @@ export class AuthController extends BaseController {
     }
 
     signUp = catchAsync(async (req, res, next) => {
-        if (checkValidationResult(req, next)) return;
-        throw Error("implement me")
+        throw Error('implement me');
     });
 
     signIn = catchAsync(async (req, res, next) => {
-        if (checkValidationResult(req, next)) return;
-        throw Error("implement me")
+        throw Error('implement me');
     });
 
     signOut = catchAsync(async (req, res, next) => {
-        throw Error("implement me")
+        throw Error('implement me');
     });
 
-    me = catchAsync(async (req, res, next) => {
-        throw Error("implement me")
+    user = catchAsync(async (req, res, next) => {
+        throw Error('implement me');
     });
 
     isLoggedIn = catchAsync(async (req, res, next) => {
-        throw Error("implement me")
+        throw Error('implement me');
     });
 
-    updateMe = catchAsync(async (req, res, next) => {
-        if (checkValidationResult(req, next)) return;
+    update = catchAsync(async (req, res, next) => {
 
         req.body = filterObject(req.body, 'firstName', 'lastName', 'username');
         super.update(req, res, next);
     });
 
     updateEmail = catchAsync(async (req, res, next) => {
-        if (checkValidationResult(req, next)) return;
 
         // Send Verification Email
         //...
@@ -51,7 +46,6 @@ export class AuthController extends BaseController {
     });
 
     updatePassword = catchAsync(async (req, res, next) => {
-        if (checkValidationResult(req, next)) return;
 
         const { password, newPassword, newPasswordConfirm } = req.body;
 

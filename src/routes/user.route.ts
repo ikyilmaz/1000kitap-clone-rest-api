@@ -2,16 +2,20 @@ import { Router } from 'express';
 import { UserController } from '../controllers/user/user.controller';
 import { UserService } from '../controllers/user/user.service';
 import { checkIdParam } from '../validators/param/id.validator';
-import { checkCreateOrUpdateUserBody } from '../validators/body/user/create-update-user.validator';
+import { userValidator } from '../validators/body/user.validator';
+import { checkValidationResult } from '../filters/check-validation-result.filter';
 
 const router = Router();
 const userController = new UserController(new UserService());
 
 router
     .route('/')
-    .get(userController.getMany)
+    .get(
+        userController.getMany
+    )
     .post(
-        checkCreateOrUpdateUserBody(true),
+        userValidator.createOrUpdate(true),
+        checkValidationResult,
         userController.create
     );
 
@@ -23,7 +27,8 @@ router
     )
     .patch(
         checkIdParam,
-        checkCreateOrUpdateUserBody(false),
+        userValidator.createOrUpdate(false),
+        checkValidationResult,
         userController.update
     )
     .delete(

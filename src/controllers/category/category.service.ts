@@ -1,5 +1,5 @@
-import { Document, Model } from 'mongoose';
+import { Category } from '../../models/category/category.model';
 
 export class CategoryService {
-    constructor(public model: Model<Document, {}>) {}
+    public model = Category
 }

@@ -3,7 +3,6 @@ import * as mongoose from 'mongoose';
 import { Document } from 'mongoose';
 import {  NotFound } from '../utils/app-error';
 import { APIFeatures } from '../utils/api-features';
-import { checkValidationResult } from '../utils/check-validation-result';
 
 export abstract class BaseController {
     protected constructor(private readonly model: mongoose.Model<Document>) {
@@ -23,14 +22,14 @@ export abstract class BaseController {
     });
 
     create = catchAsync(async (req, res, next) => {
-        if (checkValidationResult(req, next)) return;
+
 
         const doc = await this.model.create(req.body);
         res.status(201).json({ status: 'success', data: doc });
     });
 
     update = catchAsync(async (req, res, next) => {
-        if (checkValidationResult(req, next)) return;
+
 
         const doc = await this.model.findByIdAndUpdate(req.params.id, req.body, { new: true });
         res.status(200).json({ status: 'success', data: doc });
