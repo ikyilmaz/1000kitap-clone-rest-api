@@ -34,6 +34,7 @@ const bookSchema = new Schema<IBook>({
     timestamps: true
 });
 
+///// VIRTUALS /////
 
 // REVIEWS
 bookSchema.virtual('reviews', {
@@ -65,7 +66,5 @@ bookSchema.virtual('excerptsCount', {
     localField: '_id',
     count: true
 });
-
-/* * */
 
 export const Book = model<IBook>(Models.BOOK, bookSchema);

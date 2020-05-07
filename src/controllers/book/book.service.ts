@@ -56,7 +56,9 @@ export class BookService {
                     path: 'user',
                     select: limitFields(query['reviewUserFields'], ['firstName', 'lastName', 'image'], ['password'])
                 }
-            });
+            })
+            .populate('excerptsCount')
+            .populate('reviewsCount');
 
         return new APIFeatures(documentQuery, query).limitFields().query;
 
@@ -83,7 +85,9 @@ export class BookService {
                     path: 'user',
                     select: limitFields(query['reviewUserFields'], ['firstName', 'lastName', 'image'], ['password'])
                 }
-            });
+            })
+            .populate('excerptsCount')
+            .populate('reviewsCount');
 
         return new APIFeatures(documentQuery, query).limitFields().query;
     };
