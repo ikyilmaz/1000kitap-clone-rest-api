@@ -1,5 +1,4 @@
 import { User } from '../../models/user/user.model';
-import { IUser } from '../../models/user/user.interface';
 
 export class AuthService {
     public model = User;

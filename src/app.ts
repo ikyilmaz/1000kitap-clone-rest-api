@@ -24,4 +24,5 @@ app.use((err: Error | AppError, req: Request, res: Response, next: NextFunction)
     if (err instanceof AppError) return res.status(err.statusCode).json({ status: err.status, message: err.message });
     next(err);
 });
+
 export default app;
