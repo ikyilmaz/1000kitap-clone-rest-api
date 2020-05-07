@@ -6,9 +6,10 @@ import { BadRequest, Unauthorized } from '../../utils/app-error';
 import moment from 'moment';
 import { promisify } from 'util';
 import jwt from 'jsonwebtoken';
-import { JWT_SECRET } from '../../config/config';
+import { JWT_COOKIE_EXPIRES_IN, JWT_EXPIRES_IN, JWT_SECRET } from '../../config/config';
 import { User } from '../../models/user/user.model';
 import { IUser } from '../../models/user/user.interface';
+import { Request, Response } from 'express';
 
 export class AuthController extends BaseController {
     constructor(public authService: AuthService) {
@@ -16,7 +17,8 @@ export class AuthController extends BaseController {
     }
 
     signUp = catchAsync(async (req, res, next) => {
-        throw new Error('implement me');
+        const user = await this.authService.create(req.body);
+        this.createAndSendToken(user, 201, req, res);
     });
 
     signIn = catchAsync(async (req, res, next) => {
@@ -84,12 +86,36 @@ export class AuthController extends BaseController {
         res.status(200).json({ status: 'success', data: req.user });
     });
 
-    clearUser(user: IUser) {
+    private clearUser = (user: IUser) => {
         const userObject = user.toObject();
         delete userObject.password;
         delete userObject.passwordChangedAt;
         delete userObject.passwordResetExpires;
         delete userObject.passwordResetToken;
         return userObject;
-    }
+    };
+
+    private createAndSendToken = (user: IUser, statusCode: number, req: Request, res: Response) => {
+
+        let token: string;
+        token = jwt.sign({ id: user._id }, JWT_SECRET, {
+            expiresIn: JWT_EXPIRES_IN
+        });
+
+        res.cookie('jwt', token, {
+            expires: new Date(
+                Date.now() + JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
+            ),
+            httpOnly: true,
+            secure: req.secure || req.headers['x-forwarded-proto'] === 'https'
+        });
+
+        user.password = undefined as any;
+
+        res.status(statusCode).json({
+            status: 'success',
+            token,
+            data: user
+        });
+    };
 }
