@@ -25,19 +25,23 @@ router
     );
 
 router
+    .get(
+        '/:name',
+        categoryController.get
+    );
+
+router
     .route(
         '/:id'
     )
-    .get(
-        checkIdParam, checkValidationResult, // VALIDATORS
-        categoryController.get
-    )
+
     .patch(
         checkIdParam, categoryValidator.createOrUpdate(false), checkValidationResult, // VALIDATORS
         authRequired,
         restrictTo('admin'),
         categoryController.update
     )
+
     .delete(
         checkIdParam, checkValidationResult, // VALIDATORS
         authRequired,

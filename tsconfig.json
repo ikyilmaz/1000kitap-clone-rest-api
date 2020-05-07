@@ -6,8 +6,6 @@
     "noImplicitAny": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "rootDir": "./src/",
-    "forceConsistentCasingInFileNames": true
+    "esModuleInterop": true
   }
 }

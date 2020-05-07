@@ -3,6 +3,7 @@ import morgan from 'morgan';
 import { AppError } from './utils/app-error';
 import { userRouter } from './routes/user.route';
 import { categoryRouter } from './routes/category.route';
+import { authRouter } from './routes/auth.router';
 
 const app = express(); // Express Engine
 
@@ -13,6 +14,8 @@ app.use(morgan('tiny')); // Logger
 // Routes
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/categories', categoryRouter);
+app.use('/api/v1/auth', authRouter);
+
 // Hello World Message
 app.all('/', ((req, res) => res.status(200).send('hello world')));
 

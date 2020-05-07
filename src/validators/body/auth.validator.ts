@@ -3,24 +3,24 @@ import { isNotEmpty } from './lib/is-not-empty';
 
 const signUp = checkSchema({
     firstName: {
-        isString: true,
         optional: true,
+        isString: true,
         isLength: {
             errorMessage: 'field \'firstName\' must be between 2 and 64 characters',
             options: { min: 2, max: 64 }
         }
     },
     lastName: {
-        isString: true,
         optional: true,
+        isString: true,
         isLength: {
             errorMessage: 'field \'lastName\' must be between 2 and 64 characters',
             options: { min: 2, max: 64 }
         }
     },
     username: {
-        isString: true,
         notEmpty: isNotEmpty('username'),
+        isString: true,
         isLength: {
             errorMessage: 'field \'username\' must be between 2 and 64 characters',
             options: { min: 2, max: 64 }
@@ -31,13 +31,13 @@ const signUp = checkSchema({
         }
     },
     email: {
-        isString: true,
         notEmpty: isNotEmpty('email'),
+        isString: true,
         isEmail: { errorMessage: 'field \'email\' must be a valid email address' }
     },
     password: {
-        isString: true,
         notEmpty: isNotEmpty('password'),
+        isString: true,
         isLength: {
             errorMessage: 'field \'password\' must be between 6 and 32 characters',
             options: { min: 6, max: 32 }
@@ -69,16 +69,16 @@ const signIn = checkSchema({
 
 const update = checkSchema({
     firstName: {
-        isString: true,
         optional: true,
+        isString: true,
         isLength: {
             errorMessage: 'field \'firstName\' must be between 2 and 64 characters',
             options: { min: 2, max: 64 }
         }
     },
     lastName: {
-        isString: true,
         optional: true,
+        isString: true,
         isLength: {
             errorMessage: 'field \'lastName\' must be between 2 and 64 characters',
             options: { min: 2, max: 64 }
@@ -99,24 +99,24 @@ const update = checkSchema({
 
 const updatePassword = checkSchema({
     password: {
-        isString: true,
         notEmpty: isNotEmpty('password'),
+        isString: true,
         isLength: {
             errorMessage: 'field \'password\' must be between 6 and 32 characters',
             options: { min: 6, max: 32 }
         }
     },
     newPassword: {
-        isString: true,
         notEmpty: isNotEmpty('newPassword'),
+        isString: true,
         isLength: {
             errorMessage: 'field \'newPassword\' must be between 6 and 32 characters',
             options: { min: 6, max: 32 }
         }
     },
     newPasswordConfirm: {
-        isString: true,
         notEmpty: isNotEmpty('newPasswordConfirm'),
+        isString: true,
         isLength: {
             errorMessage: 'field \'newPasswordConfirm\' must be between 6 and 32 characters',
             options: { min: 6, max: 32 }
@@ -126,8 +126,8 @@ const updatePassword = checkSchema({
 
 const updateEmail = checkSchema({
     email: {
-        isString: true,
         notEmpty: isNotEmpty('email'),
+        isString: true,
         isEmail: { errorMessage: 'field \'email\' must be a valid email address' }
     }
 });

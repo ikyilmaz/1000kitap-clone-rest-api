@@ -9,7 +9,7 @@ import jwt from 'jsonwebtoken';
 import { JWT_COOKIE_EXPIRES_IN, JWT_EXPIRES_IN, JWT_SECRET } from '../../config/config';
 import { User } from '../../models/user/user.model';
 import { IUser } from '../../models/user/user.interface';
-import { Request, Response } from 'express';
+import { NextFunction, raw, Request, Response } from 'express';
 
 export class AuthController extends BaseController {
     constructor(public authService: AuthService) {
@@ -23,7 +23,8 @@ export class AuthController extends BaseController {
 
     signIn = catchAsync(async (req, res, next) => {
         const { username, email, password } = req.body;
-        if (!username || !email) return next(BadRequest('fields \'username\' or \'email\' must be specified'));
+        console.log(req.body);
+        if (!username && !email) return next(BadRequest('fields \'username\' or \'email\' must be specified'));
 
         const conditions: Partial<{ username?: string; email?: string; }> = {};
 
@@ -50,7 +51,7 @@ export class AuthController extends BaseController {
     isLoggedIn = catchAsync(async (req, res, next) => {
         let token;
         if (req.headers.authorization?.startsWith('Bearer')) token = req.headers.authorization.split(' ')[1];
-        else if (req.cookies.jwt) token = req.cookies.jwt;
+        else if (req.cookies?.jwt) token = req.cookies.jwt;
 
 
         if (!token) return res.status(200).json({ status: 'success', data: null });
@@ -58,6 +59,7 @@ export class AuthController extends BaseController {
         const decoded = await promisify(jwt.verify)(token, JWT_SECRET) as { id: string; iat: string };
 
         const currentUser = await User.findById(decoded.id);
+
         if (!currentUser) return res.status(200).json({ status: 'success', data: null });
 
         if (currentUser.changedPasswordAfter(decoded.iat)) return res.status(200).json({
@@ -65,22 +67,26 @@ export class AuthController extends BaseController {
             data: null
         });
 
-        res.status(200).json({ status: 'success', data: this.clearUser(req.user) });
+        res.status(200).json({ status: 'success', data: this.clearUser(currentUser) });
     });
 
-    update = catchAsync(async (req, res, next) => {
+    update = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
         req.body = filterObject(req.body, 'firstName', 'lastName', 'username');
-        super.update(req, res, next);
+
+        const data = await this.authService.update(req.user._id, req.body);
+
+        res.status(200).json({ status: 'success', data });
+
     });
 
-    updateEmail = catchAsync(async (req, res, next) => {
+    updateEmail(req: Request, res: Response, next: NextFunction) {
 
         // Send Verification Email
         //...
 
         req.body = filterObject(req.body, 'email');
         super.update(req, res, next);
-    });
+    }
 
     updatePassword = catchAsync(async (req, res, next) => {
 
