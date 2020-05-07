@@ -8,6 +8,7 @@ export class AppError extends Error {
     }
 }
 
-export const NotFound = () => new AppError('not found', 404);
+export const NotFound = (err?: any) => new AppError(err ? err : 'not found', 404);
 export const BadRequest = (err?: any) => new AppError(err ? err : 'bad request', 400);
 export const Unauthorized = (err?: any) => new AppError(err ? err : 'unauthorized', 401);
+export const Forbidden = (err?: any) => new AppError(err ? err : 'permission denied', 403);

@@ -1,4 +1,5 @@
 import { IBaseModel } from '../base-model.interface';
+import { Roles } from './roles.enum';
 
 export interface IUser extends IBaseModel {
     firstName: string;
@@ -15,4 +16,5 @@ export interface IUser extends IBaseModel {
 
     hashPassword(password: string): Promise<string>
     comparePasswords(candidatePassword: string, hashedPassword: string): Promise<boolean>
+    changedPasswordAfter(JWTTimestamp: string): boolean
 }

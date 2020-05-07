@@ -1,4 +1,4 @@
-import { HookNextFunction, Schema, SchemaTypes } from 'mongoose';
+import { HookNextFunction, Model, Schema, SchemaTypes } from 'mongoose';
 import mongoose from 'mongoose';
 import validator from 'validator';
 import bcrypt from 'bcryptjs';
@@ -83,12 +83,22 @@ userSchema.pre<IUser>('save', async function(next: HookNextFunction) {
     next();
 });
 
-userSchema.methods.hashPassword = (password: string): Promise<string> => {
-    return bcrypt.hash(password, 12);
-};
+userSchema.pre<Model<IUser, { id: string }>>(/^find/, function(next) {
+    this.find({ active: { $ne: false } });
+    next();
+});
 
-userSchema.methods.comparePasswords = (candidatePassword, hashedPassword) => {
-    return bcrypt.compare(candidatePassword, hashedPassword);
+userSchema.methods.hashPassword = (password: string): Promise<string> => bcrypt.hash(password, 12);
+
+userSchema.methods.comparePasswords = (candidatePassword, hashedPassword) => bcrypt.compare(candidatePassword, hashedPassword);
+
+userSchema.methods.changedPasswordAfter = function(JWTTimestamp) {
+    if (this.passwordChangedAt) {
+        const changedTimestamp = parseInt((this.passwordChangedAt.getTime() / 1000).toString(), 10);
+        return +JWTTimestamp < changedTimestamp;
+    }
+
+    return false;
 };
 
 export const User = mongoose.model<IUser>(Models.USER, userSchema);

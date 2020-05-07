@@ -11,27 +11,35 @@ export class AuthController extends BaseController {
     }
 
     signUp = catchAsync(async (req, res, next) => {
-        throw Error('implement me');
+        throw new Error('implement me');
     });
 
     signIn = catchAsync(async (req, res, next) => {
-        throw Error('implement me');
+        throw new Error('implement me');
     });
 
     signOut = catchAsync(async (req, res, next) => {
-        throw Error('implement me');
+        throw new Error('implement me');
     });
 
     user = catchAsync(async (req, res, next) => {
-        throw Error('implement me');
+        const user = req.user.toObject();
+        user.password = undefined;
+        user.passwordChangedAt = undefined;
+        user.passwordResetExpires = undefined;
+        user.passwordResetToken = undefined;
+
+        res.status(200).json({
+            status: 'success',
+            data: user 
+        });
     });
 
     isLoggedIn = catchAsync(async (req, res, next) => {
-        throw Error('implement me');
+        throw new Error('implement me');
     });
 
     update = catchAsync(async (req, res, next) => {
-
         req.body = filterObject(req.body, 'firstName', 'lastName', 'username');
         super.update(req, res, next);
     });
