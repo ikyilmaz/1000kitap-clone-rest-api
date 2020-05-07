@@ -79,14 +79,18 @@ export class AuthController extends BaseController {
 
     });
 
-    updateEmail(req: Request, res: Response, next: NextFunction) {
+    updateEmail = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
 
         // Send Verification Email
         //...
 
         req.body = filterObject(req.body, 'email');
-        super.update(req, res, next);
-    }
+
+        const data = await this.authService.update(req.user._id, req.body);
+
+        res.status(200).json({ status: 'success', data });
+
+    });
 
     updatePassword = catchAsync(async (req, res, next) => {
 
