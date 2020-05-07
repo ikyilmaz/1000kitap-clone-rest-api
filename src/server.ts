@@ -30,7 +30,21 @@ mongoose.connect(DB_CONNECTION_STRING, {
                 BookReview.init()
             ]
         ).catch(err => console.error(err));
-        console.log(chalk.yellowBright('--> All the models are initialized in %s milliseconds'), before.diff(moment()).toString().replace('-', ''));
+
+        console.log(
+            chalk.yellowBright('--> All the models are initialized in %s milliseconds'),
+            before.diff(moment()).toString().replace('-', '')
+        );
+
+        mongoose.set('debug', function(collectionName: any, method: any, query: any, doc: any) {
+            console.log('---------QUERY---------');
+            console.log(chalk.yellowBright('1) COLLECTION NAME --> %s'), chalk.redBright(collectionName));
+            console.log(chalk.yellowBright('2) METHOD --> %s'), chalk.redBright(method));
+            console.log(chalk.yellowBright('3) QUERY --> '), query);
+            console.log(chalk.yellowBright('4) DOCUMENT --> '), doc);
+            console.log('----------END----------');
+        });
+
         app.listen(PORT, HOST, () => console.log(chalk.yellow(`--> Listening on http://${HOST}:${PORT}`)));
     })
     .catch(err => console.error(err));

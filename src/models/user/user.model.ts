@@ -101,5 +101,17 @@ userSchema.methods.changedPasswordAfter = function(JWTTimestamp) {
     return false;
 };
 
+userSchema.virtual('reviews', {
+    ref: Models.BOOK_REVIEW,
+    foreignField: 'user',
+    localField: '_id'
+});
+
+userSchema.virtual('excerpt', {
+    ref: Models.BOOK_EXCERPT,
+    foreignField: 'user',
+    localField: '_id'
+});
+
 export const User = mongoose.model<IUser>(Models.USER, userSchema);
 

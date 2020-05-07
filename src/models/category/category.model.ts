@@ -7,12 +7,15 @@ const categorySchema = new Schema({
         type: SchemaTypes.String,
         required: true
     },
-    description: {
-        type: SchemaTypes.String,
-        default: '-'
-    }
+    description: SchemaTypes.String
 }, {
     timestamps: true
+});
+
+categorySchema.virtual('books', {
+    ref: Models.BOOK,
+    foreignField: 'category',
+    localField: '_id'
 });
 
 export const Category = model<ICategory>(Models.CATEGORY, categorySchema);

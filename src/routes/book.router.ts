@@ -46,4 +46,22 @@ router
         bookController.delete
     );
 
+router
+    .route(
+        '/:id/reviews' // BookID
+    )
+    .get(
+        checkIdParam, checkValidationResult, // VALIDATORS
+        bookController.getWithReviews
+    );
+
+router
+    .route(
+        '/:id/excerpts'
+    )
+    .get(
+        checkIdParam, checkValidationResult, // VALIDATORS
+        bookController.getWithExcerpts
+    );
+
 export const bookRouter = router;

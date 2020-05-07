@@ -2,6 +2,10 @@
 # Created by https://www.gitignore.io/api/node
 # Edit at https://www.gitignore.io/?templates=node
 
+/.idea
+/src/assets/img/book-images/
+/src/assets/img/user-images/
+
 ### Node ###
 # Logs
 logs

@@ -31,4 +31,10 @@ const authorSchema = new Schema<IAuthor>({
     timestamps: true
 });
 
+authorSchema.virtual('books', {
+    ref: Models.BOOK,
+    foreignField: 'author',
+    localField: '_id'
+});
+
 export const Author = model<IAuthor>(Models.AUTHOR, authorSchema);

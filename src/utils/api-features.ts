@@ -1,7 +1,7 @@
 import { Document, DocumentQuery } from 'mongoose';
 
-export class APIFeatures {
-    constructor(public query: DocumentQuery<Document | Document[] | null, Document>, public queryString: { [key: string]: string }) {
+export class APIFeatures<T extends Document> {
+    constructor(public query: DocumentQuery<T | T[] | null, T>, public queryString: { [key: string]: string }) {
     }
 
     filter() {
@@ -9,11 +9,10 @@ export class APIFeatures {
         const excludedFields = ['page', 'sort', 'limit', 'fields'];
         excludedFields.forEach(el => delete queryObj[el]);
 
-        // 1B) Advanced filtering
         let queryStr = JSON.stringify(queryObj);
         queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
 
-        this.query = this.query.find(JSON.parse(queryStr));
+        this.query = this.query.find(JSON.parse(queryStr))
 
         return this;
     }

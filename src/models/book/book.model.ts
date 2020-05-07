@@ -34,4 +34,16 @@ const bookSchema = new Schema<IBook>({
     timestamps: true
 });
 
+bookSchema.virtual('reviews', {
+    ref: Models.BOOK_REVIEW,
+    foreignField: 'book',
+    localField: '_id'
+});
+
+bookSchema.virtual('excerpts', {
+    ref: Models.BOOK_EXCERPT,
+    foreignField: 'book',
+    localField: '_id'
+});
+
 export const Book = model<IBook>(Models.BOOK, bookSchema);
