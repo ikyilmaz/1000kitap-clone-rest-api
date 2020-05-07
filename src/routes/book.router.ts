@@ -5,6 +5,7 @@ import { checkIdParam } from '../validators/param/id.validator';
 import { checkValidationResult } from '../filters/check-validation-result.filter';
 import { authRequired } from '../filters/auth-required.filter';
 import { restrictTo } from '../filters/restrict-to.filter';
+import { bookValidator } from '../validators/body/book.validator';
 
 const router = Router();
 const bookController = new BookController(new BookService());
@@ -17,7 +18,7 @@ router
         bookController.getMany
     )
     .post(
-        // bookValidator.createOrUpdate(true), checkValidationResult, // VALIDATORS
+        bookValidator.createOrUpdate(true), checkValidationResult, // VALIDATORS
         authRequired,
         restrictTo('admin'),
         bookController.create
@@ -32,7 +33,7 @@ router
         bookController.get
     )
     .patch(
-        // checkIdParam, bookValidator.createOrUpdate(false), checkValidationResult, // VALIDATORS
+        checkIdParam, bookValidator.createOrUpdate(false), checkValidationResult, // VALIDATORS
         authRequired,
         restrictTo('admin'),
         bookController.update
