@@ -1,12 +1,14 @@
 import { Book } from '../../models/book/book.model';
 import { APIFeatures } from '../../utils/api-features';
 import { limitFields, paginate } from '../../utils/api-features-funcs';
+import { MongooseFilterQuery } from 'mongoose';
+import { IBook } from '../../models/book/book.interface';
 
 export class BookService {
     public model = Book;
 
-    getMany = (query: { [key: string]: any }) => {
-        const documentQuery = this.model.find()
+    getMany = (query: Pick<string, any>) => {
+        const documentQuery = this.model.find({})
             .populate({
                 path: 'category',
                 select: limitFields(query['categoryFields'], ['name'])
@@ -19,7 +21,9 @@ export class BookService {
         return new APIFeatures(documentQuery, query).filter().sort().limitFields().paginate().query;
     };
 
-    get = (id: string, query: { [key: string]: any }) => {
+    get = (id: string, query: Pick<string, any>) => {
+
+
         const documentQuery = this.model.findById(id)
             .populate({
                 path: 'category',
@@ -35,7 +39,7 @@ export class BookService {
         return new APIFeatures(documentQuery, query).limitFields().query;
     };
 
-    getWithReviews = (id: string, query: { [key: string]: any }) => {
+    getWithReviews = (id: string, query: Pick<string, any>) => {
         const documentQuery = this.model.findById(id)
             .populate({
                 path: 'category',
@@ -64,7 +68,7 @@ export class BookService {
 
     };
 
-    getWithExcerpts = (id: string, query: { [key: string]: any }) => {
+    getWithExcerpts = (id: string, query: Pick<string, any>) => {
         const documentQuery = this.model.findById(id)
             .populate({
                 path: 'category',
@@ -76,14 +80,14 @@ export class BookService {
             })
             .populate({
                 path: 'excerpts',
-                select: limitFields(query['reviewFields'], ['book user content']),
+                select: limitFields(query['excerptFields'], ['book user content']),
                 options: {
                     ...paginate(query),
-                    sort: query['reviewSortBy'] || '-createdAt'
+                    sort: query['excerptSortBy'] || '-createdAt'
                 },
                 populate: {
                     path: 'user',
-                    select: limitFields(query['reviewUserFields'], ['firstName', 'lastName', 'image'], ['password'])
+                    select: limitFields(query['excerptUserFields'], ['firstName', 'lastName', 'image'], ['password'])
                 }
             })
             .populate('excerptsCount')

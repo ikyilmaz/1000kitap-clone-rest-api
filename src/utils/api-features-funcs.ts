@@ -24,7 +24,7 @@ export const limitFields = (fields: string, defaults: string[], unwantedFields?:
 
 };
 
-export const paginate = (query: { [key: string]: any }, options?: { pageKey?: string, limitKey?: string, defaultLimit?: number, maxLimit?: number }) => {
+export const paginate = (query: Pick<string, any>, options?: { pageKey?: string, limitKey?: string, defaultLimit?: number, maxLimit?: number }) => {
     let limit = +query[(options?.limitKey || 'limit')] || (options?.defaultLimit || 20);
     const page = +query[(options?.pageKey || 'page')] || 1;
 
