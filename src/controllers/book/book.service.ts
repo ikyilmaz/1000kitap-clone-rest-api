@@ -8,7 +8,11 @@ export class BookService {
     public model = Book;
 
     getMany = (query: Pick<string, any>) => {
-        const documentQuery = this.model.find({})
+        const documentQuery = this.model.find({
+            title: {
+                $regex: /eiusmod/
+            }
+        })
             .populate({
                 path: 'category',
                 select: limitFields(query['categoryFields'], ['name'])
