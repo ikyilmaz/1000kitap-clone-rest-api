@@ -8,8 +8,8 @@ import mongoose from 'mongoose';
 import { DB_CONNECTION_STRING, DB_NAME } from '../config/config';
 import chalk from 'chalk';
 import { Book } from '../models/book/book.model';
-import { BookExcerpt } from '../models/book-excerpt/book-excerpt.model';
-import { BookReview } from '../models/book-review/book-review.model';
+import { BookExcerpt } from '../models/m2m/book-user/book-excerpt/book-excerpt.model';
+import { BookReview } from '../models/m2m/book-user/book-review/book-review.model';
 import { Author } from '../models/author/author.model';
 
 mongoose.connect(DB_CONNECTION_STRING, {

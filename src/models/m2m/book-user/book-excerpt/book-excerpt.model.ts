@@ -1,8 +1,8 @@
 import { model, Schema, SchemaTypes } from 'mongoose';
-import { IBookReview } from './book-review.interface';
-import { Models } from '../models.enum';
+import { IBookExcerpt } from './book-excerpt.interface';
+import { Models } from '../../../models.enum';
 
-const bookReviewSchema = new Schema<IBookReview>({
+const bookExcerptSchema = new Schema<IBookExcerpt>({
     book: {
         type: SchemaTypes.ObjectId,
         required: [true, ' field \'book\' is required'],
@@ -15,7 +15,7 @@ const bookReviewSchema = new Schema<IBookReview>({
     },
     content: {
         required: [true, ' field \'content\' is required'],
-        maxlength: [3000, 'field \'content\' must contain no more than 3000 characters'],
+        maxlength: [255, 'field \'content\' must contain no more than 255 characters'],
         type: SchemaTypes.String
     }
 }, {
@@ -24,4 +24,4 @@ const bookReviewSchema = new Schema<IBookReview>({
     timestamps: true
 });
 
-export const BookReview = model<IBookReview>(Models.BOOK_REVIEW, bookReviewSchema);
+export const BookExcerpt = model<IBookExcerpt>(Models.BOOK_EXCERPT, bookExcerptSchema);

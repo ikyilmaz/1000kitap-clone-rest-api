@@ -1,8 +1,6 @@
 import { Book } from '../../models/book/book.model';
 import { APIFeatures } from '../../utils/api-features';
 import { limitFields, paginate } from '../../utils/api-features-funcs';
-import { MongooseFilterQuery } from 'mongoose';
-import { IBook } from '../../models/book/book.interface';
 
 export class BookService {
     public model = Book;
@@ -62,7 +60,7 @@ export class BookService {
                 },
                 populate: {
                     path: 'user',
-                    select: limitFields(query['reviewUserFields'], ['firstName', 'lastName', 'image'], ['password'])
+                    select: limitFields(query['reviewUserFields'], ['firstName', 'lastName', 'image'], ['password', 'email'])
                 }
             })
             .populate('excerptsCount')
@@ -91,7 +89,7 @@ export class BookService {
                 },
                 populate: {
                     path: 'user',
-                    select: limitFields(query['excerptUserFields'], ['firstName', 'lastName', 'image'], ['password'])
+                    select: limitFields(query['excerptUserFields'], ['firstName', 'lastName', 'image'], ['password', 'email'])
                 }
             })
             .populate('excerptsCount')

@@ -7,8 +7,8 @@ import { Author } from './models/author/author.model';
 import { User } from './models/user/user.model';
 import { Category } from './models/category/category.model';
 import { Book } from './models/book/book.model';
-import { BookExcerpt } from './models/book-excerpt/book-excerpt.model';
-import { BookReview } from './models/book-review/book-review.model';
+import { BookExcerpt } from './models/m2m/book-user/book-excerpt/book-excerpt.model';
+import { BookReview } from './models/m2m/book-user/book-review/book-review.model';
 import moment from 'moment';
 
 mongoose.connect(DB_CONNECTION_STRING, {
@@ -32,8 +32,11 @@ mongoose.connect(DB_CONNECTION_STRING, {
         ).catch(err => console.error(err));
 
         console.log(
-            chalk.yellowBright('--> All the models are initialized in %s milliseconds'),
-            before.diff(moment()).toString().replace('-', '')
+            chalk.cyan(
+                `--> All the models are initialized in ${
+                    chalk.underline.redBright(before.diff(moment()).toString().replace('-', ''))
+                } milliseconds`
+            )
         );
 
         mongoose.set('debug', function(collectionName: any, method: any, query: any, doc: any) {

@@ -5,6 +5,8 @@ import { Models } from '../models.enum';
 const categorySchema = new Schema({
     name: {
         type: SchemaTypes.String,
+        unique: true,
+        lowercase: true,
         required: true
     },
     description: SchemaTypes.String
