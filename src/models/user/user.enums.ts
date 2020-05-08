@@ -11,5 +11,11 @@ export enum UserVirtuals {
     FOLLOWED_BOOKS = 'followedBooks',
     FOLLOWED_BOOKS_COUNT = 'followedBooksCount',
     RATED_BOOKS = 'ratedBooks',
-    RATED_BOOKS_COUNT = 'ratedBooksCount'
+    RATED_BOOKS_COUNT = 'ratedBooksCount',
+    FOLLOWED_USERS = 'followedUsers',
+    FOLLOWED_USERS_COUNT = 'followedUsersCount',
+    FOLLOWING_USERS = 'followingUsers',
+    FOLLOWING_USERS_COUNT = 'followingUsersCount',
+    FAVORITE_AUTHORS = "favoriteAuthors",
+    FAVORITE_AUTHORS_COUNT = "favoriteAuthorsCount",
 }

@@ -1,9 +1,9 @@
 import { model, Schema, SchemaTypes } from 'mongoose';
 import { Models } from '../../../models.enum';
-import { IBookFollower } from './book-follower.interface';
+import { IBookFollow } from './book-follow.interface';
 import { AppError } from '../../../../utils/app-error';
 
-const bookFollowerSchema = new Schema({
+const bookFollowSchema = new Schema({
     user: {
         type: SchemaTypes.ObjectId,
         ref: Models.USER,
@@ -18,10 +18,10 @@ const bookFollowerSchema = new Schema({
     timestamps: true
 });
 
-bookFollowerSchema.pre<IBookFollower>('save', async function(next) {
+bookFollowSchema.pre<IBookFollow>('save', async function(next) {
 
     if (this.isNew) {
-        const bookFollower = await BookFollower.findOne({ user: this.user, book: this.book }).select('id');
+        const bookFollower = await BookFollow.findOne({ user: this.user, book: this.book }).select('id');
 
         if (!!bookFollower) next(new AppError('already exists', 400));
 
@@ -30,4 +30,4 @@ bookFollowerSchema.pre<IBookFollower>('save', async function(next) {
 
 });
 
-export const BookFollower = model<IBookFollower>(Models.BOOK_FOLLOWER, bookFollowerSchema);
+export const BookFollow = model<IBookFollow>(Models.BOOK_FOLLOWER, bookFollowSchema);

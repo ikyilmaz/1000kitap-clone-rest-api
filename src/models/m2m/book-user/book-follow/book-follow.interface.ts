@@ -3,7 +3,7 @@ import { Types } from 'mongoose';
 import { IUser } from '../../../user/user.interface';
 import { IBaseModel } from '../../../base-model.interface';
 
-export interface IBookFollower extends IBaseModel {
+export interface IBookFollow extends IBaseModel {
     book: IBook | Types.ObjectId | string;
     user: IUser | Types.ObjectId | string;
 }

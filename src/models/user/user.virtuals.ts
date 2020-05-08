@@ -33,14 +33,14 @@ export const setUserVirtuals = (userSchema: Schema<IUser>) => {
         localField: '_id'
     });
 
-    // FALLOWED BOOKS
+    // FOLLOWED BOOKS
     userSchema.virtual(UserVirtuals.FOLLOWED_BOOKS, {
         ref: Models.BOOK_FOLLOWER,
         foreignField: 'user',
         localField: '_id'
     });
 
-    // FALLOWED BOOKS COUNT
+    // FOLLOWED BOOKS COUNT
     userSchema.virtual(UserVirtuals.FOLLOWED_BOOKS_COUNT, {
         ref: Models.BOOK_FOLLOWER,
         foreignField: 'user',
@@ -63,5 +63,48 @@ export const setUserVirtuals = (userSchema: Schema<IUser>) => {
         count: true
     });
 
+    // FOLLOWED USERS
+    userSchema.virtual(UserVirtuals.FOLLOWED_USERS, {
+        ref: Models.USER_FOLLOW,
+        foreignField: 'followed',
+        localField: '_id'
+    });
 
+    // FOLLOWED USERS COUNT
+    userSchema.virtual(UserVirtuals.FOLLOWED_USERS_COUNT, {
+        ref: Models.USER_FOLLOW,
+        foreignField: 'followed',
+        localField: '_id',
+        count: true
+    });
+
+    // FOLLOWING USERS
+    userSchema.virtual(UserVirtuals.FOLLOWING_USERS, {
+        ref: Models.USER_FOLLOW,
+        foreignField: 'following',
+        localField: '_id'
+    });
+
+    // FOLLOWING USERS COUNT
+    userSchema.virtual(UserVirtuals.FOLLOWING_USERS_COUNT, {
+        ref: Models.USER_FOLLOW,
+        foreignField: 'following',
+        localField: '_id',
+        count: true
+    });
+
+    // FAVORITE AUTHORS
+    userSchema.virtual(UserVirtuals.FAVORITE_AUTHORS, {
+        ref: Models.FAVORITE_AUTHOR,
+        foreignField: 'user',
+        localField: '_id'
+    });
+
+    // FAVORITE AUTHORS COUNT
+    userSchema.virtual(UserVirtuals.FAVORITE_AUTHORS_COUNT, {
+        ref: Models.FAVORITE_AUTHOR,
+        foreignField: 'user',
+        localField: '_id',
+        count: true
+    });
 };

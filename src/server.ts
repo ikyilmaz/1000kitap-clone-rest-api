@@ -2,7 +2,7 @@ import app from './app';
 import chalk from 'chalk';
 import { DB_CONNECTION_STRING, DB_NAME, HOST, PORT } from './config/config';
 import mongoose from 'mongoose';
-import Request from './types/request';
+import type from './types/request';
 import { Author } from './models/author/author.model';
 import { User } from './models/user/user.model';
 import { Category } from './models/category/category.model';
@@ -10,11 +10,9 @@ import { Book } from './models/book/book.model';
 import { BookExcerpt } from './models/m2m/book-user/book-excerpt/book-excerpt.model';
 import { BookReview } from './models/m2m/book-user/book-review/book-review.model';
 import moment from 'moment';
-import { BookFollower } from './models/m2m/book-user/book-follower/book-follower.model';
+import { BookFollow } from './models/m2m/book-user/book-follow/book-follow.model';
 import { BookRating } from './models/m2m/book-user/book-rating/book-rating.model';
 import { UserLibrary } from './models/m2m/book-user/user-library/user-library.model';
-
-Request
 
 let before = moment();
 mongoose.connect(DB_CONNECTION_STRING, {
@@ -40,7 +38,7 @@ mongoose.connect(DB_CONNECTION_STRING, {
                 Book.init(),
                 BookExcerpt.init(),
                 BookReview.init(),
-                BookFollower.init(),
+                BookFollow.init(),
                 BookRating.init(),
                 UserLibrary.init()
             ]
