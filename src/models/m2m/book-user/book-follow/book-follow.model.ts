@@ -21,9 +21,9 @@ const bookFollowSchema = new Schema({
 bookFollowSchema.pre<IBookFollow>('save', async function(next) {
 
     if (this.isNew) {
-        const bookFollower = await BookFollow.findOne({ user: this.user, book: this.book }).select('id');
+        const exists = await BookFollow.exists({ user: this.user, book: this.book })
 
-        if (!!bookFollower) next(new AppError('already exists', 400));
+        if (exists) next(new AppError('already exists', 400));
 
         next();
     }

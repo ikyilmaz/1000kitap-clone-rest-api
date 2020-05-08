@@ -26,9 +26,9 @@ const bookRatingSchema = new Schema<IBookRating>({
 bookRatingSchema.pre<IBookRating>('save', async function(next) {
 
     if (this.isNew) {
-        const bookRating = await BookRating.findOne({ user: this.user, book: this.book }).select('id');
+        const exists = await BookRating.exists({ user: this.user, book: this.book })
 
-        if (!!bookRating) next(new AppError('already exists', 400));
+        if (exists) next(new AppError('already exists', 400));
 
         next();
     }

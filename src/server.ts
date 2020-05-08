@@ -37,10 +37,10 @@ mongoose.connect(DB_CONNECTION_STRING, {
             Category,
             Book, BookExcerpt, BookReview, BookFollow, BookRating,
             User, UserLibrary, UserFollow
-        ]
+        ];
 
         for (let model of models) {
-            await model.init()
+            await model.init();
         }
 
 
