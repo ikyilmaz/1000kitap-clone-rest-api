@@ -1,8 +1,9 @@
 import { SchemaTypes, Schema, model } from 'mongoose';
 import { IBook } from './book.interface';
 import { Models } from '../models.enum';
+import { setBookVirtuals } from './book.virtuals';
 
-const bookSchema = new Schema<IBook>({
+let bookSchema = new Schema<IBook>({
     title: {
         type: SchemaTypes.String,
         required: [true, 'field \'title\' is required']
@@ -34,37 +35,7 @@ const bookSchema = new Schema<IBook>({
     timestamps: true
 });
 
-///// VIRTUALS /////
 
-// REVIEWS
-bookSchema.virtual('reviews', {
-    ref: Models.BOOK_REVIEW,
-    foreignField: 'book',
-    localField: '_id'
-});
-
-// REVIEWS COUNT
-bookSchema.virtual('reviewsCount', {
-    ref: Models.BOOK_REVIEW,
-    foreignField: 'book',
-    localField: '_id',
-    count: true
-});
-
-
-// EXCERPTS
-bookSchema.virtual('excerpts', {
-    ref: Models.BOOK_EXCERPT,
-    foreignField: 'book',
-    localField: '_id'
-});
-
-// EXCERPTS COUNT
-bookSchema.virtual('excerptsCount', {
-    ref: Models.BOOK_EXCERPT,
-    foreignField: 'book',
-    localField: '_id',
-    count: true
-});
+setBookVirtuals(bookSchema);
 
 export const Book = model<IBook>(Models.BOOK, bookSchema);

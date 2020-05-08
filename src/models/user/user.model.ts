@@ -4,10 +4,10 @@ import validator from 'validator';
 import bcrypt from 'bcryptjs';
 import { IUser } from './user.interface';
 import { Models } from '../models.enum';
-import { raw } from 'express';
+import { setUserVirtuals } from './user.virtuals';
 
 
-const userSchema = new Schema<IUser>({
+let userSchema = new Schema<IUser>({
     firstName: {
         type: SchemaTypes.String,
         minlength: [2, 'field \'firstName\' must contains at least 2 characters'],
@@ -101,17 +101,8 @@ userSchema.methods.changedPasswordAfter = function(JWTTimestamp) {
     return false;
 };
 
-userSchema.virtual('reviews', {
-    ref: Models.BOOK_REVIEW,
-    foreignField: 'user',
-    localField: '_id'
-});
-
-userSchema.virtual('excerpt', {
-    ref: Models.BOOK_EXCERPT,
-    foreignField: 'user',
-    localField: '_id'
-});
+// Add all virtual fields
+setUserVirtuals(userSchema);
 
 export const User = mongoose.model<IUser>(Models.USER, userSchema);
 

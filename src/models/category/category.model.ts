@@ -1,8 +1,9 @@
 import { model, Schema, SchemaTypes } from 'mongoose';
 import { ICategory } from './category.interface';
 import { Models } from '../models.enum';
+import { setCategoryVirtuals } from './category.virtuals';
 
-const categorySchema = new Schema({
+let categorySchema = new Schema({
     name: {
         type: SchemaTypes.String,
         unique: true,
@@ -14,10 +15,6 @@ const categorySchema = new Schema({
     timestamps: true
 });
 
-categorySchema.virtual('books', {
-    ref: Models.BOOK,
-    foreignField: 'category',
-    localField: '_id'
-});
+setCategoryVirtuals(categorySchema)
 
 export const Category = model<ICategory>(Models.CATEGORY, categorySchema);

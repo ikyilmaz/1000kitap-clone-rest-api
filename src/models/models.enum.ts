@@ -5,5 +5,6 @@ export enum Models {
     CATEGORY = 'Category',
     BOOK_REVIEW = 'BookReview',
     BOOK_EXCERPT = 'BookExcerpt',
-    BOOK_FOLLOWER = 'BookFollower'
+    BOOK_FOLLOWER = 'BookFollower',
+    BOOK_RATING = 'BookRating'
 }

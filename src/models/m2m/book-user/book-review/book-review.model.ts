@@ -13,15 +13,26 @@ const bookReviewSchema = new Schema<IBookReview>({
         required: [true, ' field \'user\' is required'],
         ref: Models.USER
     },
+    rating: {
+        type: SchemaTypes.Number,
+        min: 1,
+        max: 10,
+        set: (value: number) => Math.round(value)
+    },
+    specialNote: {
+        type: SchemaTypes.String,
+        maxlength: [256, 'field \'specialNote\' must contain no more than 256 characters']
+    },
     content: {
+        type: SchemaTypes.String,
         required: [true, ' field \'content\' is required'],
-        maxlength: [3000, 'field \'content\' must contain no more than 3000 characters'],
-        type: SchemaTypes.String
+        maxlength: [3000, 'field \'content\' must contain no more than 3000 characters']
     }
 }, {
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
     timestamps: true
 });
+
 
 export const BookReview = model<IBookReview>(Models.BOOK_REVIEW, bookReviewSchema);

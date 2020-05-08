@@ -10,7 +10,10 @@ import { Book } from './models/book/book.model';
 import { BookExcerpt } from './models/m2m/book-user/book-excerpt/book-excerpt.model';
 import { BookReview } from './models/m2m/book-user/book-review/book-review.model';
 import moment from 'moment';
+import { BookFollower } from './models/m2m/book-user/book-follower/book-follower.model';
+import { BookRating } from './models/m2m/book-user/book-rating/book-rating.model';
 
+let before = moment();
 mongoose.connect(DB_CONNECTION_STRING, {
     useNewUrlParser: true,
     useCreateIndex: true,
@@ -18,8 +21,14 @@ mongoose.connect(DB_CONNECTION_STRING, {
     useUnifiedTopology: true
 })
     .then(async () => {
-        console.log(chalk.blueBright('--> Successfully connected to %s database'), DB_NAME);
-        const before = moment();
+        console.log(
+            chalk.blueBright(
+                `--> Successfully connected to ${chalk.underline.redBright(DB_NAME)} database in ${
+                    chalk.underline.redBright(before.diff(moment()).toString().replace('-', ''))
+                } ms`
+            )
+        );
+        before = moment();
         await Promise.all(
             [
                 Author.init(),
@@ -27,7 +36,9 @@ mongoose.connect(DB_CONNECTION_STRING, {
                 Category.init(),
                 Book.init(),
                 BookExcerpt.init(),
-                BookReview.init()
+                BookReview.init(),
+                BookFollower.init(),
+                BookRating.init()
             ]
         ).catch(err => console.error(err));
 
@@ -35,7 +46,7 @@ mongoose.connect(DB_CONNECTION_STRING, {
             chalk.cyan(
                 `--> All the models are initialized in ${
                     chalk.underline.redBright(before.diff(moment()).toString().replace('-', ''))
-                } milliseconds`
+                } ms`
             )
         );
 

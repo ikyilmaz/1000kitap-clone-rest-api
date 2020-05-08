@@ -20,12 +20,14 @@ const bookFollowerSchema = new Schema({
 
 bookFollowerSchema.pre<IBookFollower>('save', async function(next) {
 
-    const bookFollower = await BookFollower.findOne({ user: this.user, book: this.book }).select('id');
+    if (this.isNew) {
+        const bookFollower = await BookFollower.findOne({ user: this.user, book: this.book }).select('id');
 
-    if (!!bookFollower) next(new AppError('already exists', 400));
+        if (!!bookFollower) next(new AppError('already exists', 400));
 
-    next();
+        next();
+    }
 
 });
 
-const BookFollower = model<IBookFollower>(Models.BOOK_FOLLOWER, bookFollowerSchema);
+export const BookFollower = model<IBookFollower>(Models.BOOK_FOLLOWER, bookFollowerSchema);

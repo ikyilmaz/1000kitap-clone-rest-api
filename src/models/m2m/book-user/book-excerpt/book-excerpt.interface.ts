@@ -4,7 +4,7 @@ import { Types } from 'mongoose';
 import { IUser } from '../../../user/user.interface';
 
 export interface IBookExcerpt extends IBaseModel {
-    book: IBook | Types.ObjectId;
-    user: IUser | Types.ObjectId;
+    book: IBook | Types.ObjectId | string;
+    user: IUser | Types.ObjectId | string;
     content: string;
 }

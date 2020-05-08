@@ -1,8 +1,9 @@
 import { Schema, SchemaTypes, model } from 'mongoose';
 import { IAuthor } from './author.interface';
 import { Models } from '../models.enum';
+import { setAuthorVirtuals } from './author.virtuals';
 
-const authorSchema = new Schema<IAuthor>({
+let authorSchema = new Schema<IAuthor>({
     firstName: {
         type: SchemaTypes.String,
         minlength: [2, 'field \'firstName\' must contains at least 2 characters'],
@@ -31,10 +32,6 @@ const authorSchema = new Schema<IAuthor>({
     timestamps: true
 });
 
-authorSchema.virtual('books', {
-    ref: Models.BOOK,
-    foreignField: 'author',
-    localField: '_id'
-});
+setAuthorVirtuals(authorSchema);
 
 export const Author = model<IAuthor>(Models.AUTHOR, authorSchema);
