@@ -12,6 +12,7 @@ import { BookReview } from './models/m2m/book-user/book-review/book-review.model
 import moment from 'moment';
 import { BookFollower } from './models/m2m/book-user/book-follower/book-follower.model';
 import { BookRating } from './models/m2m/book-user/book-rating/book-rating.model';
+import { UserLibrary } from './models/m2m/book-user/user-library/user-library.model';
 
 let before = moment();
 mongoose.connect(DB_CONNECTION_STRING, {
@@ -38,7 +39,8 @@ mongoose.connect(DB_CONNECTION_STRING, {
                 BookExcerpt.init(),
                 BookReview.init(),
                 BookFollower.init(),
-                BookRating.init()
+                BookRating.init(),
+                UserLibrary.init()
             ]
         ).catch(err => console.error(err));
 

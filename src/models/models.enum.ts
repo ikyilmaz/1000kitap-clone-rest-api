@@ -1,10 +1,16 @@
 export enum Models {
-    USER = 'User',
-    BOOK = 'Book',
     AUTHOR = 'Author',
+
     CATEGORY = 'Category',
+
+    USER = 'User',
+
+    BOOK = 'Book',
+
     BOOK_REVIEW = 'BookReview',
     BOOK_EXCERPT = 'BookExcerpt',
     BOOK_FOLLOWER = 'BookFollower',
-    BOOK_RATING = 'BookRating'
+    BOOK_RATING = 'BookRating',
+
+    USER_LIBRARY = 'UserLibrary'
 }

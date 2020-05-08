@@ -1,17 +1,18 @@
 import { Schema } from 'mongoose';
 import { IUser } from './user.interface';
 import { Models } from '../models.enum';
+import { UserVirtuals } from './user.enums';
 
 export const setUserVirtuals = (userSchema: Schema<IUser>) => {
     // REVIEWS
-    userSchema.virtual('reviews', {
+    userSchema.virtual(UserVirtuals.REVIEWS, {
         ref: Models.BOOK_REVIEW,
         foreignField: 'user',
         localField: '_id'
     });
 
     // REVIEWS COUNT
-    userSchema.virtual('reviewsCount', {
+    userSchema.virtual(UserVirtuals.REVIEWS_COUNT, {
         ref: Models.BOOK_REVIEW,
         foreignField: 'user',
         localField: '_id',
@@ -19,28 +20,28 @@ export const setUserVirtuals = (userSchema: Schema<IUser>) => {
     });
 
     // EXCERPTS
-    userSchema.virtual('excerpts', {
+    userSchema.virtual(UserVirtuals.EXCERPTS, {
         ref: Models.BOOK_EXCERPT,
         foreignField: 'user',
         localField: '_id'
     });
 
     // EXCERPTS COUNT
-    userSchema.virtual('excerptsCount', {
+    userSchema.virtual(UserVirtuals.EXCERPTS_COUNT, {
         ref: Models.BOOK_EXCERPT,
         foreignField: 'user',
         localField: '_id'
     });
 
     // FALLOWED BOOKS
-    userSchema.virtual('fallowedBooks', {
+    userSchema.virtual(UserVirtuals.FOLLOWED_BOOKS, {
         ref: Models.BOOK_FOLLOWER,
         foreignField: 'user',
         localField: '_id'
     });
 
     // FALLOWED BOOKS COUNT
-    userSchema.virtual('fallowedBooksCount', {
+    userSchema.virtual(UserVirtuals.FOLLOWED_BOOKS_COUNT, {
         ref: Models.BOOK_FOLLOWER,
         foreignField: 'user',
         localField: '_id',
@@ -48,17 +49,19 @@ export const setUserVirtuals = (userSchema: Schema<IUser>) => {
     });
 
     // RATED BOOKS
-    userSchema.virtual('ratedBooks', {
+    userSchema.virtual(UserVirtuals.RATED_BOOKS, {
         ref: Models.BOOK_RATING,
         foreignField: 'user',
         localField: '_id'
     });
 
     // RATED BOOKS COUNT
-    userSchema.virtual('ratedBooksCount', {
+    userSchema.virtual(UserVirtuals.RATED_BOOKS_COUNT, {
         ref: Models.BOOK_RATING,
         foreignField: 'user',
         localField: '_id',
         count: true
     });
+
+
 };

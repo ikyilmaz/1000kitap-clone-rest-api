@@ -1,16 +1,13 @@
 import { Book } from '../../models/book/book.model';
 import { APIFeatures } from '../../utils/api-features';
 import { limitFields, paginate } from '../../utils/api-features-funcs';
+import { BookVirtuals } from '../../models/book/book.enums';
 
 export class BookService {
     public model = Book;
 
     getMany = (query: Pick<string, any>) => {
-        const documentQuery = this.model.find({
-            title: {
-                $regex: /eiusmod/
-            }
-        })
+        const documentQuery = this.model.find()
             .populate({
                 path: 'category',
                 select: limitFields(query['categoryFields'], ['name'])
@@ -52,7 +49,7 @@ export class BookService {
                 select: limitFields(query['authorFields'], ['firstName', 'lastName'])
             })
             .populate({
-                path: 'reviews',
+                path: BookVirtuals.REVIEWS,
                 select: limitFields(query['reviewFields'], ['book user content']),
                 options: {
                     ...paginate(query),
@@ -63,8 +60,8 @@ export class BookService {
                     select: limitFields(query['reviewUserFields'], ['firstName', 'lastName', 'image'], ['password', 'email'])
                 }
             })
-            .populate('excerptsCount')
-            .populate('reviewsCount');
+            .populate(BookVirtuals.EXCERPTS_COUNT)
+            .populate(BookVirtuals.REVIEWS_COUNT);
 
         return new APIFeatures(documentQuery, query).limitFields().query;
 
@@ -81,7 +78,7 @@ export class BookService {
                 select: limitFields(query['authorFields'], ['firstName', 'lastName'])
             })
             .populate({
-                path: 'excerpts',
+                path: BookVirtuals.EXCERPTS,
                 select: limitFields(query['excerptFields'], ['book user content']),
                 options: {
                     ...paginate(query),
@@ -92,8 +89,8 @@ export class BookService {
                     select: limitFields(query['excerptUserFields'], ['firstName', 'lastName', 'image'], ['password', 'email'])
                 }
             })
-            .populate('excerptsCount')
-            .populate('reviewsCount');
+            .populate(BookVirtuals.EXCERPTS_COUNT)
+            .populate(BookVirtuals.REVIEWS_COUNT);
 
         return new APIFeatures(documentQuery, query).limitFields().query;
     };
