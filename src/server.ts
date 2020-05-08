@@ -13,6 +13,8 @@ import moment from 'moment';
 import { BookFollow } from './models/m2m/book-user/book-follow/book-follow.model';
 import { BookRating } from './models/m2m/book-user/book-rating/book-rating.model';
 import { UserLibrary } from './models/m2m/book-user/user-library/user-library.model';
+import { UserFollow } from './models/m2m/user-user/user-follow/user-follow.model';
+import { FavoriteAuthor } from './models/m2m/author-user/favorite-author/favorite-author.model';
 
 let before = moment();
 mongoose.connect(DB_CONNECTION_STRING, {
@@ -30,19 +32,17 @@ mongoose.connect(DB_CONNECTION_STRING, {
             )
         );
         before = moment();
-        await Promise.all(
-            [
-                Author.init(),
-                User.init(),
-                Category.init(),
-                Book.init(),
-                BookExcerpt.init(),
-                BookReview.init(),
-                BookFollow.init(),
-                BookRating.init(),
-                UserLibrary.init()
-            ]
-        ).catch(err => console.error(err));
+        const models = [
+            Author, FavoriteAuthor,
+            Category,
+            Book, BookExcerpt, BookReview, BookFollow, BookRating,
+            User, UserLibrary, UserFollow
+        ]
+
+        for (let model of models) {
+            await model.init()
+        }
+
 
         console.log(
             chalk.cyan(

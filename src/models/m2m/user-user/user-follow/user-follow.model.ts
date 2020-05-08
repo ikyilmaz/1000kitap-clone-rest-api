@@ -21,4 +21,4 @@ const userFollowSchema = new Schema<IUserFollow>({
 });
 
 
-const UserFollow = model<IUserFollow>(Models.USER_FOLLOW, userFollowSchema);
+export const UserFollow = model<IUserFollow>(Models.USER_FOLLOW, userFollowSchema);
