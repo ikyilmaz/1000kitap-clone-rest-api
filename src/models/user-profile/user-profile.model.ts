@@ -37,4 +37,4 @@ const userProfileSchema = new Schema({
     timestamps: true
 });
 
-const UserProfile = model<IUserProfile>(Models.USER_PROFILE, userProfileSchema);
+export const UserProfile = model<IUserProfile>(Models.USER_PROFILE, userProfileSchema);
