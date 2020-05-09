@@ -20,4 +20,5 @@ export enum UserVirtuals {
     FAVORITE_AUTHORS_COUNT = "favoriteAuthorsCount",
     FAVORITE_BOOKS = "favoriteBooks",
     FAVORITE_BOOKS_COUNT = "favoriteBooksCount",
+    PROFILE = 'profile'
 }

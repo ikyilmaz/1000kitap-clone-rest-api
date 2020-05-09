@@ -4,6 +4,13 @@ import { Models } from '../models.enum';
 import { UserVirtuals } from './user.enums';
 
 export const setUserVirtuals = (userSchema: Schema<IUser>) => {
+    // PROFILE
+    userSchema.virtual(UserVirtuals.PROFILE, {
+        ref: Models.USER_PROFILE,
+        foreignField: 'user',
+        localField: '_id'
+    })
+
     // REVIEWS
     userSchema.virtual(UserVirtuals.REVIEWS, {
         ref: Models.BOOK_REVIEW,
