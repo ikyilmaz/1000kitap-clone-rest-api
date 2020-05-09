@@ -8,7 +8,8 @@ export const setUserVirtuals = (userSchema: Schema<IUser>) => {
     userSchema.virtual(UserVirtuals.PROFILE, {
         ref: Models.USER_PROFILE,
         foreignField: 'user',
-        localField: '_id'
+        localField: '_id',
+        justOne: true,
     })
 
     // REVIEWS

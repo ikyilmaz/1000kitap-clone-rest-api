@@ -33,8 +33,7 @@ export class UserService{
             .select(limitFields(query['fields'], { unwantedFields: ['password', 'email'] }))
             .populate({
                 path: UserVirtuals.PROFILE,
-                select: limitFields(query['profileFields']),
-                justOne: true
-            });
+                select: limitFields(query['profileFields'] as string)
+            })
     };
 }
