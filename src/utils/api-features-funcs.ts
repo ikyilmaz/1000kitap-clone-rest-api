@@ -1,4 +1,4 @@
-export const limitFields = (fields: string, defaults: string[], unwantedFields?: string[]): string => {
+export const limitFields = (fields: string, options?: { defaults?: string[], unwantedFields?: string[] }): string => {
     if (fields) {
         const arrFields: string[] = [];
 
@@ -8,7 +8,7 @@ export const limitFields = (fields: string, defaults: string[], unwantedFields?:
 
             let shouldReturn = false;
 
-            unwantedFields?.forEach(unwantedField => {
+            options?.unwantedFields?.forEach(unwantedField => {
                 if (field == unwantedField) shouldReturn = true;
             });
 
@@ -20,7 +20,8 @@ export const limitFields = (fields: string, defaults: string[], unwantedFields?:
         return arrFields.join(' ');
 
     }
-    return defaults.join(' ');
+
+    return options?.defaults ? options.defaults.join(' ') : '-__v';
 
 };
 
@@ -31,6 +32,6 @@ export const paginate = (query: Pick<string, any>, options?: { pageKey?: string,
     if (options?.maxLimit && limit > options.maxLimit) limit = options.maxLimit;
 
     const skip = (page - 1) * limit;
-    console.log({ skip, limit })
+    console.log({ skip, limit });
     return { skip, limit };
 };

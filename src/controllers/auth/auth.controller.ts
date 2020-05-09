@@ -56,7 +56,7 @@ export class AuthController extends BaseController {
         const data = await req.user.populate({
             path: UserVirtuals.PROFILE,
             justOne: true,
-            select: limitFields(req.query['profileFields'] as string, ['-__v'])
+            select: limitFields(req.query['profileFields'] as string)
         }).execPopulate();
 
         res.status(200).json({ status: 'success', data });

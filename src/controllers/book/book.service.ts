@@ -10,11 +10,11 @@ export class BookService {
         const documentQuery = this.model.find()
             .populate({
                 path: 'category',
-                select: limitFields(query['categoryFields'], ['name'])
+                select: limitFields(query['categoryFields'], { defaults: ['name'] })
             })
             .populate({
                 path: 'author',
-                select: limitFields(query['authorFields'], ['firstName', 'lastName'])
+                select: limitFields(query['authorFields'], { defaults: ['firstName', 'lastName'] })
             });
 
         return new APIFeatures(documentQuery, query).filter().sort().limitFields().paginate().query;
@@ -26,11 +26,11 @@ export class BookService {
         const documentQuery = this.model.findById(id)
             .populate({
                 path: 'category',
-                select: limitFields(query['categoryFields'], ['name'])
+                select: limitFields(query['categoryFields'], { defaults: ['name'] })
             })
             .populate({
                 path: 'author',
-                select: limitFields(query['authorFields'], ['firstName', 'lastName'])
+                select: limitFields(query['authorFields'], { defaults: ['firstName', 'lastName'] })
             })
             .populate('excerptsCount')
             .populate('reviewsCount');
@@ -42,22 +42,25 @@ export class BookService {
         const documentQuery = this.model.findById(id)
             .populate({
                 path: 'category',
-                select: limitFields(query['categoryFields'], ['name'])
+                select: limitFields(query['categoryFields'], { defaults: ['name'] })
             })
             .populate({
                 path: 'author',
-                select: limitFields(query['authorFields'], ['firstName', 'lastName'])
+                select: limitFields(query['authorFields'], { defaults: ['firstName', 'lastName'] })
             })
             .populate({
                 path: BookVirtuals.REVIEWS,
-                select: limitFields(query['reviewFields'], ['book user content']),
+                select: limitFields(query['reviewFields'], { defaults: ['book user content'] }),
                 options: {
                     ...paginate(query),
                     sort: query['reviewSortBy'] || '-createdAt'
                 },
                 populate: {
                     path: 'user',
-                    select: limitFields(query['reviewUserFields'], ['firstName', 'lastName', 'image'], ['password', 'email'])
+                    select: limitFields(query['reviewUserFields'], {
+                        defaults: ['firstName', 'lastName', 'image'],
+                        unwantedFields: ['password', 'email']
+                    })
                 }
             })
             .populate(BookVirtuals.EXCERPTS_COUNT)
@@ -71,22 +74,25 @@ export class BookService {
         const documentQuery = this.model.findById(id)
             .populate({
                 path: 'category',
-                select: limitFields(query['categoryFields'], ['name'])
+                select: limitFields(query['categoryFields'], { defaults: ['name'] })
             })
             .populate({
                 path: 'author',
-                select: limitFields(query['authorFields'], ['firstName', 'lastName'])
+                select: limitFields(query['authorFields'], { defaults: ['firstName', 'lastName'] })
             })
             .populate({
                 path: BookVirtuals.EXCERPTS,
-                select: limitFields(query['excerptFields'], ['book user content']),
+                select: limitFields(query['excerptFields'], { defaults: ['book user content'] }),
                 options: {
                     ...paginate(query),
                     sort: query['excerptSortBy'] || '-createdAt'
                 },
                 populate: {
                     path: 'user',
-                    select: limitFields(query['excerptUserFields'], ['firstName', 'lastName', 'image'], ['password', 'email'])
+                    select: limitFields(query['excerptUserFields'], {
+                        defaults: ['firstName', 'lastName', 'image'],
+                        unwantedFields: ['password', 'email']
+                    })
                 }
             })
             .populate(BookVirtuals.EXCERPTS_COUNT)

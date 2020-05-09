@@ -32,6 +32,12 @@ router.get(
 );
 
 router.get(
+    '/profile',
+    authRequired,
+    auth.profile
+);
+
+router.get(
     '/is-logged-in',
     auth.isLoggedIn
 );

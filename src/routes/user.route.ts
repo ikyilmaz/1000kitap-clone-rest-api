@@ -23,6 +23,13 @@ router
     );
 
 router
+    .route("/:id/profile")
+    .get(
+        checkIdParam, checkValidationResult, // VALIDATORS
+        userController.getOneUsersProfile
+    )
+
+router
     .route('/:id')
     .get(
         checkIdParam, checkValidationResult, // VALIDATORS
