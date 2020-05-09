@@ -10,7 +10,7 @@ const app = express(); // Express Engine
 
 app.use(express.json({ limit: '10kb' })); // Body Parser
 app.use(express.urlencoded({ extended: true }));
-app.use(morgan('tiny')); // Logger
+app.use(morgan("tiny")); // Logger
 
 // Routes
 app.use('/api/v1/users', userRouter);
