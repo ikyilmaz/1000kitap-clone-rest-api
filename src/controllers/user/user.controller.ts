@@ -1,5 +1,5 @@
 import { catchAsync } from '../../utils/catch-async';
-import { BaseController } from '../base.controller';
+import { BaseController } from '../base/base.controller';
 import { UserService } from './user.service';
 import { NotFound } from '../../utils/app-error';
 import validator from 'validator';

@@ -1,8 +1,8 @@
-import { catchAsync } from '../utils/catch-async';
+import { catchAsync } from '../../utils/catch-async';
 import * as mongoose from 'mongoose';
 import { Document } from 'mongoose';
-import {  NotFound } from '../utils/app-error';
-import { APIFeatures } from '../utils/api-features';
+import {  NotFound } from '../../utils/app-error';
+import { APIFeatures } from '../../utils/api-features';
 
 export abstract class BaseController {
     protected constructor(private readonly model: mongoose.Model<Document>) {

@@ -1,4 +1,4 @@
-import { BaseController } from '../base.controller';
+import { BaseController } from '../base/base.controller';
 import { BookService } from './book.service';
 import { catchAsync } from '../../utils/catch-async';
 import { NotFound } from '../../utils/app-error';

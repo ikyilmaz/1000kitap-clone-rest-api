@@ -1,4 +1,4 @@
-import { BaseController } from '../base.controller';
+import { BaseController } from '../base/base.controller';
 import { AuthService } from './auth.service';
 import { catchAsync } from '../../utils/catch-async';
 import { filterObject } from '../../utils/filter-object';

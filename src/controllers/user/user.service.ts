@@ -4,18 +4,14 @@ import { limitFields } from '../../utils/api-features-funcs';
 import { UserProfile } from '../../models/user-profile/user-profile.model';
 import { UserVirtuals } from '../../models/user/user.enums';
 
-export class UserService {
+export class UserService{
     public model = User;
 
     create = async (user: Pick<string, any>) => {
 
-        const createdUser = await this.model.create({
-            ...user
-        });
+        const createdUser = await this.model.create(user);
 
-        createdUser.profile = await UserProfile.create({
-            user: createdUser._id || createdUser.id
-        });
+        createdUser.profile = await UserProfile.create({ user: createdUser._id || createdUser.id });
 
         return createdUser;
 
