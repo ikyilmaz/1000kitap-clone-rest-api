@@ -8,6 +8,10 @@ export class AuthService {
         return this.model.findOne(conditions).select('+password');
     };
 
+    getWithProfile = () => {
+
+    }
+
     create = async (user: any) => {
         const createdUser = await this.model.create({
             firstName: user.firstName,

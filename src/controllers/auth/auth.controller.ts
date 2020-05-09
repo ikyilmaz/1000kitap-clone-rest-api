@@ -10,6 +10,8 @@ import { JWT_COOKIE_EXPIRES_IN, JWT_EXPIRES_IN, JWT_SECRET } from '../../config/
 import { User } from '../../models/user/user.model';
 import { IUser } from '../../models/user/user.interface';
 import { NextFunction, raw, Request, Response } from 'express';
+import { UserVirtuals } from '../../models/user/user.enums';
+import { limitFields } from '../../utils/api-features-funcs';
 
 export class AuthController extends BaseController {
     constructor(public authService: AuthService) {
@@ -48,6 +50,16 @@ export class AuthController extends BaseController {
 
     user = catchAsync(async (req, res, next) => {
         res.status(200).json({ status: 'success', data: this.clearUser(req.user) });
+    });
+
+    profile = catchAsync(async (req, res, next) => {
+        const data = await req.user.populate({
+            path: UserVirtuals.PROFILE,
+            justOne: true,
+            select: limitFields(req.query['profileFields'] as string, ['-__v'])
+        }).execPopulate();
+
+        res.status(200).json({ status: 'success', data });
     });
 
     isLoggedIn = catchAsync(async (req, res, next) => {
