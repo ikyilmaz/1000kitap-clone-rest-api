@@ -78,4 +78,19 @@ export const setBookVirtuals = (bookSchema: Schema<IBook>) => {
         localField: '_id',
         count: true
     });
+
+    // FAVORED BY
+    bookSchema.virtual(BookVirtuals.FAVORED_BY, {
+        ref: Models.FAVORITE_BOOK,
+        foreignField: 'book',
+        localField: '_id'
+    });
+
+    // FAVORED BY COUNT
+    bookSchema.virtual(BookVirtuals.FAVORED_BY_COUNT, {
+        ref: Models.FAVORITE_BOOK,
+        foreignField: 'book',
+        localField: '_id',
+        count: true
+    });
 };

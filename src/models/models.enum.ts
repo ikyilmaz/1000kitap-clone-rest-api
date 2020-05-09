@@ -15,5 +15,6 @@ export enum Models {
     USER_LIBRARY = 'UserLibrary',
     USER_FOLLOW = 'UserFollow',
 
-    FAVORITE_AUTHOR = 'FavoriteAuthor'
+    FAVORITE_AUTHOR = 'FavoriteAuthor',
+    FAVORITE_BOOK = 'FavoriteBook'
 }

@@ -8,5 +8,7 @@ export enum BookVirtuals {
     RATES = 'rates',
     RATES_COUNT = 'ratesCount',
     LIBRARIES = 'libraries',
-    LIBRARIES_COUNT = 'librariesCount'
+    LIBRARIES_COUNT = 'librariesCount',
+    FAVORED_BY = 'favoredBy',
+    FAVORED_BY_COUNT = 'favoredByCount'
 }

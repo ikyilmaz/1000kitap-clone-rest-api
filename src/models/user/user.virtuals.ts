@@ -107,4 +107,20 @@ export const setUserVirtuals = (userSchema: Schema<IUser>) => {
         localField: '_id',
         count: true
     });
+
+    // FAVORITE BOOKS
+    userSchema.virtual(UserVirtuals.FAVORITE_BOOKS, {
+        ref: Models.FAVORITE_BOOK,
+        foreignField: 'user',
+        localField: '_id'
+    });
+
+    // FAVORITE BOOKS COUNT
+    userSchema.virtual(UserVirtuals.FAVORITE_BOOKS_COUNT, {
+        ref: Models.FAVORITE_BOOK,
+        foreignField: 'user',
+        localField: '_id',
+        count: true
+    });
+
 };
