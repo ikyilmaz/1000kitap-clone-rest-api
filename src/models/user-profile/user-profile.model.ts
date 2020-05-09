@@ -1,5 +1,4 @@
-import { model, Schema, SchemaTypes, Types } from 'mongoose';
-import { IUser } from '../user/user.interface';
+import { model, Schema, SchemaTypes } from 'mongoose';
 import { Models } from '../models.enum';
 import { IUserProfile } from './user-profile.interface';
 
@@ -7,6 +6,7 @@ const userProfileSchema = new Schema({
     user: {
         type: SchemaTypes.ObjectId,
         required: true,
+        unique: true,
         ref: Models.USER
     },
     biography: {

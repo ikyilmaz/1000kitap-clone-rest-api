@@ -9,6 +9,11 @@ export class UserController extends BaseController {
         super(userService.model);
     }
 
+    create = catchAsync(async (req, res, next) => {
+        const data = await this.userService.create(req.body);
+        res.status(201).json({ status: 'success', data });
+    });
+
     get = catchAsync(async (req, res, next) => {
         let conditions: Partial<Pick<{ id: string; username: string }, any>> = {};
 

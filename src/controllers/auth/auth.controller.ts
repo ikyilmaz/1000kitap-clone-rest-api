@@ -18,6 +18,8 @@ export class AuthController extends BaseController {
 
     signUp = catchAsync(async (req, res, next) => {
         const user = await this.authService.create(req.body);
+        // Send Welcome Email
+        //...
         this.createAndSendToken(user, 201, req, res);
     });
 
