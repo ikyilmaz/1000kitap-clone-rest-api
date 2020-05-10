@@ -3,20 +3,22 @@ import morgan from 'morgan';
 import { AppError } from './utils/app-error';
 import { userRouter } from './routes/user.route';
 import { categoryRouter } from './routes/category.route';
-import { authRouter } from './routes/auth.router';
-import { bookRouter } from './routes/book.router';
+import { authRouter } from './routes/auth.route';
+import { bookRouter } from './routes/book.route';
+import { bookExcerptRouter } from './routes/book-excerpt.route';
 
 const app = express(); // Express Engine
 
 app.use(express.json({ limit: '10kb' })); // Body Parser
 app.use(express.urlencoded({ extended: true }));
-app.use(morgan("tiny")); // Logger
+app.use(morgan('tiny')); // Logger
 
 // Routes
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/categories', categoryRouter);
 app.use('/api/v1/books', bookRouter);
 app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/book-excerpts', bookExcerptRouter);
 
 // Hello World Message
 app.all('/', ((req, res) => res.status(200).send('hello world')));
