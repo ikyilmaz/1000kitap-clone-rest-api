@@ -7,6 +7,7 @@ import { authRouter } from './routes/auth.route';
 import { bookRouter } from './routes/book/book.route';
 import { bookExcerptRouter } from './routes/book/book-excerpt.route';
 import { bookReviewRouter } from './routes/book/book-review.route';
+import { bookFollowRouter } from './routes/book/book-follow.route';
 
 const app = express(); // Express Engine
 
@@ -21,6 +22,7 @@ app.use('/api/v1/books', bookRouter);
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/book-excerpts', bookExcerptRouter);
 app.use('/api/v1/book-reviews', bookReviewRouter);
+app.use('/api/v1/book-follows', bookFollowRouter)
 
 // Hello World Message
 app.all('/', ((req, res) => res.status(200).send('hello world')));
