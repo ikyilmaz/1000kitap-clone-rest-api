@@ -46,7 +46,9 @@ router.patch(
     '/update',
     authValidator.update, checkValidationResult, // VALIDATORS
     authRequired,
-    auth.baseUpdate
+    auth.uploadUserPhoto,
+    auth.resizeUserPhoto,
+    auth.update
 );
 
 router.patch(
@@ -63,4 +65,4 @@ router.patch(
     auth.updateEmail
 );
 
-export {router as authRouter}
+export { router as authRouter };

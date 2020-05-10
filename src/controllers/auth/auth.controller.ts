@@ -12,6 +12,8 @@ import { IUser } from '../../models/user/user.interface';
 import { NextFunction, raw, Request, Response } from 'express';
 import { UserVirtuals } from '../../models/user/user.enums';
 import { limitFields } from '../../utils/api-features-funcs';
+import multer from 'multer';
+import sharp from 'sharp';
 
 export class AuthController extends BaseController {
     constructor(public authService: AuthService) {
@@ -84,8 +86,35 @@ export class AuthController extends BaseController {
         res.status(200).json({ status: 'success', data: this.clearUser(currentUser) });
     });
 
-    baseUpdate = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+    uploadUserPhoto = multer({
+        storage: multer.memoryStorage(),
+        fileFilter: (req, file, cb) => {
+            if (file.mimetype.startsWith('image')) cb(null, true);
+            else cb(BadRequest('Not an image! Please upload only images.'));
+        }
+    }).single('photo');
+
+    resizeUserPhoto = catchAsync(async (req, res, next) => {
+        if (!req.file) return next();
+
+        req.file.filename = `user-${req.user.id}-${moment().unix()}.jpeg`;
+
+        console.log(``)
+
+        await sharp(req.file.buffer)
+            .resize(500, 500)
+            .toFormat('jpeg')
+            .jpeg({ quality: 90 })
+            .toFile(`${__dirname}/../../assets/img/user-images/${req.file.filename}`);
+
+        next();
+    });
+
+
+    update = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
         req.body = filterObject(req.body, 'firstName', 'lastName', 'username');
+
+        if (req.file) req.body.photo = req.file.filename;
 
         const data = await this.authService.update(req.user._id, req.body);
 

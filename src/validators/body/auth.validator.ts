@@ -85,6 +85,7 @@ const update = checkSchema({
         }
     },
     username: {
+        optional: true,
         isString: true,
         isLength: {
             errorMessage: 'field \'username\' must be between 2 and 64 characters',
