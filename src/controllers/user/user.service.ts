@@ -54,7 +54,7 @@ export class UserService {
 
     getOneWithExcerpts: getUserFunc = (conditions, query) => this.getOneWith(conditions, query, {
         populate: {
-            select: limitFields(query['excerptFields'], { defaults: ['book', 'content'] }),
+            select: limitFields(query['excerptFields'], { defaults: ['book', 'content', 'createdAt'] }),
             path: UserVirtuals.EXCERPTS,
             sortBy: query['excerptSortBy'],
             populateWithCount: { path: UserVirtuals.EXCERPTS_COUNT },

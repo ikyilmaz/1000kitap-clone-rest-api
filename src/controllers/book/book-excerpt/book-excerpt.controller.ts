@@ -9,14 +9,19 @@ export class BookExcerptController extends BaseController {
     }
 
     get = catchAsync(async (req, res, next) => {
-        const { id } = req.params;
-        const data = await this.bookExcerptService.get({ id });
+        const data = await this.bookExcerptService.get(req.params.id, req.query);
         if (!data) return next(NotFound());
         res.status(200).json({ status: 'success', data });
     });
 
+    getMany = catchAsync(async (req, res, next) => {
+        const data = await this.bookExcerptService.getMany( req.query);
+        if (!data) return next(NotFound());
+        res.status(200).json({ status: 'success', data });
+    })
+
     create = catchAsync(async (req, res, next) => {
-        const data = await this.bookExcerptService.create({
+        const data = await this.bookExcerptService.baseCreate({
             ...req.body,
             user: req.user._id || req.user.id
         });
@@ -25,7 +30,7 @@ export class BookExcerptController extends BaseController {
     });
 
     update = catchAsync(async (req, res, next) => {
-        const data = await this.bookExcerptService.update(req.params.id, { content: req.body.content });
+        const data = await this.bookExcerptService.baseUpdate(req.params.id, { content: req.body.content });
 
         res.status(200).json({ status: 'success', data });
     });
