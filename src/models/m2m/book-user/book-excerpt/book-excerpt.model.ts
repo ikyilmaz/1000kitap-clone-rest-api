@@ -17,6 +17,11 @@ const bookExcerptSchema = new Schema<IBookExcerpt>({
         required: [true, ' field \'content\' is required'],
         maxlength: [255, 'field \'content\' must contain no more than 255 characters'],
         type: SchemaTypes.String
+    },
+    postedBy: {
+        type: SchemaTypes.String,
+        enum: ['MOBILE_APP', 'WEB_SITE'],
+        default: 'WEB_SITE'
     }
 }, {
     toJSON: { virtuals: true },

@@ -38,7 +38,8 @@ export const setUserVirtuals = (userSchema: Schema<IUser>) => {
     userSchema.virtual(UserVirtuals.EXCERPTS_COUNT, {
         ref: Models.BOOK_EXCERPT,
         foreignField: 'user',
-        localField: '_id'
+        localField: '_id',
+        count: true
     });
 
     // FOLLOWED BOOKS

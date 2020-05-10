@@ -44,16 +44,24 @@ export class UserService {
             select: limitFields(query['reviewFields']),
             path: UserVirtuals.REVIEWS,
             sortBy: query['reviewSortBy'],
-            populateWithCount: { path: UserVirtuals.REVIEWS_COUNT }
+            populateWithCount: { path: UserVirtuals.REVIEWS_COUNT },
+            populate: {
+                select: limitFields(query['excerptBookFields'], { defaults: ['title', 'image', 'publisher'] }),
+                path: 'book'
+            }
         }
     });
 
     getOneWithExcerpts: getUserFunc = (conditions, query) => this.getOneWith(conditions, query, {
         populate: {
-            select: limitFields(query['excerptFields']),
+            select: limitFields(query['excerptFields'], { defaults: ['book', 'content'] }),
             path: UserVirtuals.EXCERPTS,
             sortBy: query['excerptSortBy'],
-            populateWithCount: { path: UserVirtuals.EXCERPTS_COUNT }
+            populateWithCount: { path: UserVirtuals.EXCERPTS_COUNT },
+            populate: {
+                select: limitFields(query['excerptBookFields'], { defaults: ['title', 'image', 'publisher'] }),
+                path: 'book'
+            }
         }
     });
 
@@ -118,7 +126,8 @@ export class UserService {
                 options: {
                     ...paginate(query),
                     sort: options.populate.sortBy || '-createdAt'
-                }
+                },
+                populate: options.populate.populate ? options.populate.populate : undefined
             });
 
             if (options.populate.populateWithCount) documentQuery.populate(options.populate.populateWithCount.path);

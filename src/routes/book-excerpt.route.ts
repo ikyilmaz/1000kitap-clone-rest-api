@@ -5,6 +5,7 @@ import { BookExcerptService } from '../controllers/book/book-excerpt/book-excerp
 import { checkIdParam } from '../validators/param/id.validator';
 import { checkValidationResult } from '../filters/check-validation-result.filter';
 import { bookExcerptValidator } from '../validators/body/book-excerpt.validator';
+import { authRequired } from '../filters/auth-required.filter';
 
 const router = Router();
 const bookExcerpt = new BookExcerptController(new BookExcerptService(BookExcerpt));
@@ -19,6 +20,7 @@ router
     )
     .post(
         bookExcerptValidator.createOrUpdate(true), checkValidationResult,
+        authRequired,
         bookExcerpt.create
     );
 

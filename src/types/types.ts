@@ -6,6 +6,7 @@ export type getOneWithOptions = {
         sortBy?: string,
         populateWithCount?: {
             path: string
-        }
+        },
+        populate?: Pick<any, any>
     }
 }

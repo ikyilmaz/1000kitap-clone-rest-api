@@ -28,11 +28,11 @@ router
         user.getUserWithProfile
     )
     .get(
-        '/:id/reviews',
+        '/:id/book-reviews',
         user.getUserWithReviews
     )
     .get(
-        '/:id/excerpts',
+        '/:id/book-excerpts',
         user.getUserWithExcerpts
     )
     .get(
