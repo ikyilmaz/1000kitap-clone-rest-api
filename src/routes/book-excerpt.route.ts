@@ -15,7 +15,6 @@ router
         '/'
     )
     .get(
-        checkIdParam, checkValidationResult, // VALIDATORS
         bookExcerpt.getMany
     )
     .post(
