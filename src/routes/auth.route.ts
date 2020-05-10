@@ -63,4 +63,4 @@ router.patch(
     auth.updateEmail
 );
 
-export const authRouter = router;
+export {router as authRouter}

@@ -49,4 +49,4 @@ router
         categoryController.baseDelete
     );
 
-export const categoryRouter = router;
+export { router as categoryRouter };

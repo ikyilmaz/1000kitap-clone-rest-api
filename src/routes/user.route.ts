@@ -85,4 +85,4 @@ router
         user.baseDelete
     );
 
-export const userRouter = router;
+export { router as userRouter };

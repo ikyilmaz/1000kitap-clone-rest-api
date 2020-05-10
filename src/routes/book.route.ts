@@ -64,4 +64,6 @@ router
         bookController.getWithExcerpts
     );
 
-export const bookRouter = router;
+export {
+    router as bookRouter
+}
