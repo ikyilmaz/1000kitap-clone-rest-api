@@ -12,8 +12,10 @@ import { IUser } from '../../models/user/user.interface';
 import { NextFunction, raw, Request, Response } from 'express';
 import { UserVirtuals } from '../../models/user/user.enums';
 import { limitFields } from '../../utils/api-features-funcs';
+import fs from 'fs';
 import multer from 'multer';
 import sharp from 'sharp';
+import { SendResponse } from '../../utils/send-response';
 
 export class AuthController extends BaseController {
     constructor(public authService: AuthService) {
@@ -113,9 +115,19 @@ export class AuthController extends BaseController {
 
         if (req.file) req.body.photo = req.file.filename;
 
-        const data = await this.authService.update(req.user._id, req.body);
+        await this.authService.update(req.user._id, req.body)
+            .then(data => SendResponse({ data, res, next }))
+            .catch(async (err) => {
+                if (req.file) {
+                    await fs.unlink(
+                        `${__dirname}/../../assets/img/user-images/${req.file.filename}`,
+                        (err) => err
+                    );
+                }
 
-        res.status(200).json({ status: 'success', data });
+                next(err);
+            });
+
 
     });
 
@@ -147,6 +159,11 @@ export class AuthController extends BaseController {
         req.user.password = undefined as unknown as string;
 
         res.status(200).json({ status: 'success', data: req.user });
+    });
+
+    deactivate = catchAsync(async (req, res, next) => {
+        await this.authService.update(req.user._id, { isActive: false });
+        res.status(200).json({ status: 'success' });
     });
 
     private clearUser = (user: IUser) => {

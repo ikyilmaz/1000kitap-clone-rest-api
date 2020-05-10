@@ -43,6 +43,11 @@ router.get(
 );
 
 router.patch(
+    '/deactivate',
+    auth.deactivate
+);
+
+router.patch(
     '/update',
     authValidator.update, checkValidationResult, // VALIDATORS
     authRequired,
