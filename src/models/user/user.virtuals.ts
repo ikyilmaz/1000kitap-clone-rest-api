@@ -9,8 +9,8 @@ export const setUserVirtuals = (userSchema: Schema<IUser>) => {
         ref: Models.USER_PROFILE,
         foreignField: 'user',
         localField: '_id',
-        justOne: true,
-    })
+        justOne: true
+    });
 
     // REVIEWS
     userSchema.virtual(UserVirtuals.REVIEWS, {
@@ -72,29 +72,29 @@ export const setUserVirtuals = (userSchema: Schema<IUser>) => {
     });
 
     // FOLLOWED USERS
-    userSchema.virtual(UserVirtuals.FOLLOWED_USERS, {
+    userSchema.virtual(UserVirtuals.FOLLOWERS, {
         ref: Models.USER_FOLLOW,
-        foreignField: 'followed',
+        foreignField: 'followingBy',
         localField: '_id'
     });
 
     // FOLLOWED USERS COUNT
-    userSchema.virtual(UserVirtuals.FOLLOWED_USERS_COUNT, {
+    userSchema.virtual(UserVirtuals.FOLLOWERS_COUNT, {
         ref: Models.USER_FOLLOW,
-        foreignField: 'followed',
+        foreignField: 'followingBy',
         localField: '_id',
         count: true
     });
 
     // FOLLOWING USERS
-    userSchema.virtual(UserVirtuals.FOLLOWING_USERS, {
+    userSchema.virtual(UserVirtuals.FOLLOWING, {
         ref: Models.USER_FOLLOW,
         foreignField: 'following',
         localField: '_id'
     });
 
     // FOLLOWING USERS COUNT
-    userSchema.virtual(UserVirtuals.FOLLOWING_USERS_COUNT, {
+    userSchema.virtual(UserVirtuals.FOLLOWING_COUNT, {
         ref: Models.USER_FOLLOW,
         foreignField: 'following',
         localField: '_id',

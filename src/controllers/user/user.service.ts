@@ -73,25 +73,26 @@ export class UserService {
         }
     });
 
+
     getOneWithFollowers: getUserFunc = (conditions, query) => this.getOneWith(conditions, query, {
         populate: {
-            select: limitFields(query['followerFields'], {
+            select: limitFields(query['followFields'], {
                 unwantedFields: ['password', 'email']
             }),
-            path: UserVirtuals.FOLLOWING_USERS,
-            sortBy: query['followerSortBy'],
-            populateWithCount: { path: UserVirtuals.FOLLOWING_USERS_COUNT }
+            path: UserVirtuals.FOLLOWERS,
+            sortBy: query['followSortBy'],
+            populateWithCount: { path: UserVirtuals.FOLLOWERS_COUNT }
         }
     });
 
     getOneWithFollows: getUserFunc = (conditions, query) => this.getOneWith(conditions, query, {
         populate: {
-            select: limitFields(query['followFields'], {
+            select: limitFields(query['followerFields'], {
                 unwantedFields: ['password', 'email']
             }),
-            path: UserVirtuals.FOLLOWED_USERS,
-            sortBy: query['followSortBy'],
-            populateWithCount: { path: UserVirtuals.FOLLOWED_USERS_COUNT }
+            path: UserVirtuals.FOLLOWING,
+            sortBy: query['followerSortBy'],
+            populateWithCount: { path: UserVirtuals.FOLLOWING_COUNT }
         }
     });
 

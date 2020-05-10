@@ -4,7 +4,7 @@ import { IUserFollow } from './user-follow.interface';
 import { AppError } from '../../../../utils/app-error';
 
 const userFollowSchema = new Schema<IUserFollow>({
-    followed: {
+    followingBy: {
         type: SchemaTypes.ObjectId,
         required: true,
         ref: Models.USER
