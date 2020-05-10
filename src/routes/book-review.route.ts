@@ -45,4 +45,4 @@ router
         bookReview.baseDelete
     );
 
-export { router as bookExcerptRouter };
+export { router as bookReviewRouter };

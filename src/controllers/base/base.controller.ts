@@ -38,10 +38,8 @@ export abstract class BaseController {
     });
 
     baseDelete = catchAsync(async (req, res, next) => {
-        SendResponse({
-            data: await this.model.findByIdAndDelete(req.params.id),
-            res, next, statusCode: 204
-        });
+        await this.model.findByIdAndDelete(req.params.id);
+        res.status(204).json({ status: 'success' });
     });
 
 }
