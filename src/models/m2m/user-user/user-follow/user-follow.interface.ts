@@ -3,6 +3,6 @@ import { Types } from 'mongoose';
 import { IBaseModel } from '../../../base-model.interface';
 
 export interface IUserFollow extends IBaseModel{
-    followed: IUser | Types.ObjectId | string;
+    followingBy: IUser | Types.ObjectId | string;
     following: IUser | Types.ObjectId | string;
 }

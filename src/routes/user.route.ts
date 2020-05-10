@@ -50,6 +50,20 @@ router
     .get(
         '/:id/follows',
         user.getUserWithFollows
+    )
+    .get(
+        '/:id/rated-books',
+        user.getUserWithRatedBooks
+    )
+    .patch(
+        '/:id/deactivate',
+        checkIdParam, checkValidationResult, // VALIDATORS
+        user.deactivateOrActivate(false)
+    )
+    .patch(
+        '/:id/activate',
+        checkIdParam, checkValidationResult, // VALIDATORS
+        user.deactivateOrActivate(true)
     );
 
 

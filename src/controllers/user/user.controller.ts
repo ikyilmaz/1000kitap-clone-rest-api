@@ -3,8 +3,6 @@ import { BaseController } from '../base/base.controller';
 import { UserService } from './user.service';
 import { NotFound } from '../../utils/app-error';
 import validator from 'validator';
-import { limitFields } from '../../utils/api-features-funcs';
-import { UserVirtuals } from '../../models/user/user.enums';
 import { IUser } from '../../models/user/user.interface';
 import { DocumentQuery } from 'mongoose';
 
@@ -24,6 +22,12 @@ export class UserController extends BaseController {
         res.status(200).json({ status: 'success', data });
     });
 
+    deactivateOrActivate = (isActive: boolean) => catchAsync(async (req, res, next) => {
+        const data = await this.userService.update(req.params.id, { isActive });
+        if (!data) return next(NotFound());
+        res.status(200).json({ status: 'success', data });
+    });
+    
     private getUserWith = (func: (conditions: Pick<any, any>, query: Pick<any, any>) => DocumentQuery<IUser | null, IUser, {}>) =>
         catchAsync(async (req, res, next) => {
             const conditions = this.getConditions(req.params.id);
@@ -64,7 +68,11 @@ export class UserController extends BaseController {
 
     getUserWithFollows = this.getUserWith((conditions, query) =>
         this.userService.getOneWithFollows(conditions, query)
-    )
+    );
+
+    getUserWithRatedBooks = this.getUserWith((conditions, query) =>
+        this.userService.getOneWithRatedBooks(conditions, query)
+    );
 
     private getConditions = (id: string) => {
         let conditions: Partial<Pick<{ id: string; username: string }, any>> = {};

@@ -24,7 +24,7 @@ const userFollowSchema = new Schema<IUserFollow>({
 userFollowSchema.pre<IUserFollow>('save', async function(next) {
     if (this.isNew) {
         const exists = await UserFollow.exists({
-            followed: this.followed,
+            followingBy: this.followingBy,
             following: this.following
         });
 

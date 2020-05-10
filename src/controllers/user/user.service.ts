@@ -22,6 +22,8 @@ export class UserService {
 
     };
 
+    update = (id: string, user: Pick<any, any>) => this.model.findByIdAndUpdate(id, user, { new: true });
+
     getMany = (query: any) => {
         const documentQuery = this.model.find()
             .select(limitFields(query['fields'], { unwantedFields: ['password', 'email'] }));
@@ -73,7 +75,6 @@ export class UserService {
         }
     });
 
-
     getOneWithFollowers: getUserFunc = (conditions, query) => this.getOneWith(conditions, query, {
         populate: {
             select: limitFields(query['followFields'], {
@@ -93,6 +94,15 @@ export class UserService {
             path: UserVirtuals.FOLLOWING,
             sortBy: query['followerSortBy'],
             populateWithCount: { path: UserVirtuals.FOLLOWING_COUNT }
+        }
+    });
+
+    getOneWithRatedBooks: getUserFunc = (conditions, query) => this.getOneWith(conditions, query, {
+        populate: {
+            select: limitFields(query['ratedBookFields']),
+            path: UserVirtuals.RATED_BOOKS,
+            sortBy: query['ratedBookSortBy'],
+            populateWithCount: { path: UserVirtuals.RATED_BOOKS_COUNT }
         }
     });
 
