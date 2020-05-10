@@ -96,10 +96,7 @@ export class AuthController extends BaseController {
 
     resizeUserPhoto = catchAsync(async (req, res, next) => {
         if (!req.file) return next();
-
         req.file.filename = `user-${req.user.id}-${moment().unix()}.jpeg`;
-
-        console.log(``)
 
         await sharp(req.file.buffer)
             .resize(500, 500)
