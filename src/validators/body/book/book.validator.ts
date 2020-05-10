@@ -1,8 +1,5 @@
 import { checkSchema } from 'express-validator';
-import { IAuthor } from '../../models/author/author.interface';
-import { Types } from 'mongoose';
-import { ICategory } from '../../models/category/category.interface';
-import { isNotEmpty } from './lib/is-not-empty';
+import { isNotEmpty } from '../lib/is-not-empty';
 
 const createOrUpdate = (isCreate: boolean) => checkSchema({
     title: {

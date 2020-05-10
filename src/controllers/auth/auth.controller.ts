@@ -109,7 +109,6 @@ export class AuthController extends BaseController {
         next();
     });
 
-
     update = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
         req.body = filterObject(req.body, 'firstName', 'lastName', 'username');
 

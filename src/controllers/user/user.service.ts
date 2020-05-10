@@ -6,6 +6,7 @@ import { UserVirtuals } from '../../models/user/user.enums';
 import { getOneWithOptions } from '../../types/types';
 import { IUser } from '../../models/user/user.interface';
 import { DocumentQuery } from 'mongoose';
+import { getOneWithPopulated } from '../../utils/get-one-with-populated';
 
 type getUserFunc = (conditions: Pick<any, any>, query: Pick<any, any>) => DocumentQuery<IUser | null, IUser, {}>
 
@@ -44,7 +45,7 @@ export class UserService {
             select: limitFields(query['reviewFields']),
             path: UserVirtuals.REVIEWS,
             sortBy: query['reviewSortBy'],
-            populateWithCount: { path: UserVirtuals.REVIEWS_COUNT },
+            count: { path: UserVirtuals.REVIEWS_COUNT },
             populate: {
                 select: limitFields(query['excerptBookFields'], { defaults: ['title', 'image', 'publisher'] }),
                 path: 'book'
@@ -57,7 +58,7 @@ export class UserService {
             select: limitFields(query['excerptFields'], { defaults: ['book', 'content', 'createdAt'] }),
             path: UserVirtuals.EXCERPTS,
             sortBy: query['excerptSortBy'],
-            populateWithCount: { path: UserVirtuals.EXCERPTS_COUNT },
+            count: { path: UserVirtuals.EXCERPTS_COUNT },
             populate: {
                 select: limitFields(query['excerptBookFields'], { defaults: ['title', 'image', 'publisher'] }),
                 path: 'book'
@@ -70,7 +71,7 @@ export class UserService {
             select: limitFields(query['authorFields']),
             path: UserVirtuals.FAVORITE_AUTHORS,
             sortBy: query['authorSortBy'],
-            populateWithCount: { path: UserVirtuals.FAVORITE_AUTHORS_COUNT }
+            count: { path: UserVirtuals.FAVORITE_AUTHORS_COUNT }
         }
     });
 
@@ -79,7 +80,7 @@ export class UserService {
             select: limitFields(query['bookFields']),
             path: UserVirtuals.FAVORITE_BOOKS,
             sortBy: query['bookSortBy'],
-            populateWithCount: { path: UserVirtuals.FAVORITE_BOOKS_COUNT }
+            count: { path: UserVirtuals.FAVORITE_BOOKS_COUNT }
         }
     });
 
@@ -90,7 +91,7 @@ export class UserService {
             }),
             path: UserVirtuals.FOLLOWERS,
             sortBy: query['followSortBy'],
-            populateWithCount: { path: UserVirtuals.FOLLOWERS_COUNT }
+            count: { path: UserVirtuals.FOLLOWERS_COUNT }
         }
     });
 
@@ -101,7 +102,7 @@ export class UserService {
             }),
             path: UserVirtuals.FOLLOWING,
             sortBy: query['followerSortBy'],
-            populateWithCount: { path: UserVirtuals.FOLLOWING_COUNT }
+            count: { path: UserVirtuals.FOLLOWING_COUNT }
         }
     });
 
@@ -110,7 +111,7 @@ export class UserService {
             select: limitFields(query['ratedBookFields']),
             path: UserVirtuals.RATED_BOOKS,
             sortBy: query['ratedBookSortBy'],
-            populateWithCount: { path: UserVirtuals.RATED_BOOKS_COUNT }
+            count: { path: UserVirtuals.RATED_BOOKS_COUNT }
         }
     });
 
@@ -119,19 +120,7 @@ export class UserService {
         const documentQuery = this.model.findOne(conditions)
             .select(limitFields(query['fields'], { unwantedFields: ['password', 'email'] }));
 
-        if (options) {
-            documentQuery.populate({
-                path: options.populate.path,
-                select: options.populate.select,
-                options: {
-                    ...paginate(query),
-                    sort: options.populate.sortBy || '-createdAt'
-                },
-                populate: options.populate.populate ? options.populate.populate : undefined
-            });
-
-            if (options.populate.populateWithCount) documentQuery.populate(options.populate.populateWithCount.path);
-        }
+        if (options) getOneWithPopulated({ documentQuery, options, query });
 
         return documentQuery;
     };

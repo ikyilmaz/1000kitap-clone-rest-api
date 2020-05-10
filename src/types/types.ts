@@ -1,12 +1,14 @@
-export type getOneWithOptions = {
+type options = {
     fields?: string;
     populate: {
         select?: string,
-        path: string,
+        path?: string,
         sortBy?: string,
-        populateWithCount?: {
+        count?: {
             path: string
         },
         populate?: Pick<any, any>
     }
 }
+
+export type getOneWithOptions = options | options[]

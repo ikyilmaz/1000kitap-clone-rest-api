@@ -4,9 +4,9 @@ import { AppError } from './utils/app-error';
 import { userRouter } from './routes/user.route';
 import { categoryRouter } from './routes/category.route';
 import { authRouter } from './routes/auth.route';
-import { bookRouter } from './routes/book.route';
-import { bookExcerptRouter } from './routes/book-excerpt.route';
-import { bookReviewRouter } from './routes/book-review.route';
+import { bookRouter } from './routes/book/book.route';
+import { bookExcerptRouter } from './routes/book/book-excerpt.route';
+import { bookReviewRouter } from './routes/book/book-review.route';
 
 const app = express(); // Express Engine
 
