@@ -4,15 +4,15 @@ export class APIFeatures<T extends Document> {
     constructor(public query: DocumentQuery<T | T[] | null, T>, public queryString: { [key: string]: string }) {
     }
 
-    filter() {
+    filter(...excludedFields: string[]) {
         const queryObj = { ...this.queryString };
-        const excludedFields = ['page', 'sort', 'limit', 'fields'];
-        excludedFields.forEach(el => delete queryObj[el]);
+        const excludedFieldsArr = ['page', 'sort', 'limit', 'fields', ...excludedFields];
+        excludedFieldsArr.forEach(el => delete queryObj[el]);
 
         let queryStr = JSON.stringify(queryObj);
         queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
 
-        this.query = this.query.find(JSON.parse(queryStr))
+        this.query = this.query.find(JSON.parse(queryStr));
 
         return this;
     }

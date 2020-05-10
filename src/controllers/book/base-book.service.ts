@@ -1,6 +1,5 @@
 import { BaseService } from '../base/base.service';
-import { IBookExcerpt } from '../../models/m2m/book-user/book-excerpt/book-excerpt.interface';
-import { Model, MongooseFilterQuery } from 'mongoose';
+import { Model } from 'mongoose';
 import { limitFields } from '../../utils/api-features-funcs';
 import { APIFeatures } from '../../utils/api-features';
 import * as mongoose from 'mongoose';
@@ -45,6 +44,6 @@ export class BaseBookService<T extends mongoose.Document> extends BaseService<T>
                 })
             });
 
-        return new APIFeatures(documentQuery, query).filter().sort().limitFields().paginate().query;
+        return new APIFeatures(documentQuery, query).filter('userFields', 'bookFields').sort().limitFields().paginate().query;
     };
 }

@@ -73,7 +73,7 @@ router
         book.getBookWithLibraries
     )
     .get(
-        '/:id/rates',
+        '/:id/ratings',
         checkIdParam, checkValidationResult, // VALIDATORS
         book.getBookWithRates
     );
