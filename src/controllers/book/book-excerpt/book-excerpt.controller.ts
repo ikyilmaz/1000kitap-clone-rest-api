@@ -4,6 +4,8 @@ import { catchAsync } from '../../../utils/catch-async';
 import { SendResponse } from '../../../utils/send-response';
 import { IBookExcerpt } from '../../../models/m2m/book-user/book-excerpt/book-excerpt.interface';
 import { BookExcerpt } from '../../../models/m2m/book-user/book-excerpt/book-excerpt.model';
+import { filterObject } from '../../../utils/filter-object';
+import { BadRequest } from '../../../utils/app-error';
 
 export class BookExcerptController extends BaseController {
     constructor(public baseBookService: BaseBookService<IBookExcerpt>) {
@@ -33,8 +35,12 @@ export class BookExcerptController extends BaseController {
     );
 
     update = catchAsync(async (req, res, next) => {
+
+        const data = filterObject(req.body, 'content', 'postedBy');
+        if (!data) return next(BadRequest());
+
         SendResponse({
-            data: await this.baseBookService.baseUpdate(req.params.id, { content: req.body.content }),
+            data: await this.baseBookService.baseUpdate(req.params.id, data),
             res, next
         });
     });
