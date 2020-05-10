@@ -6,6 +6,7 @@ import { checkIdParam } from '../validators/param/id.validator';
 import { checkValidationResult } from '../filters/check-validation-result.filter';
 import { bookExcerptValidator } from '../validators/body/book-excerpt.validator';
 import { authRequired } from '../filters/auth-required.filter';
+import { isOwner } from '../filters/is-owner.filter';
 
 const router = Router();
 const bookExcerpt = new BookExcerptController(new BookExcerptService(BookExcerpt));
@@ -33,10 +34,14 @@ router
     )
     .patch(
         checkIdParam, bookExcerptValidator.createOrUpdate(false), checkValidationResult, // VALIDATORS
+        authRequired,
+        isOwner(BookExcerpt),
         bookExcerpt.update
     )
     .delete(
         checkIdParam, checkValidationResult, // VALIDATORS
+        authRequired,
+        isOwner(BookExcerpt),
         bookExcerpt.delete
     );
 
