@@ -1,8 +1,7 @@
 import { BaseController } from '../base/base.controller';
 import { BookService } from './book.service';
 import { catchAsync } from '../../utils/catch-async';
-import { NotFound } from '../../utils/app-error';
-import * as mongoose from 'mongoose';
+import { SendResponse } from '../../utils/send-response';
 
 export class BookController extends BaseController {
     constructor(public bookService: BookService) {
@@ -10,27 +9,27 @@ export class BookController extends BaseController {
     }
 
     getMany = catchAsync(async (req, res, next) => {
-        const data = await this.bookService.getMany(req.query as any);
-        if (!data) return next(NotFound());
-        res.status(200).json({ status: 'success', data });
+        SendResponse({
+            data: await this.bookService.getMany(req.query as any), res, next
+        });
     });
 
 
     get = catchAsync(async (req, res, next) => {
-        const data = await this.bookService.get(req.params.id, req.query as any);
-        if (!data) return next(NotFound());
-        res.status(200).json({ status: 'success', data });
+        SendResponse({
+            data: await this.bookService.get(req.params.id, req.query as any), res, next
+        });
     });
 
     getWithReviews = catchAsync(async (req, res, next) => {
-        const data = await this.bookService.getWithReviews(req.params.id, req.query as any);
-        if (!data) return next(NotFound());
-        res.status(200).json({ status: 'success', data });
+        SendResponse({
+            data: await this.bookService.getWithReviews(req.params.id, req.query as any), res, next
+        });
     });
 
     getWithExcerpts = catchAsync(async (req, res, next) => {
-        const data = await this.bookService.getWithExcerpts(req.params.id, req.query as any);
-        if (!data) return next(NotFound());
-        res.status(200).json({ status: 'success', data });
+        SendResponse({
+            data: await this.bookService.getWithExcerpts(req.params.id, req.query as any), res, next
+        });
     });
 }

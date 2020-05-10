@@ -5,6 +5,7 @@ import { NotFound } from '../../utils/app-error';
 import validator from 'validator';
 import { IUser } from '../../models/user/user.interface';
 import { DocumentQuery } from 'mongoose';
+import { SendResponse } from '../../utils/send-response';
 
 export class UserController extends BaseController {
     constructor(private readonly userService: UserService) {
@@ -12,30 +13,30 @@ export class UserController extends BaseController {
     }
 
     create = catchAsync(async (req, res, next) => {
-        const data = await this.userService.create(req.body);
-        res.status(201).json({ status: 'success', data });
+        SendResponse({
+            data: await this.userService.create(req.body), res, next
+        });
     });
 
     getMany = catchAsync(async (req, res, next) => {
-        const data = await this.userService.getMany(req.query);
-        if (!data) return next(NotFound());
-        res.status(200).json({ status: 'success', data });
+        SendResponse({
+            data: await this.userService.getMany(req.query), res, next
+        });
     });
 
     deactivateOrActivate = (isActive: boolean) => catchAsync(async (req, res, next) => {
-        const data = await this.userService.update(req.params.id, { isActive });
-        if (!data) return next(NotFound());
-        res.status(200).json({ status: 'success', data });
+        SendResponse({
+            data: await this.userService.update(req.params.id, { isActive }), res, next
+        });
     });
-    
+
     private getUserWith = (func: (conditions: Pick<any, any>, query: Pick<any, any>) => DocumentQuery<IUser | null, IUser, {}>) =>
         catchAsync(async (req, res, next) => {
             const conditions = this.getConditions(req.params.id);
 
-            const data = await func(conditions, req.query);
-
-            if (!data) return next(NotFound());
-            res.status(200).json({ status: 'success', data });
+            SendResponse({
+                data: await func(conditions, req.query), res, next
+            });
         });
 
     get = this.getUserWith((conditions, query) =>
