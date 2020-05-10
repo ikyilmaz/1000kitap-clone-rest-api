@@ -15,11 +15,11 @@ export class BaseService<T extends mongoose.Document> {
         return new APIFeatures(documentQuery, query).filter().sort().limitFields().paginate().query;
     };
 
-    create = (data: Pick<T, keyof T>) => {
+    create = (data: Partial<Pick<T, keyof T>>) => {
         return this.model.create(data);
     };
 
-    update = (id: string, data: Pick<T, keyof T>) => {
+    update = (id: string, data: Partial<Pick<T, keyof T>>) => {
         return this.model.findByIdAndUpdate(id, data, { new: true });
     };
 

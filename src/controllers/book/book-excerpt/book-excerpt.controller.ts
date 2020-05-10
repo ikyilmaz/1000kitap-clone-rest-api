@@ -23,4 +23,10 @@ export class BookExcerptController extends BaseController {
 
         res.status(201).json({ status: 'success', data });
     });
+
+    update = catchAsync(async (req, res, next) => {
+        const data = await this.bookExcerptService.update(req.params.id, { content: req.body.content });
+
+        res.status(200).json({ status: 'success', data });
+    });
 }

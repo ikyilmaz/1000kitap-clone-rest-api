@@ -14,6 +14,13 @@ const createOrUpdate = (isCreate: boolean) => {
                 errorMessage: 'field \'content\' must be between 2 and 128 characters',
                 options: { min: 2, max: 255 }
             }
+        },
+        postedBy: {
+            optional: true,
+            isIn: {
+                errorMessage: 'field \'postedBy\' must be either \'WEB_SITE\' or \'MOBILE_APP\'',
+                options: ['WEB_SITE', 'MOBILE_APP']
+            }
         }
     });
 };

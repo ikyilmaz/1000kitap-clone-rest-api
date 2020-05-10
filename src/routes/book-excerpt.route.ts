@@ -31,6 +31,14 @@ router
     .get(
         checkIdParam, checkValidationResult, // VALIDATORS
         bookExcerpt.get
+    )
+    .patch(
+        checkIdParam, bookExcerptValidator.createOrUpdate(false), checkValidationResult, // VALIDATORS
+        bookExcerpt.update
+    )
+    .delete(
+        checkIdParam, checkValidationResult, // VALIDATORS
+        bookExcerpt.delete
     );
 
 export { router as bookExcerptRouter };
