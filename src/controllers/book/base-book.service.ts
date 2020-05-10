@@ -1,21 +1,17 @@
-import { BaseService } from '../../base/base.service';
-import { IBookExcerpt } from '../../../models/m2m/book-user/book-excerpt/book-excerpt.interface';
+import { BaseService } from '../base/base.service';
+import { IBookExcerpt } from '../../models/m2m/book-user/book-excerpt/book-excerpt.interface';
 import { Model, MongooseFilterQuery } from 'mongoose';
+import { limitFields } from '../../utils/api-features-funcs';
+import { APIFeatures } from '../../utils/api-features';
 import * as mongoose from 'mongoose';
-import { limitFields } from '../../../utils/api-features-funcs';
-import { APIFeatures } from '../../../utils/api-features';
 
-interface T extends mongoose.Document {
-
-}
-
-export class BookExcerptService extends BaseService<IBookExcerpt> {
-    constructor(public model: Model<IBookExcerpt>) {
+export class BaseBookService<T extends mongoose.Document> extends BaseService<T> {
+    constructor(public model: Model<T>) {
         super(model);
     }
 
-    get = (id: string, query: Pick<any, any>) => {
-        return this.model.findById(id)
+    get = (model: Model<T>, id: string, query: Pick<any, any>) => {
+        return model.findById(id)
             .select(query['fields'])
             .populate({
                 path: 'user',
@@ -32,8 +28,8 @@ export class BookExcerptService extends BaseService<IBookExcerpt> {
             });
     };
 
-    getMany = (query: Pick<any, any>) => {
-        const documentQuery = this.model.find()
+    getMany = (model: Model<T>, query: Pick<any, any>) => {
+        const documentQuery = model.find()
             .select(query['fields'])
             .populate({
                 path: 'user',
@@ -49,6 +45,6 @@ export class BookExcerptService extends BaseService<IBookExcerpt> {
                 })
             });
 
-        return new APIFeatures(documentQuery, query).filter().sort().limitFields().paginate().query
-    }
+        return new APIFeatures(documentQuery, query).filter().sort().limitFields().paginate().query;
+    };
 }
