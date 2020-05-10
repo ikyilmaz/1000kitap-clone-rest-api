@@ -8,42 +8,67 @@ import { authRequired } from '../filters/auth-required.filter';
 import { restrictTo } from '../filters/restrict-to.filter';
 
 const router = Router();
-const userController = new UserController(new UserService());
+const user = new UserController(new UserService());
 
 router
     .route('/')
     .get(
-        userController.getMany
+        user.getMany
     )
     .post(
         userValidator.createOrUpdate(true), checkValidationResult, // VALIDATORS
         authRequired,
         restrictTo('admin'),
-        userController.create
+        user.create
     );
 
 router
-    .route("/:id/profile")
     .get(
-        userController.getOneUsersProfile
+        '/:id/profile',
+        user.getUserWithProfile
     )
+    .get(
+        '/:id/reviews',
+        user.getUserWithReviews
+    )
+    .get(
+        '/:id/excerpts',
+        user.getUserWithExcerpts
+    )
+    .get(
+        '/:id/favorite-authors',
+        user.getUserWithFavoriteAuthors
+    )
+    .get(
+        '/:id/favorite-books',
+        user.getUserWithFavoriteBooks
+    )
+    .get(
+        '/:id/followers',
+        user.getUserWithFollowers
+    )
+    .get(
+        '/:id/follows',
+        user.getUserWithFollows
+    );
+
 
 router
     .route('/:id')
     .get(
-        userController.get
+        user.get
     )
     .patch(
         checkIdParam, userValidator.createOrUpdate(false), checkValidationResult, // VALIDATORS
         authRequired,
         restrictTo('admin'),
-        userController.update
+        user.update
     )
     .delete(
         checkIdParam, checkValidationResult, // VALIDATORS
         authRequired,
         restrictTo('admin'),
-        userController.delete
+        user.delete
     );
 
 export const userRouter = router;
