@@ -6,6 +6,7 @@ import { authRequired } from '../filters/auth-required.filter';
 import { isOwner } from '../filters/is-owner.filter';
 import { BookReviewController } from '../controllers/book/book-review/book-review.controller';
 import { BookReview } from '../models/m2m/book-user/book-review/book-review.model';
+import { bookReviewValidator } from '../validators/body/book-review.validator';
 
 const router = Router();
 const bookReview = new BookReviewController(new BaseBookService(BookReview));
@@ -18,7 +19,7 @@ router
         bookReview.getMany
     )
     .post(
-        // bookExcerptValidator.createOrUpdate(true), checkValidationResult,
+        bookReviewValidator.createOrUpdate(true), checkValidationResult,
         authRequired,
         bookReview.create
     );
@@ -32,7 +33,7 @@ router
         bookReview.get
     )
     .patch(
-        // checkIdParam, bookExcerptValidator.createOrUpdate(false), checkValidationResult, // VALIDATORS
+        checkIdParam, bookReviewValidator.createOrUpdate(false), checkValidationResult, // VALIDATORS
         authRequired,
         isOwner(BookReview),
         bookReview.update
