@@ -46,7 +46,7 @@ router.patch(
     '/update',
     authValidator.update, checkValidationResult, // VALIDATORS
     authRequired,
-    auth.update
+    auth.baseUpdate
 );
 
 router.patch(

@@ -42,7 +42,7 @@ router
         checkIdParam, checkValidationResult, // VALIDATORS
         authRequired,
         isOwner(BookExcerpt),
-        bookExcerpt.delete
+        bookExcerpt.baseDelete
     );
 
 export { router as bookExcerptRouter };

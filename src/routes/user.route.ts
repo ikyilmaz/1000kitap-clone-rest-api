@@ -76,13 +76,13 @@ router
         checkIdParam, userValidator.createOrUpdate(false), checkValidationResult, // VALIDATORS
         authRequired,
         restrictTo('admin'),
-        user.update
+        user.baseUpdate
     )
     .delete(
         checkIdParam, checkValidationResult, // VALIDATORS
         authRequired,
         restrictTo('admin'),
-        user.delete
+        user.baseDelete
     );
 
 export const userRouter = router;

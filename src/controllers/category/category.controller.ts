@@ -8,7 +8,7 @@ export class CategoryController extends BaseController {
         super(categoryService.model);
     }
 
-    get = catchAsync(async (req, res, next) => {
+    baseGet = catchAsync(async (req, res, next) => {
         const data = await this.categoryService.getByName(req.params.name);
         if (!data) return next(NotFound());
         res.status(200).json({ status: 'success', data });

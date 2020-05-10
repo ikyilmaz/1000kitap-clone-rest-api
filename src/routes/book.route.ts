@@ -21,7 +21,7 @@ router
         bookValidator.createOrUpdate(true), checkValidationResult, // VALIDATORS
         authRequired,
         restrictTo('admin'),
-        bookController.create
+        bookController.baseCreate
     );
 
 router
@@ -36,14 +36,14 @@ router
         checkIdParam, bookValidator.createOrUpdate(false), checkValidationResult, // VALIDATORS
         authRequired,
         restrictTo('admin'),
-        bookController.update
+        bookController.baseUpdate
     )
 
     .delete(
         checkIdParam, checkValidationResult, // VALIDATORS
         authRequired,
         restrictTo('admin'),
-        bookController.delete
+        bookController.baseDelete
     );
 
 router

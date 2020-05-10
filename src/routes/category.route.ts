@@ -15,19 +15,19 @@ router
         '/'
     )
     .get(
-        categoryController.getMany
+        categoryController.baseGetMany
     )
     .post(
         categoryValidator.createOrUpdate(true), checkValidationResult, // VALIDATORS
         authRequired,
         restrictTo('admin'),
-        categoryController.create
+        categoryController.baseCreate
     );
 
 router
     .get(
         '/:name',
-        categoryController.get
+        categoryController.baseGet
     );
 
 router
@@ -39,14 +39,14 @@ router
         checkIdParam, categoryValidator.createOrUpdate(false), checkValidationResult, // VALIDATORS
         authRequired,
         restrictTo('admin'),
-        categoryController.update
+        categoryController.baseUpdate
     )
 
     .delete(
         checkIdParam, checkValidationResult, // VALIDATORS
         authRequired,
         restrictTo('admin'),
-        categoryController.delete
+        categoryController.baseDelete
     );
 
 export const categoryRouter = router;

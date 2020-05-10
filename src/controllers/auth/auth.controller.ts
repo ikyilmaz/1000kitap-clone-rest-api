@@ -84,7 +84,7 @@ export class AuthController extends BaseController {
         res.status(200).json({ status: 'success', data: this.clearUser(currentUser) });
     });
 
-    update = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+    baseUpdate = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
         req.body = filterObject(req.body, 'firstName', 'lastName', 'username');
 
         const data = await this.authService.update(req.user._id, req.body);
