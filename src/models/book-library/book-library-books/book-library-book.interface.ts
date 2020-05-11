@@ -3,7 +3,8 @@ import { Types } from 'mongoose';
 import { IBook } from '../../book/book.interface';
 import { IBaseModel } from '../../base-model.interface';
 
-export interface IBookLibraryBook extends IBaseModel{
+export interface IBookLibraryBook extends IBaseModel {
     bookLibrary: IBookLibrary | Types.ObjectId | string;
     book: IBook | Types.ObjectId | string;
+    status: 'READING' | 'TO_BE_READ' | 'READ' | 'DISCONTINUE' | 'NOT_READ'
 }

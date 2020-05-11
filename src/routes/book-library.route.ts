@@ -8,6 +8,7 @@ import { BookLibrary } from '../models/book-library/book-library.model';
 import { BookLibraryService } from '../controllers/book-library/book-library.service';
 import { isOwner } from '../filters/is-owner.filter';
 import { checkCustomIdParam } from '../validators/param/custom-id.validator';
+import { BookLibraryBook } from '../models/book-library/book-library-books/book-library-book.model';
 
 const router = Router();
 
@@ -51,14 +52,28 @@ router
     );
 
 router
-    .route(
-        '/:id/add-book'
-    )
     .post(
+        '/:id/add-book',
         checkIdParam, bookLibraryValidator.addBook, checkValidationResult,
         authRequired,
         isOwner(BookLibrary),
         bookLibrary.addBook
+    );
+
+router
+    .get(
+        '/:id/get-books',
+        checkIdParam, checkValidationResult,
+        bookLibrary.getBooks
+    );
+
+router
+    .patch(
+        '/update-book-status/:id',
+        checkIdParam, bookLibraryValidator.updateBookStatus, checkValidationResult,
+        authRequired,
+        isOwner(BookLibraryBook),
+        bookLibrary.updateBookStatus
     );
 
 export { router as bookLibraryRouter };

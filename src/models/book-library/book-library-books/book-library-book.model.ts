@@ -14,6 +14,11 @@ const bookLibraryBookSchema = new Schema({
         ref: Models.BOOK,
         required: true
     },
+    user: {
+        type: SchemaTypes.ObjectId,
+        ref: Models.USER,
+        required: true
+    },
     status: {
         type: SchemaTypes.String,
         enum: ['READING', 'TO_BE_READ', 'READ', 'DISCONTINUE', 'NOT_READ'],

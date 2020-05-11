@@ -48,7 +48,18 @@ const addBook = checkSchema({
     }
 });
 
+const updateBookStatus = checkSchema({
+    status: {
+        notEmpty: isNotEmpty('status'),
+        isIn: {
+            options: [['READING', 'TO_BE_READ', 'READ', 'DISCONTINUE', 'NOT_READ']],
+            errorMessage: "field 'status' must be in 'READING', 'TO_BE_READ', 'READ', 'DISCONTINUE', 'NOT_READ'"
+        }
+    }
+})
+
 export const bookLibraryValidator = {
     createOrUpdate,
-    addBook
+    addBook,
+    updateBookStatus
 };

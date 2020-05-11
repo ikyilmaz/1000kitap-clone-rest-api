@@ -71,7 +71,28 @@ export class BookLibraryController extends BaseController {
 
     addBook = catchAsync(async (req, res, next) => {
         SendResponse({
-            data: await this.bookLibraryService.addBook(req.params.id, req.body), res, next
+            data: await this.bookLibraryService.addBook(req.params.id, req.user._id, req.body),
+            res,
+            next,
+            statusCode: 201
+        });
+    });
+
+    getBooks = catchAsync(async (req, res, next) => {
+        SendResponse({
+            data: await this.bookLibraryService.getBooks(req.params.id, req.query), res, next
+        });
+    });
+
+    removeBook = catchAsync(async (req, res, next) => {
+        SendResponse({
+            data: 'dd', res, next
+        });
+    });
+
+    updateBookStatus = catchAsync(async (req, res, next) => {
+        SendResponse({
+            data: await this.bookLibraryService.updateBookStatus(req.params.id, req.body.status), res, next
         });
     });
 }
