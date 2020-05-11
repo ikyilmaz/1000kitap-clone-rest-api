@@ -15,7 +15,11 @@ const createOrUpdate = (isCreate: boolean) => checkSchema({
         isString: true,
         optional: true,
         isIn: {
-            options: ['PRIVATE', 'PUBLIC'],
+            options: [[
+                'PUBLIC',
+                'JUST_ME',
+                'JUST_FOLLOWERS',
+            ]],
             errorMessage: 'field \'privacy\' must be either \'PRIVATE\' or \'PUBLIC\''
         }
     },

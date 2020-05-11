@@ -10,6 +10,7 @@ import { bookReviewRouter } from './routes/book/book-review.route';
 import { bookFollowRouter } from './routes/book/book-follow.route';
 import { bookRatingRouter } from './routes/book/book-rating.route';
 import { favoriteBookRouter } from './routes/book/favorite-book.route';
+import { bookLibraryRouter } from './routes/book-library.route';
 
 const app = express(); // Express Engine
 
@@ -21,6 +22,7 @@ app.use(morgan('tiny')); // Logger
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/categories', categoryRouter);
 app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/book-libraries', bookLibraryRouter);
 app.use('/api/v1/books', bookRouter);
 app.use('/api/v1/book-excerpts', bookExcerptRouter);
 app.use('/api/v1/book-reviews', bookReviewRouter);

@@ -9,12 +9,16 @@ const bookLibrarySchema = new Schema<IBookLibrary>({
         type: SchemaTypes.String,
         required: [true, 'field \'name\' is required'],
         maxlength: [64, 'field \'name\' must contain no more than 64 characters'],
-        minlength: [1, "field \'name\' must contains at least 1 characters"]
+        minlength: [1, 'field \'name\' must contains at least 1 characters']
     },
     privacy: {
         type: SchemaTypes.String,
-        enum: ['PRIVATE', 'PUBLIC'],
-        default: 'PUBLIC'
+        enum: [
+            'PUBLIC',
+            'JUST_ME',
+            'JUST_FOLLOWERS'
+        ],
+        required: [true, 'field \'privacy\' is required']
     },
     description: {
         type: SchemaTypes.String,
