@@ -1,7 +1,7 @@
 import { User } from '../../models/user/user.model';
 import { APIFeatures } from '../../utils/api-features';
 import { limitFields, paginate } from '../../utils/api-features-funcs';
-import { UserProfile } from '../../models/user-profile/user-profile.model';
+import { UserProfile } from '../../models/user/user-profile/user-profile.model';
 import { UserVirtuals } from '../../models/user/user.enums';
 import { getOneWithOptions } from '../../types/types';
 import { IUser } from '../../models/user/user.interface';

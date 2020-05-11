@@ -1,5 +1,5 @@
 import { User } from '../../models/user/user.model';
-import { UserProfile } from '../../models/user-profile/user-profile.model';
+import { UserProfile } from '../../models/user/user-profile/user-profile.model';
 
 export class AuthService {
     public model = User;

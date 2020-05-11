@@ -11,7 +11,7 @@ import { Book } from '../models/book/book.model';
 import { BookExcerpt } from '../models/m2m/book-user/book-excerpt/book-excerpt.model';
 import { BookReview } from '../models/m2m/book-user/book-review/book-review.model';
 import { Author } from '../models/author/author.model';
-import { UserProfile } from '../models/user-profile/user-profile.model';
+import { UserProfile } from '../models/user/user-profile/user-profile.model';
 import { raw } from 'express';
 
 mongoose.connect(DB_CONNECTION_STRING, {

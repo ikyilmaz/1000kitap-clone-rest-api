@@ -75,13 +75,7 @@ export class CurrentUserController extends BaseController {
     });
 
     getUsersFavoriteAuthors = catchAsync(async (req, res, next) => {
-        SendResponse({
-            data: await this.currentUserService.get({
-                currentUserId: req.user._id,
-                query: req.query,
-                model: FavoriteAuthor
-            }), res, next
-        });
+        SendResponse({ data: await this.currentUserService.getFavoriteAuthors(req.user._id, req.query), res, next });
     });
 
     getUsersFavoriteBooks = catchAsync(async (req, res, next) => {

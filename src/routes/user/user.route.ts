@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { UserController } from '../../controllers/user/user.controller';
 import { UserService } from '../../controllers/user/user.service';
 import { checkIdParam } from '../../validators/param/id.validator';
-import { userValidator } from '../../validators/body/user.validator';
+import { userValidator } from '../../validators/body/user/user.validator';
 import { checkValidationResult } from '../../filters/check-validation-result.filter';
 import { authRequired } from '../../filters/auth-required.filter';
 import { restrictTo } from '../../filters/restrict-to.filter';

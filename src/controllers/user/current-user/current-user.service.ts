@@ -13,6 +13,8 @@ import { BookReview } from '../../../models/m2m/book-user/book-review/book-revie
 import { BookExcerpt } from '../../../models/m2m/book-user/book-excerpt/book-excerpt.model';
 import { UserFollow } from '../../../models/m2m/user-user/user-follow/user-follow.model';
 import { UserVirtuals } from '../../../models/user/user.enums';
+import { FavoriteBook } from '../../../models/m2m/book-user/favorite-book/favorite-book.model';
+import { FavoriteAuthor } from '../../../models/m2m/author-user/favorite-author/favorite-author.model';
 
 export class CurrentUserService extends BaseService<IUser> {
     constructor(public model: Model<IUser>) {
@@ -25,9 +27,8 @@ export class CurrentUserService extends BaseService<IUser> {
         return this.getWith(documentQuery, query, {
             fields: limitFields(query['fields']),
             populate: {
-                path: BookLibraryVirtuals.BOOKS,
-                select: limitFields(query['bookFields'], { defaults: ['title', 'image', 'publisher'] }),
-                count: { path: BookLibraryVirtuals.BOOKS_COUNT }
+                path: 'book',
+                select: limitFields(query['bookFields'], { defaults: ['title', 'image', 'publisher'] })
             }
         });
     };
@@ -77,6 +78,18 @@ export class CurrentUserService extends BaseService<IUser> {
                     defaults: ['firstName', 'lastName', 'photo'],
                     unwantedFields: ['password', 'email']
                 })
+            }
+        });
+    };
+
+    getFavoriteAuthors = (currentUserId: string, query: Pick<any, any>) => {
+        const documentQuery = FavoriteAuthor.findOne({ user: currentUserId });
+
+        return this.getWith(documentQuery, query, {
+            fields: limitFields(query['fields']),
+            populate: {
+                path: 'author',
+                select: limitFields(query['authorFields'], { defaults: ['firstName', 'lastName', 'photo'] })
             }
         });
     };

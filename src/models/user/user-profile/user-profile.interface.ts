@@ -1,6 +1,6 @@
-import { IUser } from '../user/user.interface';
+import { IUser } from '../user.interface';
 import { Types } from 'mongoose';
-import { IBaseModel } from '../base-model.interface';
+import { IBaseModel } from '../../base-model.interface';
 
 export interface IUserProfile extends IBaseModel {
     user: IUser | Types.ObjectId | string;

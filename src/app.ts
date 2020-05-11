@@ -17,10 +17,10 @@ app.use(morgan('tiny'));                        // Logger
 
 // Routes
 app.use('/api/v1/users', userRouter);                   // USER
-app.use("/api/v1/current-user", currentUserRouter)      // CURRENT USER
+app.use("/api/v1/current-user", currentUserRouter)      // CURRENT USER (Short-Hands for some requests)
 app.use('/api/v1/categories', categoryRouter);          // CATEGORY
 app.use('/api/v1/auth', authRouter);                    // AUTH
-app.use('/api/v1/book-libraries', bookLibraryRouter);   // BOOK LIBRARY
+app.use('/api/v1/book-libraries', bookLibraryRouter);   // BOOK LIBRARY (User's Libraries)
 app.use('/api/v1/books', bookRouter);                   // BOOK
 app.use('/api/v1/authors', authorRouter);               // AUTHOR
 

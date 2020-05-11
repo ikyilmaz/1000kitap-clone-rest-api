@@ -1,7 +1,7 @@
 import { IBaseModel } from '../base-model.interface';
 import { UserRoles } from './user.enums';
 import { UserVirtuals } from './user.enums';
-import { IUserProfile } from '../user-profile/user-profile.interface';
+import { IUserProfile } from './user-profile/user-profile.interface';
 import { Types } from 'mongoose';
 import { IBookReview } from '../m2m/book-user/book-review/book-review.interface';
 import { IBookExcerpt } from '../m2m/book-user/book-excerpt/book-excerpt.interface';

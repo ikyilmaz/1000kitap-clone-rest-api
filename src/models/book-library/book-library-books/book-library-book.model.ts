@@ -3,6 +3,7 @@ import { Models } from '../../models.enum';
 import { IBookLibraryBook } from './book-library-book.interface';
 import { AppError } from '../../../utils/app-error';
 
+// Books in User's Libraries
 const bookLibraryBookSchema = new Schema({
     bookLibrary: {
         type: SchemaTypes.ObjectId,

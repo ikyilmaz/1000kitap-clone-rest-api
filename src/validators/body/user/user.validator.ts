@@ -1,5 +1,5 @@
 import { checkSchema } from 'express-validator';
-import { isNotEmpty } from './lib/is-not-empty';
+import { isNotEmpty } from '../lib/is-not-empty';
 
 export const createOrUpdate = (isCreate: boolean) => checkSchema({
     firstName: {
