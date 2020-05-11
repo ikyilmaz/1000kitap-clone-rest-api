@@ -18,6 +18,7 @@ import { FavoriteAuthor } from './models/m2m/author-user/favorite-author/favorit
 import { FavoriteBook } from './models/m2m/book-user/favorite-book/favorite-book.model';
 import { UserProfile } from './models/user-profile/user-profile.model';
 import { BookLibrary } from './models/book-library/book-library.model';
+import { BookLibraryBook } from './models/book-library/book-library-books/book-library-book.model';
 
 let before = moment();
 mongoose.connect(DB_CONNECTION_STRING, {
@@ -37,7 +38,7 @@ mongoose.connect(DB_CONNECTION_STRING, {
         before = moment();
         const models = [
             Author, FavoriteAuthor,
-            BookLibrary,
+            BookLibrary, BookLibraryBook,
             Category,
             Book, BookExcerpt, BookReview, BookFollow, BookRating, FavoriteBook,
             User, UserLibrary, UserFollow, UserProfile

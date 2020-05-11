@@ -2,7 +2,6 @@ import { model, Schema, SchemaTypes } from 'mongoose';
 import { IBookLibrary } from './book-library.interface';
 import { Models } from '../models.enum';
 import { AppError } from '../../utils/app-error';
-import { BookFollow } from '../m2m/book-user/book-follow/book-follow.model';
 import { setBookLibraryVirtuals } from './book-library.virtuals';
 
 const bookLibrarySchema = new Schema<IBookLibrary>({

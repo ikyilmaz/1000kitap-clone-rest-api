@@ -29,4 +29,4 @@ bookLibraryBookSchema.pre<IBookLibraryBook>('save', async function(next) {
     }
 });
 
-export const BookLibraryBook = model<IBookLibraryBook>(Models.BOOK_LIBRARY_BOOK);
+export const BookLibraryBook = model<IBookLibraryBook>(Models.BOOK_LIBRARY_BOOK, bookLibraryBookSchema);
