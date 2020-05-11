@@ -58,6 +58,7 @@ router
         book.baseDelete
     );
 
+// (Short-Hands for some requests)
 router
     .get(
         '/:id/excerpts',

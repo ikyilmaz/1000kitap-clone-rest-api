@@ -7,10 +7,14 @@ import { restrictTo } from '../../filters/restrict-to.filter';
 import { checkIdParam } from '../../validators/param/id.validator';
 import { checkValidationResult } from '../../filters/check-validation-result.filter';
 import { authorValidator } from '../../validators/body/author/author.validator';
+import { favoriteAuthorRouter } from './favorite-author.route';
 
 const router = Router();
 
 const author = new AuthorController(new AuthorService(Author));
+
+router
+    .use('/favorites', favoriteAuthorRouter);
 
 router
     .route(

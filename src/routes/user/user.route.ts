@@ -22,6 +22,7 @@ router
         user.create
     );
 
+// (Short-Hands for some requests)
 router
     .get(
         '/:id/profile',
