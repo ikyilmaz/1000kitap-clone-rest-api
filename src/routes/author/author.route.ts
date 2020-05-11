@@ -6,6 +6,7 @@ import { authRequired } from '../../filters/auth-required.filter';
 import { restrictTo } from '../../filters/restrict-to.filter';
 import { checkIdParam } from '../../validators/param/id.validator';
 import { checkValidationResult } from '../../filters/check-validation-result.filter';
+import { authorValidator } from '../../validators/body/author/author.validator';
 
 const router = Router();
 
@@ -16,12 +17,15 @@ router
         '/'
     )
     .get(
-        author.baseGet
+        author.baseGetMany
     )
     .post(
+        author.uploadAuthorPhoto,
+        authorValidator.createOrUpdate(true), checkValidationResult,
+        author.resizeAuthorPhoto,
         authRequired,
         restrictTo('admin'),
-        author.baseCreate
+        author.create
     );
 
 router
@@ -33,10 +37,12 @@ router
         author.baseGet
     )
     .patch(
-        checkIdParam, checkValidationResult,
+        author.uploadAuthorPhoto,
+        checkIdParam, authorValidator.createOrUpdate(true), checkValidationResult,
+        author.resizeAuthorPhoto,
         authRequired,
         restrictTo('admin'),
-        author.baseUpdate
+        author.update
     )
     .delete(
         checkIdParam, checkValidationResult,
@@ -47,15 +53,15 @@ router
 
 router
     .get(
-        "/:id/books",
+        '/:id/books',
         checkIdParam, checkValidationResult,
         author.getAuthorWithBooks
     )
     .get(
-        "/:id/favored-users",
+        '/:id/favored-users',
         checkIdParam, checkValidationResult,
         author.getAuthorWithFavoredUsers
-    )
+    );
 
 
 export { router as authorRouter };

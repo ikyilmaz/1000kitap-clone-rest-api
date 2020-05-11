@@ -5,6 +5,7 @@ export interface IAuthor extends IBaseModel {
     lastName: string;
     placeOfBirth: string;
     birthday: string;
+    image: string;
     biography: string;
     title: string;
 }
