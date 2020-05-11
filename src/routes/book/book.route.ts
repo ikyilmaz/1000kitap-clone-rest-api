@@ -6,9 +6,21 @@ import { checkValidationResult } from '../../filters/check-validation-result.fil
 import { authRequired } from '../../filters/auth-required.filter';
 import { restrictTo } from '../../filters/restrict-to.filter';
 import { bookValidator } from '../../validators/body/book/book.validator';
+import { bookRatingRouter } from './book-rating.route';
+import { bookFollowRouter } from './book-follow.route';
+import { bookReviewRouter } from './book-review.route';
+import { bookExcerptRouter } from './book-excerpt.route';
+import { favoriteBookRouter } from './favorite-book.route';
 
 const router = Router();
 const book = new BookController(new BookService());
+
+router
+    .use('/ratings', bookRatingRouter)
+    .use('/follows', bookFollowRouter)
+    .use('/reviews', bookReviewRouter)
+    .use("/excerpts", bookExcerptRouter)
+    .use("/favorites", favoriteBookRouter)
 
 router
     .route(
@@ -77,5 +89,6 @@ router
         checkIdParam, checkValidationResult, // VALIDATORS
         book.getBookWithRates
     );
+
 
 export { router as bookRouter };

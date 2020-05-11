@@ -20,15 +20,14 @@ app.use(morgan('tiny')); // Logger
 
 // Routes
 app.use('/api/v1/users', userRouter);
+
 app.use('/api/v1/categories', categoryRouter);
+
 app.use('/api/v1/auth', authRouter);
+
 app.use('/api/v1/book-libraries', bookLibraryRouter);
+
 app.use('/api/v1/books', bookRouter);
-app.use('/api/v1/book-excerpts', bookExcerptRouter);
-app.use('/api/v1/book-reviews', bookReviewRouter);
-app.use('/api/v1/book-follows', bookFollowRouter);
-app.use('/api/v1/book-ratings', bookRatingRouter);
-app.use('/api/v1/favored-books', favoriteBookRouter);
 
 // Hello World Message
 app.all('/', ((req, res) => res.status(200).send('hello world')));
