@@ -14,18 +14,18 @@ export const getOneWithPopulated = (
     }) => {
 
     const populate = (option: getOneWithOptions) => {
-        if (options && !Array.isArray(options)) {
+        if (option && !Array.isArray(option) && option.populate) {
             documentQuery.populate({
-                path: options.populate.path,
-                select: options.populate.select,
-                options: {
+                path: option.populate.path,
+                select: option.populate.select,
+                option: {
                     ...paginate(query),
-                    sort: options.populate.sortBy || '-createdAt'
+                    sort: option.populate.sortBy || '-createdAt'
                 },
-                populate: options.populate.populate ? options.populate.populate : undefined
+                populate: option.populate.populate ? option.populate.populate : undefined
             });
 
-            if (options.populate.count) documentQuery.populate(options.populate.count.path);
+            if (option.populate.count) documentQuery.populate(option.populate.count.path);
         }
     };
 

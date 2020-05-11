@@ -1,6 +1,6 @@
 type options = {
     fields?: string;
-    populate: {
+    populate?: {
         select?: string,
         path?: string,
         sortBy?: string,

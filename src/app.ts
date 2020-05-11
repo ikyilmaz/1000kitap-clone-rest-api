@@ -1,12 +1,13 @@
 import express, { NextFunction, Request, Response } from 'express';
 import morgan from 'morgan';
 import { AppError } from './utils/app-error';
-import { userRouter } from './routes/user.route';
+import { userRouter } from './routes/user/user.route';
 import { categoryRouter } from './routes/category.route';
 import { authRouter } from './routes/auth.route';
 import { bookRouter } from './routes/book/book.route';
 import { bookLibraryRouter } from './routes/book-library.route';
 import { authorRouter } from './routes/author/author.route';
+import { currentUserRouter } from './routes/user/current-user.route';
 
 const app = express();                                 // Express Engine
 
@@ -16,6 +17,7 @@ app.use(morgan('tiny'));                        // Logger
 
 // Routes
 app.use('/api/v1/users', userRouter);                   // USER
+app.use("/api/v1/current-user", currentUserRouter)      // CURRENT USER
 app.use('/api/v1/categories', categoryRouter);          // CATEGORY
 app.use('/api/v1/auth', authRouter);                    // AUTH
 app.use('/api/v1/book-libraries', bookLibraryRouter);   // BOOK LIBRARY
