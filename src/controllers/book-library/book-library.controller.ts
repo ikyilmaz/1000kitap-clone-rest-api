@@ -85,9 +85,8 @@ export class BookLibraryController extends BaseController {
     });
 
     removeBook = catchAsync(async (req, res, next) => {
-        SendResponse({
-            data: 'dd', res, next
-        });
+        await this.bookLibraryService.removeBook(req.params.id);
+        res.status(204).json({ status: 'success' });
     });
 
     updateBookStatus = catchAsync(async (req, res, next) => {

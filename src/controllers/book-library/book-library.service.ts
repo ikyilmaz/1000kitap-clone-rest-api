@@ -58,7 +58,11 @@ export class BookLibraryService extends BaseService<IBookLibrary> {
     };
 
     updateBookStatus = (bookLibraryBookId: string, status: any) => {
-        return BookLibraryBook.findByIdAndUpdate(bookLibraryBookId, { status }, {new :true});
+        return BookLibraryBook.findByIdAndUpdate(bookLibraryBookId, { status }, { new: true });
+    };
+
+    removeBook = (bookLibraryBookId: string) => {
+        return BookLibraryBook.findByIdAndDelete(bookLibraryBookId);
     };
 
     private populateUser = (query: Pick<any, any>) => {

@@ -7,7 +7,6 @@ import { BookLibraryController } from '../controllers/book-library/book-library.
 import { BookLibrary } from '../models/book-library/book-library.model';
 import { BookLibraryService } from '../controllers/book-library/book-library.service';
 import { isOwner } from '../filters/is-owner.filter';
-import { checkCustomIdParam } from '../validators/param/custom-id.validator';
 import { BookLibraryBook } from '../models/book-library/book-library-books/book-library-book.model';
 
 const router = Router();
@@ -75,5 +74,14 @@ router
         isOwner(BookLibraryBook),
         bookLibrary.updateBookStatus
     );
+
+router
+    .delete(
+        "/remove-book/:id",
+        checkIdParam, checkValidationResult,
+        authRequired,
+        isOwner(BookLibraryBook),
+        bookLibrary.removeBook
+    )
 
 export { router as bookLibraryRouter };
