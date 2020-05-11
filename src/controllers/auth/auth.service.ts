@@ -5,7 +5,7 @@ export class AuthService {
     public model = User;
 
     get = (conditions: { [key: string]: any }) => {
-        return this.model.findOne(conditions).select('+password');
+        return this.model.findOne(conditions).select('+password +email');
     };
 
     getWithProfile = () => {

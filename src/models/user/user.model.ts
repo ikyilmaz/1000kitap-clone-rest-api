@@ -46,6 +46,7 @@ let userSchema = new Schema<IUser>({
     },
     email: {
         type: SchemaTypes.String,
+        select: false,
         trim: true,
         unique: true,
         required: [true, 'field \'email\' is required'],

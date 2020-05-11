@@ -17,6 +17,6 @@ export const setBookLibraryVirtuals = (bookLibrarySchema: Schema<IBookLibrary>) 
         foreignField: 'bookLibrary',
         localField: '_id',
         count: true
-    });
+    })
 
 };

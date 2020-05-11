@@ -16,7 +16,7 @@ router
         '/'
     )
     .get(
-        bookLibrary.baseGetMany
+        bookLibrary.getMany
     )
     .post(
         bookLibraryValidator.createOrUpdate(true), checkValidationResult,

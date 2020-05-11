@@ -18,6 +18,7 @@ const bookLibrarySchema = new Schema<IBookLibrary>({
             'JUST_ME',
             'JUST_FOLLOWERS'
         ],
+        select: false,
         required: [true, 'field \'privacy\' is required']
     },
     description: {
@@ -34,7 +35,7 @@ const bookLibrarySchema = new Schema<IBookLibrary>({
         required: [true, 'field \'user\' is required'],
         ref: Models.USER
     }
-}, { timestamps: true });
+}, { timestamps: true, toObject: { virtuals: true }, toJSON: { virtuals: true } });
 
 bookLibrarySchema.pre<IBookLibrary>('save', async function(next) {
     if (this.isNew) {

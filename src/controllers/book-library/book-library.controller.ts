@@ -15,6 +15,12 @@ export class BookLibraryController extends BaseController {
         });
     });
 
+    getMany = catchAsync(async (req, res, next) => {
+        SendResponse({
+            data: await this.bookLibraryService.getMany(req.query), res, next
+        });
+    });
+
     create = catchAsync(async (req, res, next) => {
         req.body = filterObject(req.body, 'name', 'privacy', 'description');
         SendResponse({
