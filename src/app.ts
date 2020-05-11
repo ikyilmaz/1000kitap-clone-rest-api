@@ -5,29 +5,22 @@ import { userRouter } from './routes/user.route';
 import { categoryRouter } from './routes/category.route';
 import { authRouter } from './routes/auth.route';
 import { bookRouter } from './routes/book/book.route';
-import { bookExcerptRouter } from './routes/book/book-excerpt.route';
-import { bookReviewRouter } from './routes/book/book-review.route';
-import { bookFollowRouter } from './routes/book/book-follow.route';
-import { bookRatingRouter } from './routes/book/book-rating.route';
-import { favoriteBookRouter } from './routes/book/favorite-book.route';
 import { bookLibraryRouter } from './routes/book-library.route';
+import { authorRouter } from './routes/author/author.route';
 
-const app = express(); // Express Engine
+const app = express();                                 // Express Engine
 
-app.use(express.json({ limit: '10kb' })); // Body Parser
+app.use(express.json({ limit: '10kb' }));       // Body Parser
 app.use(express.urlencoded({ extended: true }));
-app.use(morgan('tiny')); // Logger
+app.use(morgan('tiny'));                        // Logger
 
 // Routes
-app.use('/api/v1/users', userRouter);
-
-app.use('/api/v1/categories', categoryRouter);
-
-app.use('/api/v1/auth', authRouter);
-
-app.use('/api/v1/book-libraries', bookLibraryRouter);
-
-app.use('/api/v1/books', bookRouter);
+app.use('/api/v1/users', userRouter);                   // USER
+app.use('/api/v1/categories', categoryRouter);          // CATEGORY
+app.use('/api/v1/auth', authRouter);                    // AUTH
+app.use('/api/v1/book-libraries', bookLibraryRouter);   // BOOK LIBRARY
+app.use('/api/v1/books', bookRouter);                   // BOOK
+app.use('/api/v1/authors', authorRouter);               // AUTHOR
 
 // Hello World Message
 app.all('/', ((req, res) => res.status(200).send('hello world')));
