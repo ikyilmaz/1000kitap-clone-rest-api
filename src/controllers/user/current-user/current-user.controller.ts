@@ -88,7 +88,9 @@ export class CurrentUserController extends BaseController {
     });
 
     updateUserProfile = catchAsync(async (req, res, next) => {
-        SendResponse({ data: await this.currentUserService.updateUserProfile(req.user._id, req.body), res, next });
+        await this.currentUserService.updateUserProfile(req.user._id, req.body);
+        const data = await this.currentUserService.getUserProfile(req.user._id, req.query);
+        res.status(200).json({ 'status': 'success', data });
     });
 
     getUserProfile = catchAsync(async (req, res, next) => {

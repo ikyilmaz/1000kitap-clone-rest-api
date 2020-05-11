@@ -98,7 +98,7 @@ export class CurrentUserService extends BaseService<IUser> {
 
     updateUserProfile = (userId: string, data: Pick<any, any>) => {
         data.user = undefined;
-        return UserProfile.update({ user: userId }, data);
+        return UserProfile.update({ user: userId }, data)
     };
 
     getUserProfile = (userId: string, query: Pick<any, any>) => UserProfile.findOne({ user: userId }).select(limitFields(query['fields']));
