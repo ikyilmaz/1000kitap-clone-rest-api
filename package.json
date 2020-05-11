@@ -1,16 +1,15 @@
 {
   "name": "1000kitap-clone-rest-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "Social Book app Restful API",
   "main": "index.js",
   "scripts": {
     "start": "nodemon"
   },
   "keywords": [],
-  "author": "",
+  "author": "ikyilmaz",
   "license": "ISC",
   "dependencies": {
-    "@types/sharp": "^0.25.0",
     "bcryptjs": "^2.4.3",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
@@ -23,6 +22,7 @@
     "validator": "^13.0.0"
   },
   "devDependencies": {
+    "@types/sharp": "^0.25.0",
     "@types/multer": "^1.4.3",
     "@types/bcryptjs": "^2.4.2",
     "@types/chalk": "^2.2.0",

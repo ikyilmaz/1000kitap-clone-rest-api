@@ -2,7 +2,7 @@
 
 ### Development
 
-MongoDB and Express
+> #### MongoDB + Express
 
 First Tab:
 ```sh
@@ -14,7 +14,7 @@ Second Tab:
 $ npm start
 ```
 
-Verify the deployment by navigating to your server address in your preferred browser.
+> Verify by navigating to your server address in your preferred browser.
 
 ```sh
 http://localhost:8000
