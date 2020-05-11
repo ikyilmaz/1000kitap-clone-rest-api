@@ -7,7 +7,6 @@ import { BookExcerpt } from '../../../models/m2m/book-user/book-excerpt/book-exc
 import { FavoriteBook } from '../../../models/m2m/book-user/favorite-book/favorite-book.model';
 import { BookFollow } from '../../../models/m2m/book-user/book-follow/book-follow.model';
 import { BookRating } from '../../../models/m2m/book-user/book-rating/book-rating.model';
-import { FavoriteAuthor } from '../../../models/m2m/author-user/favorite-author/favorite-author.model';
 
 export class CurrentUserController extends BaseController {
     constructor(public currentUserService: CurrentUserService) {
@@ -86,5 +85,13 @@ export class CurrentUserController extends BaseController {
                 model: FavoriteBook
             }), res, next
         });
+    });
+
+    updateUserProfile = catchAsync(async (req, res, next) => {
+        SendResponse({ data: await this.currentUserService.updateUserProfile(req.user._id, req.body), res, next });
+    });
+
+    getUserProfile = catchAsync(async (req, res, next) => {
+        SendResponse({ data: await this.currentUserService.getUserProfile(req.user._id, req.query), res, next });
     });
 }

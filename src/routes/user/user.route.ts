@@ -6,9 +6,11 @@ import { userValidator } from '../../validators/body/user/user.validator';
 import { checkValidationResult } from '../../filters/check-validation-result.filter';
 import { authRequired } from '../../filters/auth-required.filter';
 import { restrictTo } from '../../filters/restrict-to.filter';
+import { User } from '../../models/user/user.model';
 
 const router = Router();
-const user = new UserController(new UserService());
+
+const user = new UserController(new UserService(User));
 
 router
     .route('/')

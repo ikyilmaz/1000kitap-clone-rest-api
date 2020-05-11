@@ -23,4 +23,17 @@ router
     .get('/favorite-authors', currentUser.getUsersFavoriteAuthors)
     .get('/favorite-books', currentUser.getUsersFavoriteBooks);
 
+router
+    .route(
+        '/user-profile'
+    )
+    .get(
+        currentUser.getUserProfile
+    )
+    .patch(
+        // TODO ADD VALIDATOR
+        currentUser.updateUserProfile
+    );
+
+
 export { router as currentUserRouter };

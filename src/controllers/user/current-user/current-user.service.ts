@@ -15,6 +15,7 @@ import { UserFollow } from '../../../models/m2m/user-user/user-follow/user-follo
 import { UserVirtuals } from '../../../models/user/user.enums';
 import { FavoriteBook } from '../../../models/m2m/book-user/favorite-book/favorite-book.model';
 import { FavoriteAuthor } from '../../../models/m2m/author-user/favorite-author/favorite-author.model';
+import { UserProfile } from '../../../models/user/user-profile/user-profile.model';
 
 export class CurrentUserService extends BaseService<IUser> {
     constructor(public model: Model<IUser>) {
@@ -33,10 +34,11 @@ export class CurrentUserService extends BaseService<IUser> {
         });
     };
 
-    getBookLibraries = (currentUserId: string, query: Pick<any, any>) =>
-        this.getWith(BookLibrary.find({ user: currentUserId }), query, {
+    getBookLibraries = (currentUserId: string, query: Pick<any, any>) => {
+        return this.getWith(BookLibrary.find({ user: currentUserId }), query, {
             fields: limitFields(query['fields'])
         });
+    };
 
 
     getBookLibrary = (currentUserId: string, bookLibraryId: string, query: Pick<any, any>) => {
@@ -93,6 +95,13 @@ export class CurrentUserService extends BaseService<IUser> {
             }
         });
     };
+
+    updateUserProfile = (userId: string, data: Pick<any, any>) => {
+        data.user = undefined;
+        return UserProfile.update({ user: userId }, data);
+    };
+
+    getUserProfile = (userId: string, query: Pick<any, any>) => UserProfile.findOne({ user: userId }).select(limitFields(query['fields']));
 
     private getWith = (documentQuery: DocumentQuery<any, any>, query: Pick<any, any>, options?: getOneWithOptions) => {
         if (options) getOneWithPopulated({ documentQuery, query, options });

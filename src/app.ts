@@ -8,6 +8,7 @@ import { bookRouter } from './routes/book/book.route';
 import { bookLibraryRouter } from './routes/book-library.route';
 import { authorRouter } from './routes/author/author.route';
 import { currentUserRouter } from './routes/user/current-user.route';
+import { userProfileRouter } from './routes/user/user-profile.route';
 
 const app = express();                                 // Express Engine
 
@@ -18,6 +19,7 @@ app.use(morgan('tiny'));                        // Logger
 // Routes
 app.use('/api/v1/users', userRouter);                   // USER
 app.use('/api/v1/current-user', currentUserRouter);     // CURRENT USER (Includes Short-Hands for some requests)
+app.use("/api/v1/user-profiles", userProfileRouter)     // USER PROFILE
 app.use('/api/v1/categories', categoryRouter);          // CATEGORY
 app.use('/api/v1/auth', authRouter);                    // AUTH
 app.use('/api/v1/book-libraries', bookLibraryRouter);   // BOOK LIBRARY (User's Libraries)

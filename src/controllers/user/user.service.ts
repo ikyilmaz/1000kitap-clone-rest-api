@@ -5,13 +5,13 @@ import { UserProfile } from '../../models/user/user-profile/user-profile.model';
 import { UserVirtuals } from '../../models/user/user.enums';
 import { getOneWithOptions } from '../../types/types';
 import { IUser } from '../../models/user/user.interface';
-import { DocumentQuery } from 'mongoose';
+import { DocumentQuery, Model } from 'mongoose';
 import { getOneWithPopulated } from '../../utils/get-one-with-populated';
 
 type getUserFunc = (conditions: Pick<any, any>, query: Pick<any, any>) => DocumentQuery<IUser | null, IUser, {}>
 
 export class UserService {
-    public model = User;
+    constructor(public model: Model<IUser>) {}
 
     create = async (user: Pick<any, any>) => {
 
