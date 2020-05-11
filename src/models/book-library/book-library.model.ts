@@ -3,6 +3,7 @@ import { IBookLibrary } from './book-library.interface';
 import { Models } from '../models.enum';
 import { AppError } from '../../utils/app-error';
 import { BookFollow } from '../m2m/book-user/book-follow/book-follow.model';
+import { setBookLibraryVirtuals } from './book-library.virtuals';
 
 const bookLibrarySchema = new Schema<IBookLibrary>({
     name: {
@@ -41,5 +42,7 @@ bookLibrarySchema.pre<IBookLibrary>('save', async function(next) {
         next();
     }
 });
+
+setBookLibraryVirtuals(bookLibrarySchema);
 
 export const BookLibrary = model<IBookLibrary>(Models.BOOK_LIBRARY, bookLibrarySchema);

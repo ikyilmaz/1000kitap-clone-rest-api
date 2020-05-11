@@ -5,7 +5,8 @@ export enum Models {
 
     USER = 'User',
 
-    BOOK_LIBRARY = "BookLibrary",
+    BOOK_LIBRARY = 'BookLibrary',
+    BOOK_LIBRARY_BOOK = 'BookLibraryBook',
 
     BOOK = 'Book',
 
