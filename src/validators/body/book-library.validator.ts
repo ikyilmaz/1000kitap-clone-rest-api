@@ -13,14 +13,15 @@ const createOrUpdate = (isCreate: boolean) => checkSchema({
     },
     privacy: {
         isString: true,
-        optional: true,
+        notEmpty: isCreate ? isNotEmpty('privacy') : undefined,
+        optional: !isCreate ? true : undefined,
         isIn: {
             options: [[
                 'PUBLIC',
                 'JUST_ME',
-                'JUST_FOLLOWERS',
+                'JUST_FOLLOWERS'
             ]],
-            errorMessage: 'field \'privacy\' must be either \'PRIVATE\' or \'PUBLIC\''
+            errorMessage: 'field \'privacy\' must be in PUBLIC, JUST_ME, JUST_FOLLOWERS'
         }
     },
     description: {
@@ -33,6 +34,21 @@ const createOrUpdate = (isCreate: boolean) => checkSchema({
     }
 });
 
+const addBook = checkSchema({
+    book: {
+        notEmpty: isNotEmpty('book'),
+        isMongoId: { errorMessage: 'field \'book\' must be a valid mongoId' }
+    },
+    status: {
+        optional: true,
+        isIn: {
+            options: [['READING', 'TO_BE_READ', 'READ', 'DISCONTINUE', 'NOT_READ']],
+            errorMessage: "field 'status' must be in 'READING', 'TO_BE_READ', 'READ', 'DISCONTINUE', 'NOT_READ'"
+        }
+    }
+});
+
 export const bookLibraryValidator = {
-    createOrUpdate
+    createOrUpdate,
+    addBook
 };

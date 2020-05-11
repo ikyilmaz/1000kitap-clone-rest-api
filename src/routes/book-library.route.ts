@@ -6,6 +6,8 @@ import { authRequired } from '../filters/auth-required.filter';
 import { BookLibraryController } from '../controllers/book-library/book-library.controller';
 import { BookLibrary } from '../models/book-library/book-library.model';
 import { BookLibraryService } from '../controllers/book-library/book-library.service';
+import { isOwner } from '../filters/is-owner.filter';
+import { checkCustomIdParam } from '../validators/param/custom-id.validator';
 
 const router = Router();
 
@@ -35,10 +37,28 @@ router
         bookLibrary.get
     )
     .patch(
-        checkIdParam, bookLibraryValidator.createOrUpdate(false), checkValidationResult
+        bookLibrary.uploadBookLibraryPhoto,
+        checkIdParam, bookLibraryValidator.createOrUpdate(false), checkValidationResult,
+        bookLibrary.resizeBookLibraryPhoto,
+        authRequired,
+        bookLibrary.update
     )
     .delete(
-        checkIdParam, checkValidationResult
+        checkIdParam, checkValidationResult,
+        authRequired,
+        isOwner(BookLibrary),
+        bookLibrary.baseDelete
+    );
+
+router
+    .route(
+        '/:id/add-book'
+    )
+    .post(
+        checkIdParam, bookLibraryValidator.addBook, checkValidationResult,
+        authRequired,
+        isOwner(BookLibrary),
+        bookLibrary.addBook
     );
 
 export { router as bookLibraryRouter };

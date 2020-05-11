@@ -2,6 +2,7 @@
   <dictionary name="ismail">
     <words>
       <w>bcrypt</w>
+      <w>multer</w>
       <w>virtuals</w>
     </words>
   </dictionary>

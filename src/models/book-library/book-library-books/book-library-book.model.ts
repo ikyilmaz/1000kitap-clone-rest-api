@@ -13,6 +13,11 @@ const bookLibraryBookSchema = new Schema({
         type: SchemaTypes.ObjectId,
         ref: Models.BOOK,
         required: true
+    },
+    status: {
+        type: SchemaTypes.String,
+        enum: ['READING', 'TO_BE_READ', 'READ', 'DISCONTINUE', 'NOT_READ'],
+        default: 'TO_BE_READ'
     }
 }, { timestamps: true });
 

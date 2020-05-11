@@ -18,5 +18,5 @@ const createOrUpdate = (isCreate: boolean) => checkSchema({
 
 
 export const bookRatingValidator = {
-    createOrUpdate
+    createOrUpdate,
 };

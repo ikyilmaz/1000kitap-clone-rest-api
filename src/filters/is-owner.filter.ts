@@ -3,13 +3,24 @@ import * as mongoose from 'mongoose';
 import { catchAsync } from '../utils/catch-async';
 import { Forbidden, NotFound } from '../utils/app-error';
 
-export const isOwner = (model: Model<mongoose.Document>, options?: { customIdentifier: string, customOwnerField: string }) => catchAsync(async (req, res, next) => {
+export const isOwner = (
+    model: Model<mongoose.Document>,
+    options?: {
+        customIdentifier?: {
+            modelField: string,
+            paramField: string
+        },
+        customOwnerField?: string
+    }
+) => catchAsync(async (req, res, next) => {
     let data: mongoose.Document | null;
     if (options?.customIdentifier) {
 
         const conditions: Partial<Pick<any, any>> = {};
 
-        conditions[options.customIdentifier] = req.params[options.customIdentifier];
+        conditions[options.customIdentifier.modelField] = req.params[options.customIdentifier.paramField];
+
+        console.log(conditions)
 
         data = await model.findOne(conditions);
 
