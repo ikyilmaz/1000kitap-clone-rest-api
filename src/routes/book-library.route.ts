@@ -19,8 +19,10 @@ router
         bookLibrary.getMany
     )
     .post(
+        bookLibrary.uploadBookLibraryPhoto,
         bookLibraryValidator.createOrUpdate(true), checkValidationResult,
         authRequired,
+        bookLibrary.resizeBookLibraryPhoto,
         bookLibrary.create
     );
 

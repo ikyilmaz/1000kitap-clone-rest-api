@@ -1,6 +1,6 @@
 import { BaseService } from '../base/base.service';
 import { IBookLibrary } from '../../models/book-library/book-library.interface';
-import { DocumentQuery, Model } from 'mongoose';
+import { Model } from 'mongoose';
 import { limitFields, paginate } from '../../utils/api-features-funcs';
 import { BookLibraryVirtuals } from '../../models/book-library/book-library.enums';
 
