@@ -8,8 +8,8 @@ const bookLibrarySchema = new Schema<IBookLibrary>({
     name: {
         type: SchemaTypes.String,
         required: [true, 'field \'name\' is required'],
-        maxlength: 64,
-        minlength: 1
+        maxlength: [64, 'field \'name\' must contain no more than 64 characters'],
+        minlength: [1, "field \'name\' must contains at least 1 characters"]
     },
     privacy: {
         type: SchemaTypes.String,
@@ -18,8 +18,8 @@ const bookLibrarySchema = new Schema<IBookLibrary>({
     },
     description: {
         type: SchemaTypes.String,
-        maxlength: [255, 'field \'description\' must contains at least 2 characters'],
-        minlength: [1, 'field \'description\' must contain no more than 32 characters']
+        maxlength: [255, 'field \'description\' must contain no more than 255 characters'],
+        minlength: [1, 'field \'description\' must contains at least 1 characters']
     },
     photo: {
         type: SchemaTypes.String,
