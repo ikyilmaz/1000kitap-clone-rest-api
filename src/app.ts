@@ -8,7 +8,6 @@ import { bookRouter } from './routes/book/book.route';
 import { bookLibraryRouter } from './routes/book-library.route';
 import { authorRouter } from './routes/author/author.route';
 import { currentUserRouter } from './routes/user/current-user.route';
-import moment from 'moment';
 
 const app = express();                                 // Express Engine
 

@@ -6,6 +6,7 @@ import { isOwner } from '../../filters/is-owner.filter';
 import { FavoriteAuthor } from '../../models/m2m/author-user/favorite-author/favorite-author.model';
 import { FavoriteAuthorController } from '../../controllers/authors/favorite-author/favorite-author.controller';
 import { FavoriteAuthorService } from '../../controllers/authors/favorite-author/favorite-author.service';
+import { favoriteAuthorValidator } from '../../validators/body/author/favorite-author.route';
 
 const router = Router();
 
@@ -16,11 +17,12 @@ router
         '/'
     )
     .get(
-        favoriteAuthor.baseGet
+        favoriteAuthor.getMany
     )
     .post(
+        favoriteAuthorValidator.create, checkValidationResult,
         authRequired,
-        favoriteAuthor.baseGet
+        favoriteAuthor.create
     );
 
 router
@@ -29,13 +31,13 @@ router
     )
     .get(
         checkIdParam, checkValidationResult,
-        favoriteAuthor.baseGet
+        favoriteAuthor.get
     )
     .delete(
         checkIdParam, checkValidationResult,
         authRequired,
         isOwner(FavoriteAuthor),
-        favoriteAuthor.baseGet
+        favoriteAuthor.baseDelete
     );
 
 export { router as favoriteAuthorRouter };
