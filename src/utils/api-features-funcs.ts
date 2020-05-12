@@ -1,3 +1,7 @@
+
+/**
+ * @description short hand for limiting the query fields
+ * */
 export const limitFields = (fields: string, options?: { defaults?: string[], unwantedFields?: string[] }): string => {
     if (fields) {
         const arrFields: string[] = [];
@@ -25,6 +29,9 @@ export const limitFields = (fields: string, options?: { defaults?: string[], unw
 
 };
 
+/**
+ * @description short hand for paginating
+ * */
 export const paginate = (query: Pick<string, any>, options?: { pageKey?: string, limitKey?: string, defaultLimit?: number, maxLimit?: number }) => {
     let limit = +query[(options?.limitKey || 'limit')] || (options?.defaultLimit || 20);
     const page = +query[(options?.pageKey || 'page')] || 1;

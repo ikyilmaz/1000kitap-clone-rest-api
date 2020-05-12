@@ -1,5 +1,8 @@
 import { Document, DocumentQuery } from 'mongoose';
 
+/**
+ * @description short hands for some basic api features
+ * */
 export class APIFeatures<T extends Document> {
     constructor(public query: DocumentQuery<T | T[] | null, T>, public queryString: { [key: string]: string }) {
     }

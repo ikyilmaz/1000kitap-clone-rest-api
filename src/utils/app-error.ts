@@ -1,3 +1,6 @@
+/**
+ * @description error class for express next function
+ * */
 export class AppError extends Error {
     status: string;
     isOperational: true = true;

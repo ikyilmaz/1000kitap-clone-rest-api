@@ -2,6 +2,9 @@ import { getOneWithOptions } from '../types/types';
 import { paginate } from './api-features-funcs';
 import { DocumentQuery } from 'mongoose';
 
+/**
+ * @description short hand for populating user data with mongoose
+ * */
 export const getOneWithPopulated = (
     {
         documentQuery,

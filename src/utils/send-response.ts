@@ -8,6 +8,9 @@ type SendResponseArgs = {
     statusCode?: number;
 }
 
+/**
+ * @description short hand for sending response
+ * */
 export const SendResponse = ({ data, res, next, statusCode }: SendResponseArgs) => {
     if (!data) return next(NotFound());
     if (Array.isArray(data) && data.length == 0) return next(NotFound());
