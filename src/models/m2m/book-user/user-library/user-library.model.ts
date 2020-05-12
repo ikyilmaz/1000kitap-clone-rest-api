@@ -3,6 +3,9 @@ import { Models } from '../../../models.enum';
 import { IUserLibrary } from './user-library.interface';
 import { AppError } from '../../../../utils/app-error';
 
+/**
+ * @deprecated using bookLibrarySchema
+ * */
 const userLibrarySchema = new Schema({
     book: {
         type: SchemaTypes.ObjectId,

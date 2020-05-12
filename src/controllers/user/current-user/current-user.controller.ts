@@ -8,6 +8,9 @@ import { FavoriteBook } from '../../../models/m2m/book-user/favorite-book/favori
 import { BookFollow } from '../../../models/m2m/book-user/book-follow/book-follow.model';
 import { BookRating } from '../../../models/m2m/book-user/book-rating/book-rating.model';
 
+/**
+ * @description includes some short-hand end points for the current user
+ * */
 export class CurrentUserController extends BaseController {
     constructor(public currentUserService: CurrentUserService) {
         super(currentUserService.model);

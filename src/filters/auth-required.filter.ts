@@ -5,6 +5,9 @@ import jwt from 'jsonwebtoken';
 import { User } from '../models/user/user.model';
 import { JWT_SECRET } from '../config/config';
 
+/**
+ * @description only authenticated users can access to the specified route
+ * */
 export const authRequired = catchAsync(async (req, res, next) => {
     let token;
     if (req.headers.authorization?.startsWith('Bearer')) token = req.headers.authorization.split(' ')[1];

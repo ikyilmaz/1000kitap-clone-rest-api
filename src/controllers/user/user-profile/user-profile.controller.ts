@@ -8,7 +8,6 @@ export class UserProfileController extends BaseController {
         super(userProfileService.model);
     }
 
-
     get = catchAsync(async (req, res, next) => {
         SendResponse({
             data: await this.userProfileService.get(req.params.id, req.query), res, next

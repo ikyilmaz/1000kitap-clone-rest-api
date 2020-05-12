@@ -20,7 +20,9 @@ import { UserProfile } from './models/user/user-profile/user-profile.model';
 import { BookLibrary } from './models/book-library/book-library.model';
 import { BookLibraryBook } from './models/book-library/book-library-books/book-library-book.model';
 
+// the time before connecting the database
 let before = moment();
+
 mongoose.connect(DB_CONNECTION_STRING, {
     useNewUrlParser: true,
     useCreateIndex: true,
@@ -36,6 +38,7 @@ mongoose.connect(DB_CONNECTION_STRING, {
             )
         );
         before = moment();
+        // Initialize Models
         const models = [
             Author, FavoriteAuthor,
             BookLibrary, BookLibraryBook,

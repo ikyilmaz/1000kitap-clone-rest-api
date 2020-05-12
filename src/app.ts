@@ -12,14 +12,14 @@ import { userProfileRouter } from './routes/user/user-profile.route';
 
 const app = express();                                 // Express Engine
 
-app.use(express.json({ limit: '10kb' }));       // Body Parser
-app.use(express.urlencoded({ extended: true }));
-app.use(morgan('tiny'));                        // Logger
+app.use(express.json({ limit: '10kb' }));        // Body Parser
+app.use(express.urlencoded({ extended: true })); // Query Parser
+app.use(morgan('tiny'));                         // Logger
 
 // Routes
 app.use('/api/v1/users', userRouter);                   // USER
 app.use('/api/v1/current-user', currentUserRouter);     // CURRENT USER (Includes Short-Hands for some requests)
-app.use("/api/v1/user-profiles", userProfileRouter)     // USER PROFILE
+app.use('/api/v1/user-profiles', userProfileRouter);    // USER PROFILE
 app.use('/api/v1/categories', categoryRouter);          // CATEGORY
 app.use('/api/v1/auth', authRouter);                    // AUTH
 app.use('/api/v1/book-libraries', bookLibraryRouter);   // BOOK LIBRARY (User's Libraries)

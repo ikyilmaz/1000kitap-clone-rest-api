@@ -3,6 +3,9 @@ import * as mongoose from 'mongoose';
 import { catchAsync } from '../utils/catch-async';
 import { Forbidden, NotFound } from '../utils/app-error';
 
+/**
+ * @description only the owner access to the specified route
+ * */
 export const isOwner = (
     model: Model<mongoose.Document>,
     options?: {
