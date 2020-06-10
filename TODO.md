@@ -1,6 +1,6 @@
 ## User Profile
 
-- [ ] User Profile Validator
+- [X] User Profile Validator
 
 ## Book Excerpt
 
