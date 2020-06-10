@@ -1,0 +1,2540 @@
+{
+	"info": {
+		"_postman_id": "6bd42cb5-4719-44ee-bbf9-e71800f34a52",
+		"name": "1000kitap",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Is Logged In",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/v1/auth/is-logged-in",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"auth",
+								"is-logged-in"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Current User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/v1/auth/user",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"auth",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Current User Profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/v1/auth/profile",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"auth",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign Out",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/v1/auth/sign-out",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"auth",
+								"sign-out"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign Up",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fee01628-e2bf-435b-b90f-bc4e5ee6518e",
+								"exec": [
+									"if(pm.response.code == 201) {",
+									"pm.environment.set(\"jwt\", pm.response.json().token)",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"firstName\": \"John\",\n\t\"lastName\": \"Doe\",\n\t\"username\": \"johndoee\",\n\t\"email\": \"johnn@example.com\",\n\t\"password\": \"87654321\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/v1/auth/sign-up",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"auth",
+								"sign-up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign In",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "407585e2-2d58-4e42-9ad4-04289c877ed3",
+								"exec": [
+									"if (pm.response.code == 200) {",
+									"    pm.environment.set(\"jwt\", pm.response.json().token)",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"john@example.com\",\n    \"password\": \"87654321\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/v1/auth/sign-in",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"auth",
+								"sign-in"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE Password",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"password\": \"12345678\",\n\t\"newPassword\": \"87654321\",\n\t\"newPasswordConfirm\": \"87654321\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/v1/auth/update-password",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"auth",
+								"update-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE Email",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"jack@example.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/v1/auth/update-email",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"auth",
+								"update-email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE Me",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/C:/Users/ismai/Desktop/Japan_coins_money_Hong_Kong_Taiwan_1280x960.jpg"
+								},
+								{
+									"key": "username",
+									"value": "johndoe",
+									"type": "text"
+								}
+							],
+							"options": {
+								"formdata": {}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/v1/auth/update",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"auth",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deactivate Me",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/v1/auth/deactivate-me",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"auth",
+								"deactivate-me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Activate Me",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/v1/auth/activate-me",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"auth",
+								"activate-me"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Authors",
+			"item": [
+				{
+					"name": "Favorites",
+					"item": [
+						{
+							"name": "GET Many Favorite Author",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}api/v1/authors/favorites",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"authors",
+										"favorites"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET Favorite Author",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}api/v1/authors/favorites/5eb9c078e7bd7909145c6703",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"authors",
+										"favorites",
+										"5eb9c078e7bd7909145c6703"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CREATE Favorite Author",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"author\": \"5eb2dc601d89472a7cb11c04\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}api/v1/authors/favorites",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"authors",
+										"favorites"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE Favorite Author",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}api/v1/authors/favorites/5eb9c078e7bd7909145c6703",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"authors",
+										"favorites",
+										"5eb9c078e7bd7909145c6703"
+									]
+								},
+								"description": "must be the owner of the favored book"
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "GET Many Author",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/v1/authors",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"authors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Author",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/v1/authors/5eb2dc601d89472a7cb11c04",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"authors",
+								"5eb2dc601d89472a7cb11c04"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE Author",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/v1/authors",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"authors"
+							]
+						},
+						"description": "only admins"
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE Author",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/v1/authors/5eb2dc601d89472a7cb11c04",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"authors",
+								"5eb2dc601d89472a7cb11c04"
+							]
+						},
+						"description": "only admins"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Author",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/v1/authors/5eb2dc601d89472a7cb11c04",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"authors",
+								"5eb2dc601d89472a7cb11c04"
+							]
+						},
+						"description": "only admins"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Current User",
+					"item": [
+						{
+							"name": "GET Book Libraries",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}api/v1/current-user/book-libraries",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"current-user",
+										"book-libraries"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET Book Library",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}api/v1/current-user/book-libraries/5eb95e91f0f15b1ca4a94bd6",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"current-user",
+										"book-libraries",
+										"5eb95e91f0f15b1ca4a94bd6"
+									],
+									"query": [
+										{
+											"key": "bookFields",
+											"value": "title",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET Book Reviews",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}api/v1/current-user/book-reviews",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"current-user",
+										"book-reviews"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET Book Excerpts",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}api/v1/current-user/book-excerpts",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"current-user",
+										"book-excerpts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET Book Followed Books",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}api/v1/current-user/followed-books",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"current-user",
+										"followed-books"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET Book Rated Books",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}api/v1/current-user/rated-books",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"current-user",
+										"rated-books"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET Followers",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}api/v1/current-user/followers",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"current-user",
+										"followers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET Followings",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}api/v1/current-user/followings",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"current-user",
+										"followings"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET Favorite Books",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}api/v1/current-user/favorite-books",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"current-user",
+										"favorite-books"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET Favorite Authors",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}api/v1/current-user/favorite-authors",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"current-user",
+										"favorite-authors"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET User Profile",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}api/v1/current-user/user-profile",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"current-user",
+										"user-profile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UPDATE User Profile",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{url}}api/v1/current-user/user-profile",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"current-user",
+										"user-profile"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "GET One User By ID or Username",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/v1/users/agasticke7",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"agasticke7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Many User",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/v1/users",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "",
+									"description": "page",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "",
+									"description": "limit",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET User With Profile",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/v1/users/iabrahm2/profile",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"iabrahm2",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET User With Book Reviews",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/v1/users/johndoe/reviews",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"johndoe",
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET User With Book Excerpts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/v1/users/johndoee/book-excerpts",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"johndoee",
+								"book-excerpts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET User  With Favorite Authors",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/v1/users/johndoe/favorite-authors",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"johndoe",
+								"favorite-authors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET User With Favorite Books",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/v1/users/johndoe/favorite-books",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"johndoe",
+								"favorite-books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET User With Followers",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/v1/users/johndoe/followers",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"johndoe",
+								"followers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET User With Follows",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/v1/users/johndoe/follows",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"johndoe",
+								"follows"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET User With Rated Books",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/v1/users/johndoe/rated-books",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"johndoe",
+								"rated-books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\t\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/v1/users",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"users"
+							]
+						},
+						"description": "only admins"
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE User By ID",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/v1/users/5",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"5"
+							]
+						},
+						"description": "only admins"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE User By ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/v1/users/5",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"5"
+							]
+						},
+						"description": "only admins"
+					},
+					"response": []
+				},
+				{
+					"name": "Deactivate User",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/v1/users/5eb2c680fc13ae1b2000014a/deactivate",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"5eb2c680fc13ae1b2000014a",
+								"deactivate"
+							]
+						},
+						"description": "only admins"
+					},
+					"response": []
+				},
+				{
+					"name": "Activate User",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/v1/users/5eb2c680fc13ae1b2000014a/activate",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"5eb2c680fc13ae1b2000014a",
+								"activate"
+							]
+						},
+						"description": "only admins"
+					},
+					"response": []
+				}
+			],
+			"description": "Just For Admin Users",
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Books",
+			"item": [
+				{
+					"name": "Ratings",
+					"item": [
+						{
+							"name": "GET Many Book Rating",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}api/v1/books/ratings/",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"books",
+										"ratings",
+										""
+									],
+									"query": [
+										{
+											"key": "book",
+											"value": "5eb2cb11fc13ae4b0e000054",
+											"disabled": true
+										},
+										{
+											"key": "bookFields",
+											"value": "title",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET Book Rating By ID",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}api/v1/books/ratings/5eb8541d1130f80cc4f454cb",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"books",
+										"ratings",
+										"5eb8541d1130f80cc4f454cb"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CREATE Book Rating",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"book\": \"5eb2cb11fc13ae4b0e000054\",\n\t\"rating\": 8\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}api/v1/books/ratings",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"books",
+										"ratings"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UPDATE Book Rating",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"rating\": 5\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}api/v1/books/ratings/5eb85315a5f9e1029c38bfa6",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"books",
+										"ratings",
+										"5eb85315a5f9e1029c38bfa6"
+									]
+								},
+								"description": "must be the owner of the rating"
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE Book Rating",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}api/v1/books/ratings/5eb85315a5f9e1029c38bfa6 ",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"books",
+										"ratings",
+										"5eb85315a5f9e1029c38bfa6 "
+									]
+								},
+								"description": "must be the owner of the rating"
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Follows",
+					"item": [
+						{
+							"name": "GET Many Book Follow",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}api/v1/books/follows",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"books",
+										"follows"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Book Follow By ID",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}api/v1/books/follows/5eb84ef007dac52ae0f36ee6",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"books",
+										"follows",
+										"5eb84ef007dac52ae0f36ee6"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CREATE Book Follow",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"book\": \"5eb2cb11fc13ae4b0e000060\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}api/v1/books/follows",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"books",
+										"follows"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE Book Follow",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}api/v1/books/follows/5eb84ea707dac52ae0f36ee4",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"books",
+										"follows",
+										"5eb84ea707dac52ae0f36ee4"
+									]
+								},
+								"description": "must be the owner of the follow"
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Reviews",
+					"item": [
+						{
+							"name": "GET One Book Review By ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}api/v1/books/reviews/5eb82de39d31c01a40ed2669",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"books",
+										"reviews",
+										"5eb82de39d31c01a40ed2669"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET Many Book Review",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}api/v1/books/reviews",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"books",
+										"reviews"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CREATE Book Review",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"book\": \"5eb2cb11fc13ae4b0e000027\",\n\t\"content\": \"best book ever\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}api/v1/books/reviews",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"books",
+										"reviews"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UPDATE Book Review",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"content\": \"Gelmiş geçmiş en iyi kitap.\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}api/v1/books/reviews/5eb82d38c48779163c5d2c23",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"books",
+										"reviews",
+										"5eb82d38c48779163c5d2c23"
+									]
+								},
+								"description": "must be the owner of the review"
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE Book Review",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}api/v1/books/reviews/5eb82d38c48779163c5d2c23",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"books",
+										"reviews",
+										"5eb82d38c48779163c5d2c23"
+									]
+								},
+								"description": "must be the owner of the review"
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Excerpts",
+					"item": [
+						{
+							"name": "GET One Book Excerpt By ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}api/v1/books/excerpts/5eb80fb082838c2524b95201",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"books",
+										"excerpts",
+										"5eb80fb082838c2524b95201"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET Many Book Excerpt",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}api/v1/books/excerpts",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"books",
+										"excerpts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CREATE Book Excerpt",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"book\": \"5eb2cb11fc13ae4b0e000027\",\n\t\"content\": \"I had a football stadium in my head\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}api/v1/books/excerpts",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"books",
+										"excerpts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UPDATE Book Excerpt",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"content\": \"Hiç bir yerde hiç kimse beklemiyordu beni.\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}api/v1/books/excerpts/5eb80fb082838c2524b95201",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"books",
+										"excerpts",
+										"5eb80fb082838c2524b95201"
+									]
+								},
+								"description": "must be the owner of the excerpt"
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE Book Excerpt",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}api/v1/books/excerpts/5eb80fb082838c2524b95201",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"books",
+										"excerpts",
+										"5eb80fb082838c2524b95201"
+									]
+								},
+								"description": "must be the owner of the excerpt"
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Favorites",
+					"item": [
+						{
+							"name": "GET Many Favored Book",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}api/v1/books/favorites",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"books",
+										"favorites"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET Favored Book By ID",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}api/v1/books/favorites/5eb95058b6f73f0c7867f1f8",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"books",
+										"favorites",
+										"5eb95058b6f73f0c7867f1f8"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CREATE Favored Book",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"book\": \"5eb2cb11fc13ae4b0e000060\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}api/v1/books/favorites",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"books",
+										"favorites"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE Favored Book",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}api/v1/books/favorites/5eb95059b6f73f0c7867f1f9",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"books",
+										"favorites",
+										"5eb95059b6f73f0c7867f1f9"
+									]
+								},
+								"description": "must be the owner of the favored book"
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "GET Many Book",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/v1/books",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"books"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "title,publisher,image",
+									"description": "fields",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "",
+									"description": "page",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "",
+									"description": "limit",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "-createdAt",
+									"description": "sort",
+									"disabled": true
+								},
+								{
+									"key": "author",
+									"value": "5eb2dc601d89472a7cb11c04",
+									"disabled": true
+								},
+								{
+									"key": "category",
+									"value": "5eb2d54ef0b6732b443a840e",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Book",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/v1/books/5eb2cb11fc13ae4b0e000054",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"books",
+								"5eb2cb11fc13ae4b0e000054"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Book With Reviews",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/v1/books/5eb2cb11fc13ae4b0e000054/reviews",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"books",
+								"5eb2cb11fc13ae4b0e000054",
+								"reviews"
+							],
+							"query": [
+								{
+									"key": "categoryFields",
+									"value": "",
+									"description": "which fields you want default only name",
+									"disabled": true
+								},
+								{
+									"key": "authorFields",
+									"value": "",
+									"description": "which fields you want default firstName, lastName",
+									"disabled": true
+								},
+								{
+									"key": "reviewFields",
+									"value": "",
+									"description": "which fields you want default all",
+									"disabled": true
+								},
+								{
+									"key": "reviewSortBy",
+									"value": "",
+									"description": "which fields you want default -createdAt",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "",
+									"description": "which page you want default 1",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "",
+									"description": "how many review you want default is 20",
+									"disabled": true
+								},
+								{
+									"key": "reviewUserFields",
+									"value": "",
+									"description": "which fields you want default firstName lastName image",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Book With Excerpts",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/v1/books/5eb2cb11fc13ae4b0e000054/excerpts",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"books",
+								"5eb2cb11fc13ae4b0e000054",
+								"excerpts"
+							],
+							"query": [
+								{
+									"key": "categoryFields",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "authorFields",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "excerptFields",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "excerptSortBy",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "excerptUserFields",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Book With Favorites",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/v1/books/5eb2cb11fc13ae4b0e000054/favorites",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"books",
+								"5eb2cb11fc13ae4b0e000054",
+								"favorites"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Book With Libraries",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/v1/books/5eb2cb11fc13ae4b0e000054/libraries",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"books",
+								"5eb2cb11fc13ae4b0e000054",
+								"libraries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Book With Rates",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/v1/books/5eb2cb11fc13ae4b0e000054/ratings",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"books",
+								"5eb2cb11fc13ae4b0e000054",
+								"ratings"
+							],
+							"query": [
+								{
+									"key": "rateFields",
+									"value": "-user",
+									"disabled": true
+								},
+								{
+									"key": "fields",
+									"value": "title,author,rates,-category",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Book With Followers",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/v1/books/5eb2cb11fc13ae4b0e000054/followers",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"books",
+								"5eb2cb11fc13ae4b0e000054",
+								"followers"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Book Libraries",
+			"item": [
+				{
+					"name": "Books In Libraries",
+					"item": [
+						{
+							"name": "GET Books From Library",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}api/v1/book-libraries/5eb962b71de5482eac334f81/get-books",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"book-libraries",
+										"5eb962b71de5482eac334f81",
+										"get-books"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "REMOVE Book From Library",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}api/v1/book-libraries/remove-book/5eb976ee93b871120ccaffdd",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"book-libraries",
+										"remove-book",
+										"5eb976ee93b871120ccaffdd"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UPDATE Book Status ",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"status\": \"DISCONTINUE\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}api/v1/book-libraries/update-book-status/5eb97d21545bb30340662b6d",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"book-libraries",
+										"update-book-status",
+										"5eb97d21545bb30340662b6d"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ADD One Book To Library",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"book\": \"5eb2cb11fc13ae4b0e00006c\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}api/v1/book-libraries/5eb962b71de5482eac334f81/add-book",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"v1",
+										"book-libraries",
+										"5eb962b71de5482eac334f81",
+										"add-book"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "Books in the Library",
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "GET Book Library By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/v1/book-libraries/5eb962b71de5482eac334f81",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"book-libraries",
+								"5eb962b71de5482eac334f81"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Many Book Library",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/v1/book-libraries",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"book-libraries"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "-user",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE Book Library",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/C:/Users/ismai/Desktop/Japan_coins_money_Hong_Kong_Taiwan_1280x960.jpg"
+								},
+								{
+									"key": "name",
+									"value": "my book library",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "my lovely books",
+									"type": "text"
+								},
+								{
+									"key": "privacy",
+									"value": "PUBLIC",
+									"type": "text"
+								}
+							],
+							"options": {
+								"formdata": {}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/v1/book-libraries",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"book-libraries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE Book Library",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": \"all the books which ones are new\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/v1/book-libraries/5eb96d7c3c92b61470fbe2fc",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"book-libraries",
+								"5eb96d7c3c92b61470fbe2fc"
+							]
+						},
+						"description": "must be the owner of the library"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Book Library",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/v1/book-libraries/5eb82d38c48779163c5d2c23",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"book-libraries",
+								"5eb82d38c48779163c5d2c23"
+							]
+						},
+						"description": "must be the owner of the library"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "GET Many Category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/v1/categories",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET One Category By Name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/v1/categories/dram",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"categories",
+								"dram"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE Category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"music\",\n\t\"description\": \"Everything about music and much more.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/v1/category",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"category"
+							]
+						},
+						"description": "admins only"
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE Category By ID",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"description\": \"Everything about Turkey and much more \"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/v1/category/turkey",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"category",
+								"turkey"
+							]
+						},
+						"description": "admins only"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Category By ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/v1/categories/dram",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"categories",
+								"dram"
+							]
+						},
+						"description": "admins only"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "User Profiles",
+			"item": [
+				{
+					"name": "GET Many User Profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/v1/user-profiles",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"user-profiles"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "gender",
+									"disabled": true
+								},
+								{
+									"key": "username",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Many User Profile Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/v1/user-profiles/5eb70f36898488199ce3f497",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"v1",
+								"user-profiles",
+								"5eb70f36898488199ce3f497"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE My Profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{jwt}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "cc8cfdf4-61b4-44a0-8b3c-17f35eb2e3ea",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "20252171-e0fd-4d58-b385-832478ed87ed",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "5219f4bc-cc9b-4237-84a0-63fe19b039c7",
+			"key": "jwt",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "95b79e6b-af5b-46fb-83ae-82f8af89d6b9",
+			"key": "url",
+			"value": "http://localhost:8080/",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
