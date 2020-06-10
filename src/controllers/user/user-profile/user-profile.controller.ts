@@ -16,10 +16,10 @@ export class UserProfileController extends BaseController {
         data: await this.userProfileService.getMany(req.query), res, next
     }));
 
-    update = catchAsync((req, res, next) => {
+    update = catchAsync(async (req, res, next) => {
         req.body.user = req.user._id;
         SendResponse({
-            data: this.userProfileService.update(req.body), res, next
+            data: await this.userProfileService.update(req.body), res, next
         });
     });
 }
