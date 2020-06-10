@@ -17,6 +17,8 @@ export class UserProfileService extends BaseService<IUserProfile> {
         return new APIFeatures(documentQuery, query).filter('userFields', 'fields').sort().limitFields().paginate().query;
     };
 
+    update = (userProfile: Pick<any, any>) => this.model.findOneAndUpdate({ user: userProfile.user }, userProfile);
+
     private populateDefaults = (documentQuery: DocumentQuery<any, any>, query: Pick<any, any>) => {
         return documentQuery
             .select(limitFields(query['fields']))

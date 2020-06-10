@@ -8,15 +8,18 @@ export class UserProfileController extends BaseController {
         super(userProfileService.model);
     }
 
-    get = catchAsync(async (req, res, next) => {
-        SendResponse({
-            data: await this.userProfileService.get(req.params.id, req.query), res, next
-        });
-    });
+    get = catchAsync(async (req, res, next) => SendResponse({
+        data: await this.userProfileService.get(req.params.id, req.query), res, next
+    }));
 
-    getMany = catchAsync(async (req, res, next) => {
+    getMany = catchAsync(async (req, res, next) => SendResponse({
+        data: await this.userProfileService.getMany(req.query), res, next
+    }));
+
+    update = catchAsync((req, res, next) => {
+        req.body.user = req.user._id;
         SendResponse({
-            data: await this.userProfileService.getMany(req.query), res, next
+            data: this.userProfileService.update(req.body), res, next
         });
     });
 }
