@@ -1,8 +1,8 @@
 # 1000kitap Clone Restful JSON API
 
-### Development
+## Development
 
-> #### MongoDB + Express
+#### MongoDB + Express + Mongoose + JWT 🚀
 
 First Tab:
 ```sh
